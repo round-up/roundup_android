@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/menu/activity_home_feed_drawer.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/menu/activity_home_feed_drawer.xml"
+    },
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/menu/home_feed.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/menu/home_feed.xml"
+    }
+]

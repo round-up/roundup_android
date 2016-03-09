@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/drawable-v21/ic_menu_share.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/drawable-v21/ic_menu_share.xml"
+    },
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/drawable-v21/ic_menu_send.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/drawable-v21/ic_menu_send.xml"
+    },
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/drawable-v21/ic_menu_gallery.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/drawable-v21/ic_menu_gallery.xml"
+    },
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/drawable-v21/ic_menu_slideshow.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/drawable-v21/ic_menu_slideshow.xml"
+    },
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/drawable-v21/ic_menu_manage.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/drawable-v21/ic_menu_manage.xml"
+    },
+    {
+        "merged": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/res/merged/debug/drawable-v21/ic_menu_camera.xml",
+        "source": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/drawable-v21/ic_menu_camera.xml"
+    }
+]
