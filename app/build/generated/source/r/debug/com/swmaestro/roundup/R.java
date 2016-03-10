@@ -2273,14 +2273,19 @@ containing a value of this type.
         public static final int abc_textfield_search_material=0x7f02004a;
         public static final int design_fab_background=0x7f02004b;
         public static final int design_snackbar_background=0x7f02004c;
-        public static final int ic_menu_camera=0x7f02004d;
-        public static final int ic_menu_gallery=0x7f02004e;
-        public static final int ic_menu_manage=0x7f02004f;
-        public static final int ic_menu_send=0x7f020050;
-        public static final int ic_menu_share=0x7f020051;
-        public static final int ic_menu_slideshow=0x7f020052;
-        public static final int notification_template_icon_bg=0x7f020054;
-        public static final int side_nav_bar=0x7f020053;
+        public static final int ic_action_add_group=0x7f02004d;
+        public static final int ic_action_chat=0x7f02004e;
+        public static final int ic_action_dock=0x7f02004f;
+        public static final int ic_action_forward=0x7f020050;
+        public static final int ic_action_settings=0x7f020051;
+        public static final int ic_menu_camera=0x7f020052;
+        public static final int ic_menu_gallery=0x7f020053;
+        public static final int ic_menu_manage=0x7f020054;
+        public static final int ic_menu_send=0x7f020055;
+        public static final int ic_menu_share=0x7f020056;
+        public static final int ic_menu_slideshow=0x7f020057;
+        public static final int notification_template_icon_bg=0x7f020059;
+        public static final int side_nav_bar=0x7f020058;
     }
     public static final class id {
         public static final int action0=0x7f0c0077;
@@ -2298,7 +2303,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c0057;
         public static final int action_mode_bar_stub=0x7f0c0056;
         public static final int action_mode_close_button=0x7f0c003c;
-        public static final int action_settings=0x7f0c008a;
+        public static final int action_settings=0x7f0c0089;
         public static final int activity_chooser_view_content=0x7f0c003d;
         public static final int alertTitle=0x7f0c0049;
         public static final int always=0x7f0c0033;
@@ -2356,12 +2361,11 @@ containing a value of this type.
         public static final int middle=0x7f0c0032;
         public static final int mini=0x7f0c0030;
         public static final int multiply=0x7f0c0027;
-        public static final int nav_camera=0x7f0c0084;
-        public static final int nav_gallery=0x7f0c0085;
-        public static final int nav_manage=0x7f0c0087;
-        public static final int nav_send=0x7f0c0089;
-        public static final int nav_share=0x7f0c0088;
-        public static final int nav_slideshow=0x7f0c0086;
+        public static final int nav_add_group=0x7f0c0088;
+        public static final int nav_chatting=0x7f0c0086;
+        public static final int nav_following=0x7f0c0085;
+        public static final int nav_home_feed=0x7f0c0084;
+        public static final int nav_setting=0x7f0c0087;
         public static final int nav_view=0x7f0c006a;
         public static final int navigation_header_container=0x7f0c0070;
         public static final int never=0x7f0c0036;
