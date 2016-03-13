@@ -1,6 +1,8 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:2:1-23:12
+ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:2:1-27:12
+	xmlns:android
+		ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:2:11-69
 	package
 		ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:3:5-36
 		INJECTED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml
@@ -8,13 +10,11 @@ ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/
 	android:versionName
 		INJECTED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml
-	xmlns:android
-		ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:2:11-69
 	android:versionCode
 		INJECTED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml
 application
-ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:5:5-21:19
+ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:5:5-25:19
 MERGED from [com.android.support:appcompat-v7:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-v4:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:animated-vector-drawable:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.0/AndroidManifest.xml:7:5-20
@@ -32,10 +32,10 @@ MERGED from [com.android.support:support-v4:23.2.0] /Users/JeongMinCha/Dropbox/D
 MERGED from [com.android.support:support-vector-drawable:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.0/AndroidManifest.xml:7:5-20
 MERGED from [com.android.support:support-v4:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/AndroidManifest.xml:22:5-20
-	android:label
-		ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:8:9-41
 	android:supportsRtl
 		ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:9:9-35
+	android:label
+		ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:8:9-41
 	android:allowBackup
 		ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:6:9-35
 	android:icon
@@ -60,6 +60,10 @@ category#android.intent.category.LAUNCHER
 ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:18:17-77
 	android:name
 		ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:18:27-74
+activity#com.swmaestro.roundup.AddGroupActivity
+ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:21:9-24:20
+	android:name
+		ADDED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml:22:13-45
 uses-sdk
 INJECTED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/AndroidManifest.xml:21:5-23:78
@@ -80,11 +84,11 @@ MERGED from [com.android.support:support-v4:23.2.0] /Users/JeongMinCha/Dropbox/D
 MERGED from [com.android.support:support-vector-drawable:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.0/AndroidManifest.xml:5:5-43
 MERGED from [com.android.support:support-v4:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-v4:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.0/AndroidManifest.xml:20:5-43
-	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
 		INJECTED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:23.2.0] /Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.0/AndroidManifest.xml:23:9-75
