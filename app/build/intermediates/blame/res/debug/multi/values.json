@@ -4824,11 +4824,11 @@
                 "from": {
                     "file": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/values/styles.xml",
                     "position": {
-                        "startLine": 13,
+                        "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 523,
+                        "startOffset": 525,
                         "endColumn": 90,
-                        "endOffset": 609
+                        "endOffset": 611
                     }
                 }
             },
@@ -4844,12 +4844,12 @@
                 "from": {
                     "file": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/values/styles.xml",
                     "position": {
-                        "startLine": 9,
+                        "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 373,
-                        "endLine": 12,
+                        "startOffset": 374,
+                        "endLine": 13,
                         "endColumn": 12,
-                        "endOffset": 518
+                        "endOffset": 519
                     }
                 }
             },
@@ -4864,11 +4864,11 @@
                 "from": {
                     "file": "/Users/JeongMinCha/Dropbox/Development/AndroidStudioProjects/RoundUp/app/src/main/res/values/styles.xml",
                     "position": {
-                        "startLine": 14,
+                        "startLine": 17,
                         "startColumn": 4,
-                        "startOffset": 614,
+                        "startOffset": 617,
                         "endColumn": 80,
-                        "endOffset": 690
+                        "endOffset": 693
                     }
                 }
             },
