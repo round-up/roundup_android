@@ -27,27 +27,54 @@
                 android:id="@+id/et_group_name"
                 android:inputType="text"
                 android:hint="Essential"
+                android:textSize="15sp"
+                android:backgroundTint="@color/grayLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="15sp">
             <TextView
+                android:id="@+id/tv_add_logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Logo: "
+                android:layout_alignParentLeft="true"
                 android:textSize="15sp"
                 android:textStyle="bold" />
-            <EditText
-                android:id="@+id/et_logo_file_name"
-                android:inputType="text"
+            <ImageButton
+                android:id="@+id/ib_add_logo_file"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_action_new"
+                />
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/ib_add_logo_file"
+                android:layout_toLeftOf="@id/ib_add_logo_file"
+                android:layout_toEndOf="@id/tv_add_logo"
+                android:layout_toRightOf="@id/tv_add_logo">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:hint="Logo File Name"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/grayLine"
+                    android:layout_alignParentBottom="true"/>
+            </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,6 +91,8 @@
                 android:id="@+id/et_place"
                 android:inputType="text"
                 android:hint="Optional"
+                android:textSize="15sp"
+                android:backgroundTint="@color/grayLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -83,6 +112,8 @@
                 android:id="@+id/et_belong_to"
                 android:inputType="text"
                 android:hint="Optional"
+                android:textSize="15sp"
+                android:backgroundTint="@color/grayLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -102,6 +133,8 @@
                 android:id="@+id/et_foundation_date"
                 android:inputType="date"
                 android:hint="2000/01/01"
+                android:textSize="15sp"
+                android:backgroundTint="@color/grayLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -121,6 +154,8 @@
                 android:id="@+id/et_current_turn"
                 android:inputType="number"
                 android:hint="5"
+                android:textSize="15sp"
+                android:backgroundTint="@color/grayLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -142,29 +177,60 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingTop="15sp">
             <TextView
+                android:id="@+id/tv_add_cover_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cover Image: "
+                android:layout_alignParentLeft="true"
                 android:textSize="15sp"
                 android:textStyle="bold" />
-            <EditText
-                android:id="@+id/et_cover_image"
-                android:inputType="text"
-                android:hint="Optional"
+            <ImageButton
+                android:id="@+id/ib_add_cover_image"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_action_new"
+                />
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/ib_add_cover_image"
+                android:layout_toLeftOf="@id/ib_add_cover_image"
+                android:layout_toEndOf="@id/tv_add_cover_image"
+                android:layout_toRightOf="@id/tv_add_cover_image">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textSize="15sp"
+                    android:hint="Cover Image File Name"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/grayLine"
+                    android:layout_alignParentBottom="true"/>
+            </LinearLayout>
+        </RelativeLayout>
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Make this group"/>
+            android:orientation="vertical"
+            android:paddingTop="15sp">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="Make this group"/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>
