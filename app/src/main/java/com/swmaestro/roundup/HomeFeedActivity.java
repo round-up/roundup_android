@@ -1,5 +1,6 @@
 package com.swmaestro.roundup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -90,6 +91,8 @@ public class HomeFeedActivity extends AppCompatActivity
             case R.id.nav_setting:
                 break;
             case R.id.nav_add_group:
+                Intent intent = new Intent(this, AddGroupActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
