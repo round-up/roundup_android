@@ -1,6 +1,7 @@
 package com.swmaestro.roundup;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -18,7 +20,7 @@ import java.util.List;
 /**
  * Created by lk on 16. 3. 8..
  */
-public class ClubActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class ClubActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AppBarLayout.OnOffsetChangedListener{
 
 
     private RecyclerViewAdapter adapter;
@@ -68,7 +70,6 @@ public class ClubActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -84,6 +85,14 @@ public class ClubActivity extends AppCompatActivity implements NavigationView.On
         }
 
         adapter.setFeedList(feedList);
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
+        int maxScroll = appBarLayout.getTotalScrollRange();
+        float percentage = (float) Math.abs(offset) / (float) maxScroll;
+
+        Log.i("",maxScroll + "  / " + percentage);
     }
 
 }
