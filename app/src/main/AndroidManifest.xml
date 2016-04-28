@@ -24,7 +24,8 @@
             android:name=".AddGroupActivity">
         </activity>
         <activity
-            android:name=".ClubActivity">
+            android:name=".ClubActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

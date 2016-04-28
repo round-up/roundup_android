@@ -56,6 +56,17 @@ public class HomeFeedActivity extends AppCompatActivity
 
         mHomeFeedListAdapter = new HomeFeedListAdapter(this);
         mRecyclerView.setAdapter(mHomeFeedListAdapter);
+
+        HomeFeedListAdapter.OnItemClickListener onItemClickListener
+                = new HomeFeedListAdapter.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(HomeFeedActivity.this, ClubActivity.class);
+                startActivity(intent);
+            }
+        };
+        mHomeFeedListAdapter.setOnItemClickListener(onItemClickListener);
     }
 
     @Override

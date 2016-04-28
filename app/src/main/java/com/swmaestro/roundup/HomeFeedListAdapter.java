@@ -18,10 +18,15 @@ public class HomeFeedListAdapter
         extends RecyclerView.Adapter<HomeFeedListAdapter.ViewHolder> {
 
     Context mContext;
+    OnItemClickListener mItemClickListener;
 
     public HomeFeedListAdapter(Context context) {
 
         this.mContext = context;
+    }
+
+    public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
     }
 
     @Override
@@ -46,7 +51,9 @@ public class HomeFeedListAdapter
         return HomeFeedData.size;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder
+            extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
         public LinearLayout cardHolder;
         public LinearLayout cardNameHolder;
         public TextView cardName;
@@ -58,6 +65,19 @@ public class HomeFeedListAdapter
             cardNameHolder = (LinearLayout) itemView.findViewById(R.id.home_card_name_holder);
             cardName = (TextView) itemView.findViewById(R.id.home_card_name);
             cardImage = (ImageView) itemView.findViewById(R.id.home_card_image);
+
+            cardHolder.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(itemView, getPosition());
+            }
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
     }
 }
