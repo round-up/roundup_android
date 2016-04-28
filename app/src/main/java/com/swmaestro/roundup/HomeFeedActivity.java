@@ -21,9 +21,11 @@ public class HomeFeedActivity extends AppCompatActivity
 
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
+    private HomeFeedListAdapter mHomeFeedListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_feed);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -51,6 +53,9 @@ public class HomeFeedActivity extends AppCompatActivity
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1,
                 StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
+
+        mHomeFeedListAdapter = new HomeFeedListAdapter(this);
+        mRecyclerView.setAdapter(mHomeFeedListAdapter);
     }
 
     @Override

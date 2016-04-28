@@ -7,8 +7,9 @@ import java.util.ArrayList;
  */
 public class HomeFeedData {
 
+    public static int size = 2;
     public static String[] homeFeedNameArray = {"roundup1", "roundup2"};
-    public static String[] homeFeedImageNameArray = {"clubphoto.jpg", "clubphoto.jpg"};
+    public static String[] homeFeedImageNameArray = {"clubphoto", "clubphoto"};
 
     public static ArrayList<HomeFeed> homeFeedList() {
         ArrayList<HomeFeed> list = new ArrayList<>();

@@ -20,6 +20,7 @@ public class HomeFeedListAdapter
     Context mContext;
 
     public HomeFeedListAdapter(Context context) {
+
         this.mContext = context;
     }
 
@@ -32,6 +33,7 @@ public class HomeFeedListAdapter
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
         final HomeFeed homeFeed = HomeFeedData.homeFeedList().get(position);
         holder.cardName.setText(homeFeed.name);
         Picasso.with(mContext)
@@ -41,7 +43,7 @@ public class HomeFeedListAdapter
 
     @Override
     public int getItemCount() {
-        return 0;
+        return HomeFeedData.size;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
