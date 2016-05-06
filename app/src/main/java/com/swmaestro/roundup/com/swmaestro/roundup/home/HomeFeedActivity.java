@@ -25,7 +25,7 @@ public class HomeFeedActivity extends AppCompatActivity
 
     private RecyclerView mRecyclerView;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
-    private HomeFeedListAdapter mHomeFeedListAdapter;
+    private ClubSummaryFeedListAdapter mClubSummaryFeedListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,22 +55,21 @@ public class HomeFeedActivity extends AppCompatActivity
 
         mRecyclerView = (RecyclerView) findViewById(R.id.home_feed_list);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1,
-                StaggeredGridLayoutManager.VERTICAL);
+                StaggeredGridLayoutManager.HORIZONTAL);
         mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
 
-        mHomeFeedListAdapter = new HomeFeedListAdapter(this);
-        mRecyclerView.setAdapter(mHomeFeedListAdapter);
+        mClubSummaryFeedListAdapter = new ClubSummaryFeedListAdapter(this);
+        mRecyclerView.setAdapter(mClubSummaryFeedListAdapter);
 
-        HomeFeedListAdapter.OnItemClickListener onItemClickListener
-                = new HomeFeedListAdapter.OnItemClickListener() {
+        ClubSummaryFeedListAdapter.OnItemClickListener onItemClickListener
+                = new ClubSummaryFeedListAdapter.OnItemClickListener() {
 
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(HomeFeedActivity.this, ClubActivity.class);
-                startActivity(intent);
+
             }
         };
-        mHomeFeedListAdapter.setOnItemClickListener(onItemClickListener);
+        mClubSummaryFeedListAdapter.setOnItemClickListener(onItemClickListener);
     }
 
     @Override
