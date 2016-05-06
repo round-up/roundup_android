@@ -1,4 +1,4 @@
-package com.swmaestro.roundup;
+package com.swmaestro.roundup.com.swmaestro.roundup.navigation;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ToggleButton;
+
+import com.swmaestro.roundup.R;
 
 /**
  * Created by JeongMinCha on 16. 3. 14..
