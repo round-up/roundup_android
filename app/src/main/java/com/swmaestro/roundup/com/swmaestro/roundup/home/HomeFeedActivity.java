@@ -17,24 +17,31 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.swmaestro.roundup.com.swmaestro.roundup.navigation.AddGroupActivity;
-import com.swmaestro.roundup.ClubActivity;
 import com.swmaestro.roundup.R;
 
 public class HomeFeedActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private RecyclerView mRecyclerView;
-    private StaggeredGridLayoutManager mStaggeredLayoutManager;
+    private RecyclerView mClubSummaryRecyclerView;
+    private StaggeredGridLayoutManager mClubSummaryLayoutManager;
     private ClubSummaryFeedListAdapter mClubSummaryFeedListAdapter;
+
+    private RecyclerView mInterestingActivitiesRecyclerView;
+    private StaggeredGridLayoutManager mInterestingActivitiesLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_feed);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        this.makeFloatingActionButton();
+        this.makeNavigationDrawer();
+        this.makeClubSummarySection();
+        this.makeInterestingActivitiesSection();
+    }
+
+    private void makeFloatingActionButton() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +50,11 @@ public class HomeFeedActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private void makeNavigationDrawer() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -52,14 +64,17 @@ public class HomeFeedActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.home_feed_list);
-        mStaggeredLayoutManager = new StaggeredGridLayoutManager(1,
+    private void makeClubSummarySection() {
+        // RecyclerView and StaggeredGridLayoutManager for Club Summary Feed Section.
+        mClubSummaryRecyclerView = (RecyclerView) findViewById(R.id.club_summary_feed_list);
+        mClubSummaryLayoutManager = new StaggeredGridLayoutManager(1,
                 StaggeredGridLayoutManager.HORIZONTAL);
-        mRecyclerView.setLayoutManager(mStaggeredLayoutManager);
+        mClubSummaryRecyclerView.setLayoutManager(mClubSummaryLayoutManager);
 
         mClubSummaryFeedListAdapter = new ClubSummaryFeedListAdapter(this);
-        mRecyclerView.setAdapter(mClubSummaryFeedListAdapter);
+        mClubSummaryRecyclerView.setAdapter(mClubSummaryFeedListAdapter);
 
         ClubSummaryFeedListAdapter.OnItemClickListener onItemClickListener
                 = new ClubSummaryFeedListAdapter.OnItemClickListener() {
@@ -70,6 +85,14 @@ public class HomeFeedActivity extends AppCompatActivity
             }
         };
         mClubSummaryFeedListAdapter.setOnItemClickListener(onItemClickListener);
+    }
+
+    private void makeInterestingActivitiesSection() {
+        // RecyclerView and StaggeredGridLayoutManager for Interesting Activities Section.
+        mInterestingActivitiesRecyclerView = (RecyclerView) findViewById(R.id.interesting_club_activity_list);
+        mInterestingActivitiesLayoutManager = new StaggeredGridLayoutManager(1,
+                StaggeredGridLayoutManager.VERTICAL);
+        mInterestingActivitiesRecyclerView.setLayoutManager(mInterestingActivitiesLayoutManager);
     }
 
     @Override
