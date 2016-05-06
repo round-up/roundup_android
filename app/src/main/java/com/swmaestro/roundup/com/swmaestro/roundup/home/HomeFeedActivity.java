@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.swmaestro.roundup.RecyclerViewAdapter;
 import com.swmaestro.roundup.com.swmaestro.roundup.navigation.AddGroupActivity;
 import com.swmaestro.roundup.R;
 
@@ -28,6 +29,7 @@ public class HomeFeedActivity extends AppCompatActivity
 
     private RecyclerView mInterestingActivitiesRecyclerView;
     private StaggeredGridLayoutManager mInterestingActivitiesLayoutManager;
+    private HomeFeedListAdapter mInterestingActivitiesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,19 @@ public class HomeFeedActivity extends AppCompatActivity
         mInterestingActivitiesLayoutManager = new StaggeredGridLayoutManager(1,
                 StaggeredGridLayoutManager.VERTICAL);
         mInterestingActivitiesRecyclerView.setLayoutManager(mInterestingActivitiesLayoutManager);
+
+        mInterestingActivitiesAdapter = new HomeFeedListAdapter(this);
+        mInterestingActivitiesRecyclerView.setAdapter(mInterestingActivitiesAdapter);
+
+        HomeFeedListAdapter.OnItemClickListener onItemClickListener
+                = new HomeFeedListAdapter.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+        };
+        mInterestingActivitiesAdapter.setOnItemClickListener(onItemClickListener);
     }
 
     @Override
