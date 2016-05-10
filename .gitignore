@@ -4,6 +4,7 @@
 /build
 /captures
 
+.idea/
 .idea/libraries/
 .idea/workspace.xml
 .idea/gradle.xml
