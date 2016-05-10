@@ -1,4 +1,4 @@
-package com.swmaestro.roundup;
+package com.swmaestro.roundup.com.swmaestro.roundup.home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.swmaestro.roundup.R;
 
 /**
  * Created by JeongMinCha on 16. 4. 28..
