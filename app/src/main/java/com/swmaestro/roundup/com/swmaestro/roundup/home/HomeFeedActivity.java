@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.swmaestro.roundup.ClubActivity;
 import com.swmaestro.roundup.RecyclerViewAdapter;
 import com.swmaestro.roundup.com.swmaestro.roundup.navigation.AddGroupActivity;
 import com.swmaestro.roundup.R;
@@ -104,7 +105,9 @@ public class HomeFeedActivity extends AppCompatActivity
 
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = new Intent(getApplicationContext(), ClubActivity.class);
+                intent.putExtra("name", HomeFeedData.homeFeedList().get(position).name);
+                startActivity(intent);
             }
         };
         mInterestingActivitiesAdapter.setOnItemClickListener(onItemClickListener);
