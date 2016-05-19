@@ -16,8 +16,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.swmaestro.roundup.navigation.AddGroupActivity;
+import com.swmaestro.roundup.chatting.ChattingListActivity;
+import com.swmaestro.roundup.following.FollowingListActivity;
+import com.swmaestro.roundup.add_group.AddGroupActivity;
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.setting.SettingActivity;
 
 public class HomeFeedActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -147,17 +150,26 @@ public class HomeFeedActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Intent intent;
         switch (id) {
             case R.id.nav_home_feed:
+                intent = new Intent(this, HomeFeedActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_following:
+                intent = new Intent(this, FollowingListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_chatting:
+                intent = new Intent(this, ChattingListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_setting:
+                intent = new Intent(this, SettingActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_add_group:
-                Intent intent = new Intent(this, AddGroupActivity.class);
+                intent = new Intent(this, AddGroupActivity.class);
                 startActivity(intent);
                 break;
             default:
