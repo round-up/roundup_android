@@ -1,4 +1,4 @@
-package com.swmaestro.roundup.com.swmaestro.roundup.home;
+package com.swmaestro.roundup.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.swmaestro.roundup.RecyclerViewAdapter;
-import com.swmaestro.roundup.com.swmaestro.roundup.navigation.AddGroupActivity;
+import com.swmaestro.roundup.navigation.AddGroupActivity;
 import com.swmaestro.roundup.R;
 
 public class HomeFeedActivity extends AppCompatActivity

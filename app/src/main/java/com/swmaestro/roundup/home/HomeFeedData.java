@@ -1,4 +1,4 @@
-package com.swmaestro.roundup.com.swmaestro.roundup.home;
+package com.swmaestro.roundup.home;
 
 import java.util.ArrayList;
 
