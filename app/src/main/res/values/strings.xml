@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">RoundUp</string>
 
+    <string name="home_feed_activity_label">Home</string>
+    <string name="following_list_ativity_label">Following</string>
+    <string name="chatting_activity_label">Chatting</string>
+    <string name="setting_activity_label">Setting</string>
+    <string name="add_group_activity_label">Add a Group</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
