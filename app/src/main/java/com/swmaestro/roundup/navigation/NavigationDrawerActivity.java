@@ -17,6 +17,7 @@ import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.add_group.AddGroupActivity;
 import com.swmaestro.roundup.chatting.ChattingListActivity;
 import com.swmaestro.roundup.following.FollowingListActivity;
+import com.swmaestro.roundup.home.HomeFeed;
 import com.swmaestro.roundup.home.HomeFeedActivity;
 import com.swmaestro.roundup.setting.SettingActivity;
 
@@ -45,22 +46,35 @@ public class NavigationDrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        // close the navigation drawer.
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
+        // Process the intent.
         Intent intent;
         switch (id) {
             case R.id.nav_home_feed:
                 intent = new Intent(this, HomeFeedActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 break;
             case R.id.nav_following:
                 intent = new Intent(this, FollowingListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 break;
             case R.id.nav_chatting:
                 intent = new Intent(this, ChattingListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 break;
             case R.id.nav_setting:
                 intent = new Intent(this, SettingActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 break;
             case R.id.nav_add_group:
@@ -71,8 +85,6 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }
