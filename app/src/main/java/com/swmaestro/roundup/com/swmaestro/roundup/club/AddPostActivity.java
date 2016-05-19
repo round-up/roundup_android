@@ -1,4 +1,4 @@
-package com.swmaestro.roundup;
+package com.swmaestro.roundup.com.swmaestro.roundup.club;
 
 import android.app.Fragment;
 import android.app.FragmentManager;

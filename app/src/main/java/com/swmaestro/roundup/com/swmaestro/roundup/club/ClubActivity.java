@@ -1,4 +1,4 @@
-package com.swmaestro.roundup;
+package com.swmaestro.roundup.com.swmaestro.roundup.club;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.swmaestro.roundup.R;
 
 import java.util.ArrayList;
 import java.util.List;
