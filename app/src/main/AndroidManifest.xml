@@ -23,9 +23,15 @@
         <activity
             android:name=".add_group.AddGroupActivity">
         </activity>
-        <activity android:name=".chatting.ChattingListActivity"></activity>
-        <activity android:name=".following.FollowingListActivity"></activity>
-        <activity android:name=".setting.SettingActivity"></activity>
+        <activity
+            android:name=".chatting.ChattingListActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".following.FollowingListActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".setting.SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ClubActivity"
             android:theme="@style/AppTheme.NoActionBar">
