@@ -16,11 +16,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.swmaestro.roundup.navigation.AddGroupActivity;
+import com.swmaestro.roundup.chatting.ChattingListActivity;
+import com.swmaestro.roundup.following.FollowingListActivity;
+import com.swmaestro.roundup.add_group.AddGroupActivity;
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.navigation.NavigationDrawerActivity;
+import com.swmaestro.roundup.setting.SettingActivity;
 
-public class HomeFeedActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeFeedActivity extends NavigationDrawerActivity {
 
     private RecyclerView mClubSummaryRecyclerView;
     private StaggeredGridLayoutManager mClubSummaryLayoutManager;
@@ -36,35 +39,9 @@ public class HomeFeedActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_feed);
 
-        this.makeFloatingActionButton();
-        this.makeNavigationDrawer();
+        super.makeNavigationDrawer();
         this.makeClubSummarySection();
         this.makeInterestingActivitiesSection();
-    }
-
-    private void makeFloatingActionButton() {
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
-
-    private void makeNavigationDrawer() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void makeClubSummarySection() {
@@ -139,33 +116,5 @@ public class HomeFeedActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.nav_home_feed:
-                break;
-            case R.id.nav_following:
-                break;
-            case R.id.nav_chatting:
-                break;
-            case R.id.nav_setting:
-                break;
-            case R.id.nav_add_group:
-                Intent intent = new Intent(this, AddGroupActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }

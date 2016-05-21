@@ -1,4 +1,4 @@
-package com.swmaestro.roundup.navigation;
+package com.swmaestro.roundup.add_group;
 
 import android.content.Intent;
 import android.database.Cursor;
