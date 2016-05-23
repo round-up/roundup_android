@@ -10,4 +10,41 @@
         android:text="Notice"
         android:id="@+id/textView2"
         android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="15sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제목 : "
+            android:textSize="15sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_club_post_notice_title"
+            android:inputType="text"
+            android:hint="Essential"
+            android:textSize="15sp"
+            android:backgroundTint="@color/grayLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="15sp" >
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:gravity="top"
+            android:hint="글쓰기.." />
+    </LinearLayout>
 </LinearLayout>

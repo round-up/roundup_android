@@ -10,4 +10,142 @@
         android:text="Event"
         android:id="@+id/textView2"
         android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="15sp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제목 : "
+            android:textSize="15sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/et_club_post_event_title"
+            android:inputType="text"
+            android:hint="Essential"
+            android:textSize="15sp"
+            android:backgroundTint="@color/grayLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="15sp" >
+        <LinearLayout
+            android:paddingTop="15sp"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간 : "
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/editText"
+                android:inputType="text"
+                android:hint="Essential"
+                android:textSize="15sp"
+                android:backgroundTint="@color/grayLine"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="~"/>
+            <EditText
+                android:id="@+id/editText2"
+                android:inputType="text"
+                android:hint="Essential"
+                android:textSize="15sp"
+                android:backgroundTint="@color/grayLine"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="15sp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장소 : "
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:inputType="text"
+            android:hint="Essential"
+            android:textSize="15sp"
+            android:backgroundTint="@color/grayLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="15sp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내용 : "
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editText4"
+            android:inputType="text"
+            android:hint="Essential"
+            android:textSize="15sp"
+            android:backgroundTint="@color/grayLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="15sp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오픈 : "
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/switch1" />
+    </LinearLayout>
 </LinearLayout>

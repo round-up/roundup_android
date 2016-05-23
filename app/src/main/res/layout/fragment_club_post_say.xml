@@ -10,4 +10,16 @@
         android:text="Say"
         android:id="@+id/textView2"
         android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText6"
+        android:layout_gravity="center_horizontal"
+        android:gravity="top"
+        android:hint="글쓰기.." />
+
+
 </LinearLayout>

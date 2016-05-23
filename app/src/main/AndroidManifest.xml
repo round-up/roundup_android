@@ -24,10 +24,10 @@
             android:name=".com.swmaestro.roundup.navigation.AddGroupActivity">
         </activity>
         <activity
-            android:name=".ClubActivity"
+            android:name=".com.swmaestro.roundup.club.ClubActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".AddPostActivity"/>
+        <activity android:name=".com.swmaestro.roundup.club.AddPostActivity"/>
     </application>
 
 </manifest>
