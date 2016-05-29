@@ -1,5 +1,5 @@
 
-package com.swmaestro.roundup.com.swmaestro.roundup.club;
+package com.swmaestro.roundup.club;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

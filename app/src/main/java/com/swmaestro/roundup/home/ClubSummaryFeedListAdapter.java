@@ -1,4 +1,4 @@
-package com.swmaestro.roundup.com.swmaestro.roundup.home;
+package com.swmaestro.roundup.home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

@@ -1,4 +1,4 @@
-package com.swmaestro.roundup.com.swmaestro.roundup.club;
+package com.swmaestro.roundup.club;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,10 +12,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.swmaestro.roundup.R;
-import com.swmaestro.roundup.com.swmaestro.roundup.club.PostEventFragment;
-import com.swmaestro.roundup.com.swmaestro.roundup.club.PostNoticeFragment;
-import com.swmaestro.roundup.com.swmaestro.roundup.club.PostSayFragment;
-import com.swmaestro.roundup.com.swmaestro.roundup.club.PostSessionFragment;
 
 /**
  * Created by lk on 16. 5. 15..

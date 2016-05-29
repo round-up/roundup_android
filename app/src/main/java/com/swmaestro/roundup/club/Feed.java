@@ -1,5 +1,5 @@
 
-package com.swmaestro.roundup.com.swmaestro.roundup.club;
+package com.swmaestro.roundup.club;
 
 public class Feed {
 

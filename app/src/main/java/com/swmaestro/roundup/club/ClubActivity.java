@@ -1,4 +1,4 @@
-package com.swmaestro.roundup.com.swmaestro.roundup.club;
+package com.swmaestro.roundup.club;
 
 import android.content.Intent;
 import android.graphics.Color;
