@@ -28,7 +28,7 @@ public class AddPostActivity extends AppCompatActivity{
     private Button btn_say;
     private FragmentManager fm;
     private FragmentTransaction fragmentTransaction;
-    private Fragment fr;
+    private Fragment[] fr;
 
 
     @Override
@@ -46,18 +46,20 @@ public class AddPostActivity extends AppCompatActivity{
         btn_say = (Button) findViewById(R.id.btn_add_club_post_say);
         fm = getFragmentManager();
 
-        fr = new PostSessionFragment();
+        fr = new Fragment[4];
+        fr[0] = new PostSessionFragment();
         fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.add(R.id.fl_add_club_post, fr);
+        fragmentTransaction.add(R.id.fl_add_club_post, fr[0]);
         fragmentTransaction.commit();
 
 
         btn_session.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fr = new PostSessionFragment();
+                if(fr[0] == null)
+                    fr[0] = new PostSessionFragment();
                 fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.fl_add_club_post, fr);
+                fragmentTransaction.replace(R.id.fl_add_club_post, fr[0]);
                 fragmentTransaction.commit();
             }
         });
@@ -65,9 +67,10 @@ public class AddPostActivity extends AppCompatActivity{
         btn_notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fr = new PostNoticeFragment();
+                if(fr[1] == null)
+                    fr[1] = new PostNoticeFragment();
                 fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.fl_add_club_post, fr);
+                fragmentTransaction.replace(R.id.fl_add_club_post, fr[1]);
                 fragmentTransaction.commit();
             }
         });
@@ -75,9 +78,10 @@ public class AddPostActivity extends AppCompatActivity{
         btn_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fr = new PostEventFragment();
+                if(fr[2] == null)
+                    fr[2] = new PostEventFragment();
                 fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.fl_add_club_post, fr);
+                fragmentTransaction.replace(R.id.fl_add_club_post, fr[2]);
                 fragmentTransaction.commit();
             }
         });
@@ -85,9 +89,10 @@ public class AddPostActivity extends AppCompatActivity{
         btn_say.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fr = new PostSayFragment();
+                if(fr[3] == null)
+                    fr[3] = new PostSayFragment();
                 fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.fl_add_club_post, fr);
+                fragmentTransaction.replace(R.id.fl_add_club_post, fr[3]);
                 fragmentTransaction.commit();
             }
         });
