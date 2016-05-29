@@ -21,8 +21,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".navigation.AddGroupActivity">
+            android:label="@string/add_group_activity_label"
+            android:name=".add_group.AddGroupActivity">
         </activity>
+        <activity
+            android:label="@string/chatting_activity_label"
+            android:name=".chatting.ChattingListActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:label="@string/following_list_ativity_label"
+            android:name=".following.FollowingListActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:label="@string/setting_activity_label"
+            android:name=".setting.SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".club.ClubActivity"
             android:theme="@style/AppTheme.NoActionBar">
