@@ -2,26 +2,18 @@ package com.swmaestro.roundup.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.swmaestro.roundup.chatting.ChattingListActivity;
-import com.swmaestro.roundup.following.FollowingListActivity;
-import com.swmaestro.roundup.add_group.AddGroupActivity;
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.club.ClubActivity;
 import com.swmaestro.roundup.navigation.NavigationDrawerActivity;
-import com.swmaestro.roundup.setting.SettingActivity;
+
 
 public class HomeFeedActivity extends NavigationDrawerActivity {
 
@@ -80,7 +72,9 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
 
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = new Intent(getApplicationContext(), ClubActivity.class);
+                intent.putExtra("name", HomeFeedData.homeFeedList().get(position).name);
+                startActivity(intent);
             }
         };
         mInterestingActivitiesAdapter.setOnItemClickListener(onItemClickListener);
@@ -98,19 +92,14 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home_feed, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }

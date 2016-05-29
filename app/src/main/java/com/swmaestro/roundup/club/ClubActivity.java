@@ -1,9 +1,11 @@
-package com.swmaestro.roundup;
+package com.swmaestro.roundup.club;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +18,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.swmaestro.roundup.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +51,14 @@ public class ClubActivity extends AppCompatActivity implements NavigationView.On
         });
 
         setSupportActionBar(toolbar);
+
+        FloatingActionButton writeButton = (FloatingActionButton) findViewById(R.id.fab);
+        writeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), AddPostActivity.class));
+            }
+        });
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         //collapsingToolbar.setCollapsedTitleTextColor(R.color.colorWhite);

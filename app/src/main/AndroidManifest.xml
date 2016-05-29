@@ -37,9 +37,10 @@
             android:name=".setting.SettingActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ClubActivity"
+            android:name=".club.ClubActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".club.AddPostActivity"/>
     </application>
 
 </manifest>
