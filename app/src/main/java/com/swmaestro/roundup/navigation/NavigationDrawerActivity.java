@@ -32,16 +32,6 @@ import io.realm.RealmResults;
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    final private String[] menuTitles = {"Home Feed",
-            "Followings",
-            "Chatting",
-            "Setting",
-            "Add a New Group"};
-    final private int[] menuIcons = {R.drawable.ic_action_dock,
-            R.drawable.ic_action_forward,
-            R.drawable.ic_action_chat,
-            R.drawable.ic_action_settings,
-            R.drawable.ic_action_add_group};
     private Menu mNavigationMenu;
     private List<String> followingGroupTitles;
     private List<Integer> followingGroupIcons;
@@ -102,16 +92,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mNavigationMenu = navigationView.getMenu();
-        mNavigationMenu.clear();
-        for (int idx = 0; idx < menuTitles.length; idx++) {
-            if (idx == 1) {
-                SubMenu subMenu = mNavigationMenu.addSubMenu(menuTitles[idx]);
-                for (int subIdx = 0; subIdx < followingGroupIcons.size(); subIdx ++) {
-                    subMenu.add(followingGroupTitles.get(subIdx)).setIcon(followingGroupIcons.get(subIdx));
-                }
-            } else {
-                mNavigationMenu.add(menuTitles[idx]).setIcon(menuIcons[idx]);
-            }
+        SubMenu subMenu = mNavigationMenu.addSubMenu("Followings");
+        for (int i = 0; i < followingGroupIcons.size(); i++) {
+            subMenu.add(followingGroupTitles.get(i)).setIcon(followingGroupIcons.get(i));
         }
     }
 
@@ -129,12 +112,6 @@ public class NavigationDrawerActivity extends AppCompatActivity
         switch (id) {
             case R.id.nav_home_feed:
                 intent = new Intent(this, HomeFeedActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                break;
-            case R.id.nav_following:
-                intent = new Intent(this, FollowingListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);

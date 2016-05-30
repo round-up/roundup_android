@@ -7,21 +7,17 @@
             android:icon="@drawable/ic_action_dock"
             android:title="Home Feed" />
         <item
-            android:id="@+id/nav_following"
-            android:icon="@drawable/ic_action_forward"
-            android:title="Followings" />
-        <item
             android:id="@+id/nav_chatting"
             android:icon="@drawable/ic_action_chat"
             android:title="Chatting" />
         <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_action_settings"
-            android:title="Setting" />
-        <item
             android:id="@+id/nav_add_group"
             android:icon="@drawable/ic_action_add_group"
             android:title="Add a New Group" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_action_settings"
+            android:title="Setting" />
     </group>
 
 </menu>
