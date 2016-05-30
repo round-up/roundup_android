@@ -14,9 +14,17 @@ import android.view.SubMenu;
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.add_group.AddGroupActivity;
 import com.swmaestro.roundup.chatting.ChattingListActivity;
+import com.swmaestro.roundup.following.Following;
 import com.swmaestro.roundup.following.FollowingListActivity;
 import com.swmaestro.roundup.home.HomeFeedActivity;
 import com.swmaestro.roundup.setting.SettingActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 /**
  * Created by JeongMinCha on 16. 5. 19..
@@ -34,12 +42,48 @@ public class NavigationDrawerActivity extends AppCompatActivity
             R.drawable.ic_action_chat,
             R.drawable.ic_action_settings,
             R.drawable.ic_action_add_group};
-
     private Menu mNavigationMenu;
+    private List<String> followingGroupTitles;
+    private List<Integer> followingGroupIcons;
+
+    RealmConfiguration realmConfig;
+    Realm realm;
 
     protected void makeNavigationDrawer() {
+        prepareRealm();
+        createFollowingTable();
+        accessFollowingTable();
         makeDrawer();
         makeNavigationView();
+    }
+
+    private void prepareRealm() {
+        realmConfig = new RealmConfiguration.Builder(this).build();
+        realm = Realm.getInstance(realmConfig);
+    }
+
+    private void createFollowingTable() {
+        final List<Following> groups = new ArrayList<>();
+        groups.add(new Following(1, "SubGroup 1", R.drawable.ic_action_dock));
+        groups.add(new Following(2, "SubGroup 2", R.drawable.ic_action_dock));
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealmOrUpdate(groups);
+            }
+        });
+    }
+
+    private void accessFollowingTable() {
+        followingGroupTitles = new ArrayList<>();
+        followingGroupIcons = new ArrayList<>();
+
+        RealmResults<Following> realmResults
+                = realm.where(Following.class).findAll();
+        for (int idx = 0; idx < realmResults.size(); idx ++) {
+            followingGroupTitles.add(realmResults.get(idx).getTitle());
+            followingGroupIcons.add(realmResults.get(idx).getIconRes());
+        }
     }
 
     private void makeDrawer() {
@@ -62,8 +106,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
         for (int idx = 0; idx < menuTitles.length; idx++) {
             if (idx == 1) {
                 SubMenu subMenu = mNavigationMenu.addSubMenu(menuTitles[idx]);
-                subMenu.add("Sub Menu 1");
-                subMenu.add("Sub Menu 2");
+                for (int subIdx = 0; subIdx < followingGroupIcons.size(); subIdx ++) {
+                    subMenu.add(followingGroupTitles.get(subIdx)).setIcon(followingGroupIcons.get(subIdx));
+                }
             } else {
                 mNavigationMenu.add(menuTitles[idx]).setIcon(menuIcons[idx]);
             }
