@@ -1,23 +1,20 @@
 package com.swmaestro.roundup.navigation;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.SubMenu;
 
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.add_group.AddGroupActivity;
 import com.swmaestro.roundup.chatting.ChattingListActivity;
 import com.swmaestro.roundup.following.FollowingListActivity;
-import com.swmaestro.roundup.home.HomeFeed;
 import com.swmaestro.roundup.home.HomeFeedActivity;
 import com.swmaestro.roundup.setting.SettingActivity;
 
@@ -26,6 +23,19 @@ import com.swmaestro.roundup.setting.SettingActivity;
  */
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    final private String[] menuTitles = {"Home Feed",
+            "Followings",
+            "Chatting",
+            "Setting",
+            "Add a New Group"};
+    final private int[] menuIcons = {R.drawable.ic_action_dock,
+            R.drawable.ic_action_forward,
+            R.drawable.ic_action_chat,
+            R.drawable.ic_action_settings,
+            R.drawable.ic_action_add_group};
+
+    private Menu mNavigationMenu;
 
     protected void makeNavigationDrawer() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -39,6 +49,18 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mNavigationMenu = navigationView.getMenu();
+        mNavigationMenu.clear();
+        for (int idx = 0; idx < menuTitles.length; idx++) {
+            if (idx == 1) {
+                SubMenu subMenu = mNavigationMenu.addSubMenu(menuTitles[idx]);
+                subMenu.add("Sub Menu 1");
+                subMenu.add("Sub Menu 2");
+            } else {
+                mNavigationMenu.add(menuTitles[idx]).setIcon(menuIcons[idx]);
+            }
+        }
     }
 
     @Override
