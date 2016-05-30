@@ -7,9 +7,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.add_group.AddGroupActivity;
@@ -33,26 +37,51 @@ public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Menu mNavigationMenu;
+
     private List<String> followingGroupTitles;
     private List<Integer> followingGroupIcons;
+
+    private NavigationHeader mHeader;
 
     RealmConfiguration realmConfig;
     Realm realm;
 
     protected void makeNavigationDrawer() {
+        // Processing Realm DataBase.
         prepareRealm();
         createFollowingTable();
         accessFollowingTable();
+        createNavigationHeaderTable();
+        accessNavigationHeaderTable();
+
+        // Make components by information derived from Realm DB.
         makeDrawer();
         makeNavigationView();
+        makeNavigationHeader();
+    }
+
+    private void makeNavigationHeader() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_home_feed);
+        TextView tvName = (TextView) headerView.findViewById(R.id.nav_head_name);
+        TextView tvEmail = (TextView) headerView.findViewById(R.id.nav_head_email);
+        ImageView ivIcon = (ImageView) headerView.findViewById(R.id.nav_head_image);
+
+        if (mHeader != null) {
+            tvName.setText(mHeader.getName());
+            tvEmail.setText(mHeader.getEmailAddr());
+            ivIcon.setImageResource(mHeader.getResIconImage());
+            headerView.setBackgroundResource(mHeader.getResBackImage());
+        }
     }
 
     private void prepareRealm() {
-        realmConfig = new RealmConfiguration.Builder(this).build();
+        realmConfig = new RealmConfiguration.Builder(this).deleteRealmIfMigrationNeeded().build();
         realm = Realm.getInstance(realmConfig);
     }
 
     private void createFollowingTable() {
+        // TODO: Delete this method after making a routine to get data from server and save it to RealmDB.
         final List<Following> groups = new ArrayList<>();
         groups.add(new Following(1, "SubGroup 1", R.drawable.ic_action_dock));
         groups.add(new Following(2, "SubGroup 2", R.drawable.ic_action_dock));
@@ -74,6 +103,25 @@ public class NavigationDrawerActivity extends AppCompatActivity
             followingGroupTitles.add(realmResults.get(idx).getTitle());
             followingGroupIcons.add(realmResults.get(idx).getIconRes());
         }
+    }
+
+    private void createNavigationHeaderTable() {
+        // TODO: Delete this method after making a routine to get data from server and save it to RealmDB.
+        final NavigationHeader header = new NavigationHeader();
+        header.setName("JeongMinCha");
+        header.setEmailAddr("cjm9236@naver.com");
+        header.setResBackImage(R.drawable.nav_header_background_example);
+        header.setResIconImage(R.drawable.ic_action_dock);
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealmOrUpdate(header);
+            }
+        });
+    }
+
+    private void accessNavigationHeaderTable() {
+        mHeader = realm.where(NavigationHeader.class).findFirst();
     }
 
     private void makeDrawer() {
