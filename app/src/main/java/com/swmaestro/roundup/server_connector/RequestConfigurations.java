@@ -10,7 +10,7 @@ import org.json.JSONObject;
  * Created by CHOI ILJI on 2016-06-01.
  */
 public class RequestConfigurations {
-    private static final String BASE_URL = "http://localhost:8000/api_v1/";
+    private static final String BASE_URL = "http://10.0.3.2:8000/api_v1/";
     private static final String BASE_HEADER = "Content-type application/json";
     // Need to parse json file
     private JSONObject loadSettingsFromCfg() throws JSONException {

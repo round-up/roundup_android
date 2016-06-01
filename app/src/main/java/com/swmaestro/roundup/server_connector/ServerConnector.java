@@ -3,6 +3,7 @@ package com.swmaestro.roundup.server_connector;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import org.apache.http.entity.StringEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,6 +16,8 @@ import org.apache.http.util.EntityUtils;
 import android.util.Log;
 
 import com.swmaestro.roundup.dto.RequestInfo;
+
+import java.io.UnsupportedEncodingException;
 
 
 /**
@@ -38,8 +41,13 @@ public class ServerConnector extends AsyncTask<String, String, String> {
         // TODO Auto-generated method stub
         if (callType==POST) {
             // For test the server request;
-            JSONObject obj =postOnly(info);
-            return convertJSONtoString(obj);
+            try {
+                JSONObject obj = postInsert(info);
+                return convertJSONtoString(obj);
+            }catch(UnsupportedEncodingException ue){
+                ue.printStackTrace();
+                return "";
+            }
         }else{
             return "";
         }
@@ -72,6 +80,30 @@ public class ServerConnector extends AsyncTask<String, String, String> {
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
         post.setHeader(header[0], header[1]);
+        Log.e("info", url + " "+ header[0] + " "+header[1]);
+        JSONObject result = null;
+        try{
+            HttpResponse response = client.execute(post);
+            String content = EntityUtils.toString(response.getEntity());
+            result = new JSONObject(content);
+        }catch(Exception e){
+            Log.e("ERror", e.getMessage());
+        }
+        return result;
+    }
+
+    private JSONObject postInsert(RequestInfo info) throws UnsupportedEncodingException{
+        String url = info.getUrl();
+        String[] header = info.getHeader();
+        HttpClient client = new DefaultHttpClient();
+        StringEntity se = new StringEntity(info.getData().toString());
+
+        HttpPost post = new HttpPost(url);
+        post.setHeader(header[0], header[1]);
+        post.setEntity(se);
+        Log.i("iasdasdnfo", url + " "+ header[0] + " "+header[1]);
+        Log.i("info2", "123///" + se.toString());
+
         JSONObject result = null;
         try{
             HttpResponse response = client.execute(post);

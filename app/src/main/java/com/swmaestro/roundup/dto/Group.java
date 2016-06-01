@@ -37,6 +37,9 @@ public class Group {
             obj.put("group_description", "");
             obj.put("group_start_date", groupFoundation);
             obj.put("group_place", groupPlace);
+            //
+            obj.put("group_description", "1");
+            obj.put("group_category", "1");
             //obj.put("group_logo", );
             //obj.put("group_cover", );
             obj.put("group_recruit_state", groupEnroll);
