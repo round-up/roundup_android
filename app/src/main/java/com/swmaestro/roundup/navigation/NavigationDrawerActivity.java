@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.add_group.AddGroupActivity;
 import com.swmaestro.roundup.chatting.ChattingListActivity;
-import com.swmaestro.roundup.following.Following;
 import com.swmaestro.roundup.following.FollowingListActivity;
 import com.swmaestro.roundup.home.HomeFeedActivity;
 import com.swmaestro.roundup.setting.SettingActivity;
@@ -94,9 +93,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
     private void createFollowingTable() {
         // TODO: Delete this method after making a routine to get data from server and save it to RealmDB.
-        final List<Following> groups = new ArrayList<>();
-        groups.add(new Following(1, "SubGroup 1", R.drawable.ic_action_dock));
-        groups.add(new Following(2, "SubGroup 2", R.drawable.ic_action_dock));
+        final List<MyGroupMenuItem> groups = new ArrayList<>();
+        groups.add(new MyGroupMenuItem(1, "SubGroup 1", R.drawable.ic_action_dock));
+        groups.add(new MyGroupMenuItem(2, "SubGroup 2", R.drawable.ic_action_dock));
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -109,8 +108,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
         followingGroupTitles = new ArrayList<>();
         followingGroupIcons = new ArrayList<>();
 
-        RealmResults<Following> realmResults
-                = realm.where(Following.class).findAll();
+        RealmResults<MyGroupMenuItem> realmResults
+                = realm.where(MyGroupMenuItem.class).findAll();
         for (int idx = 0; idx < realmResults.size(); idx ++) {
             followingGroupTitles.add(realmResults.get(idx).getTitle());
             followingGroupIcons.add(realmResults.get(idx).getIconRes());
