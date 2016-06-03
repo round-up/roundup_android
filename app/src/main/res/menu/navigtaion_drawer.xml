@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home_feed"
-            android:icon="@drawable/ic_action_dock"
-            android:title="Home Feed" />
-        <item
-            android:id="@+id/nav_chatting"
-            android:icon="@drawable/ic_action_chat"
-            android:title="Chatting" />
-        <item
-            android:id="@+id/nav_add_group"
-            android:icon="@drawable/ic_action_add_group"
-            android:title="Add a New Group" />
-        <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_action_settings"
-            android:title="Setting" />
+    <group
+        android:id="@+id/nav_group1"
+        android:checkableBehavior="single">
+    </group>
+
+    <group
+        android:id="@+id/nav_group2"
+        android:checkableBehavior="single">
     </group>
 
 </menu>
