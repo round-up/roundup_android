@@ -19,6 +19,7 @@ import io.realm.RealmConfiguration;
 public class FollowingListActivity extends NavigationDrawerActivity {
 
     private Realm realm;
+    private List<FollowingGroup> followingGroups;
 
     public FollowingListActivity() {
     }
