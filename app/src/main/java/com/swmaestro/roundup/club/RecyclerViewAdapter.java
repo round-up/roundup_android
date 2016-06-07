@@ -2,10 +2,12 @@
 package com.swmaestro.roundup.club;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,11 +35,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
 
         switch (viewType){
             case CLUBINFO:
                 View Clubview = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_club_info, parent, false);
+                Button btn_detail = (Button) Clubview.findViewById(R.id.btn_club_info_detail);
+                btn_detail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        view.getContext().startActivity(new Intent(parent.getContext(), DetailClubActivity.class));
+                    }
+                });
                 return  new ClubViewHolder(Clubview);
             case CLUBFEED:
                 View Feedview = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_club_feed, parent, false);
