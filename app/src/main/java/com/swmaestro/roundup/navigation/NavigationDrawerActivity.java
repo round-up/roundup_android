@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.add_group.AddGroupActivity;
 import com.swmaestro.roundup.chatting.ChattingListActivity;
-import com.swmaestro.roundup.following.Following;
 import com.swmaestro.roundup.following.FollowingListActivity;
 import com.swmaestro.roundup.home.HomeFeedActivity;
 import com.swmaestro.roundup.setting.SettingActivity;
@@ -35,6 +34,18 @@ import io.realm.RealmResults;
  */
 public class NavigationDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private final int idHomeFeed = 0;
+    private final int idMyGroups = 1;
+    private final int idFollowingGroups = 2;
+    private final int idAddGroup = 3;
+    private final int idSettings = 4;
+
+    private final String HOME_FEED = "Home Feed";
+    private final String MY_GROUPS = "My Groups";
+    private final String FOLLOWING_GROUPS = "Following Groups";
+    private final String ADD_GROUP = "Add a New Group";
+    private final String SETTINGS = "Settings";
 
     private Menu mNavigationMenu;
 
@@ -82,9 +93,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
     private void createFollowingTable() {
         // TODO: Delete this method after making a routine to get data from server and save it to RealmDB.
-        final List<Following> groups = new ArrayList<>();
-        groups.add(new Following(1, "SubGroup 1", R.drawable.ic_action_dock));
-        groups.add(new Following(2, "SubGroup 2", R.drawable.ic_action_dock));
+        final List<MyGroupMenuItem> groups = new ArrayList<>();
+        groups.add(new MyGroupMenuItem(1, "SubGroup 1", R.drawable.ic_action_dock));
+        groups.add(new MyGroupMenuItem(2, "SubGroup 2", R.drawable.ic_action_dock));
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -97,8 +108,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
         followingGroupTitles = new ArrayList<>();
         followingGroupIcons = new ArrayList<>();
 
-        RealmResults<Following> realmResults
-                = realm.where(Following.class).findAll();
+        RealmResults<MyGroupMenuItem> realmResults
+                = realm.where(MyGroupMenuItem.class).findAll();
         for (int idx = 0; idx < realmResults.size(); idx ++) {
             followingGroupTitles.add(realmResults.get(idx).getTitle());
             followingGroupIcons.add(realmResults.get(idx).getIconRes());
@@ -140,16 +151,27 @@ public class NavigationDrawerActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         mNavigationMenu = navigationView.getMenu();
-        SubMenu subMenu = mNavigationMenu.addSubMenu("Followings");
+        mNavigationMenu.add(R.id.nav_group1, idHomeFeed, Menu.NONE, HOME_FEED)
+                .setIcon(R.drawable.ic_action_dock);
+        SubMenu subMenu = mNavigationMenu
+                .addSubMenu(R.id.nav_group1, idMyGroups, Menu.NONE, MY_GROUPS);
         for (int i = 0; i < followingGroupIcons.size(); i++) {
             subMenu.add(followingGroupTitles.get(i)).setIcon(followingGroupIcons.get(i));
         }
+
+        mNavigationMenu.add(R.id.nav_group2, idFollowingGroups, Menu.NONE, FOLLOWING_GROUPS)
+                .setIcon(R.drawable.ic_action_forward);
+        mNavigationMenu.add(R.id.nav_group2, idAddGroup, Menu.NONE, ADD_GROUP)
+                .setIcon(R.drawable.ic_action_add_group);
+        mNavigationMenu.add(R.id.nav_group2, idSettings, Menu.NONE, SETTINGS)
+                .setIcon(R.drawable.ic_action_settings);
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        String title = item.getTitle().toString();
 
         // close the navigation drawer.
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -157,27 +179,27 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         // Process the intent.
         Intent intent;
-        switch (id) {
-            case R.id.nav_home_feed:
+        switch (title) {
+            case HOME_FEED:
                 intent = new Intent(this, HomeFeedActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 break;
-            case R.id.nav_chatting:
-                intent = new Intent(this, ChattingListActivity.class);
+            case FOLLOWING_GROUPS:
+                intent = new Intent(this, FollowingListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 break;
-            case R.id.nav_setting:
+            case ADD_GROUP:
+                intent = new Intent(this, AddGroupActivity.class);
+                startActivity(intent);
+                break;
+            case SETTINGS:
                 intent = new Intent(this, SettingActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-                break;
-            case R.id.nav_add_group:
-                intent = new Intent(this, AddGroupActivity.class);
                 startActivity(intent);
                 break;
             default:

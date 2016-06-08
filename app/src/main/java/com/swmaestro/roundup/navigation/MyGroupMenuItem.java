@@ -1,4 +1,4 @@
-package com.swmaestro.roundup.following;
+package com.swmaestro.roundup.navigation;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -6,15 +6,15 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by JeongMinCha on 16. 5. 30..
  */
-public class Following extends RealmObject {
+public class MyGroupMenuItem extends RealmObject {
     @PrimaryKey
     private long id;
     private String title;
     private int iconRes;
 
-    public Following() {}
+    public MyGroupMenuItem() {}
 
-    public Following(long id, String title, int iconRes) {
+    public MyGroupMenuItem(long id, String title, int iconRes) {
         this.id = id;
         this.title = title;
         this.iconRes = iconRes;
