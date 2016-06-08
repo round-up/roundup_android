@@ -3,69 +3,107 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Session"
-        android:id="@+id/textView2"
-        android:layout_gravity="center_horizontal" />
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorWhite"
         android:orientation="horizontal"
-        android:paddingTop="15sp">
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical" >
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="제목 : "
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_weight="5"
+            android:textColor="#000000"
+            android:text="제목"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp" />
+
         <EditText
-            android:id="@+id/et_club_post_session_title"
+            android:id="@+id/editText7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_weight="13"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="세션 제목을 입력해주세요."
             android:inputType="text"
-            android:hint="Essential"
-            android:textSize="15sp"
-            android:backgroundTint="@color/grayLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorWhite"
         android:orientation="horizontal"
-        android:paddingTop="15sp" >
+        android:gravity="center_vertical" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="제목 : "
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_weight="5"
+            android:text="공개 범위"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp" />
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:id="@+id/spinner2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner"
-            android:layout_weight="1" />
-
+            android:layout_weight="13"
+            android:backgroundTint="@color/grayLine"
+            android:inputType="text"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="150dp"
         android:orientation="horizontal"
-        android:paddingTop="15sp" >
+        android:paddingTop="15sp"
+        android:background="#ffffff">
 
         <EditText
-            android:layout_width="match_parent"
+            android:id="@+id/editText8"
+            android:textColor="#000000"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="13"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="  | 세션 내용을 입력해 주세요."
             android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/editText5"
-            android:gravity="top"
-            android:hint="글쓰기" />
+            android:textSize="13sp"
+            android:layout_gravity="top"
+            android:gravity="top" />
+
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button7"
+            android:layout_weight="1"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button8"
+            android:layout_weight="1"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
+
 </LinearLayout>
