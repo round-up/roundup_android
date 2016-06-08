@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/noti_one_hour"
+        android:title="1 시간"/>
+    <item
+        android:id="@+id/noti_two_hour"
+        android:title="2 시간"/>
+</menu>
