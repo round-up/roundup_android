@@ -1,9 +1,8 @@
 package com.swmaestro.roundup.following;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ListView;
 
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.navigation.NavigationDrawerActivity;
@@ -22,6 +21,7 @@ public class FollowingListActivity extends NavigationDrawerActivity {
 
     private Realm realm;
     private List<FollowingGroup> followingGroups;
+    private ListView listView;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,20 +32,27 @@ public class FollowingListActivity extends NavigationDrawerActivity {
     @Override
     public void onStart() {
         super.onStart();
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder(this)
-                .deleteRealmIfMigrationNeeded().build();
-        realm = Realm.getInstance(realmConfig);
-
         followingGroups = new ArrayList<>();
 
+        prepareRealm();
         createFollowingTable();
         accessFollowingTable();
+
+        listView = (ListView) findViewById(R.id.listview_following_groups);
+        listView.setAdapter(new FollowingGroupsAdapter(this, followingGroups));
+        Log.i("count", Integer.toString(listView.getCount()));
     }
 
     @Override
     public void onStop() {
         super.onStop();
         realm.close();
+    }
+
+    private void prepareRealm() {
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder(this)
+                .deleteRealmIfMigrationNeeded().build();
+        realm = Realm.getInstance(realmConfig);
     }
 
     private void createFollowingTable() {
