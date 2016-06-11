@@ -32,16 +32,16 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/imageView4"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="86dp"
+                        android:layout_height="86dp"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginTop="20dp"
                         android:src="@drawable/img_profile1" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:orientation="vertical">
@@ -51,14 +51,65 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="창업동아리 레알"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textSize="54px"
+                            android:textStyle="bold"
+                            android:textColor="#6c6c6c" />
 
-                        <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="New Text" />
+                            android:layout_marginTop="5dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView14"
+                                android:src="@drawable/ic_flag"
+                                android:layout_marginRight="5dp" />
+
+                            <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3"
+                                android:textSize="40px"
+                                android:textColor="#888" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="기"
+                                android:id="@+id/textView29"
+                                android:layout_marginRight="10dp"
+                                android:textSize="40px"
+                                android:textColor="#888" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="|"
+                                android:id="@+id/textView30"
+                                android:layout_marginRight="10dp"
+                                android:textSize="40px"
+                                android:textColor="#888" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/imageView15"
+                                android:src="@drawable/ic_bigspot"
+                                android:layout_marginRight="5dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="한국과학창의재단"
+                                android:id="@+id/textView31"
+                                android:textSize="40px"
+                                android:textColor="#888" />
+
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -67,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="REAL은 SW 실천 창업 연합동아리로서 SW 분야의 창업 경험을 통해 관련 역량을 기르고 나아가 실제창업을 목표로 합니다."
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="20dp" />
             </LinearLayout>
@@ -84,7 +135,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -93,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView5"
                     android:src="@drawable/ic_bigspot"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginRight="15dp" />
 
                 <TextView
@@ -101,13 +152,15 @@
                     android:layout_weight="4"
                     android:layout_height="wrap_content"
                     android:text="활동 장소"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="42px" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="7"
                     android:layout_height="wrap_content"
-                    android:text="한국과학창의재단" />
+                    android:text="한국과학창의재단"
+                    android:textSize="40px" />
 
             </LinearLayout>
             <View
@@ -118,7 +171,7 @@
                 android:background="#EAEAEA" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -127,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView6"
                     android:src="@drawable/ic_briefcase"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginRight="15dp" />
 
                 <TextView
@@ -135,13 +188,15 @@
                     android:layout_weight="4"
                     android:layout_height="wrap_content"
                     android:text="소속"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="42px" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="7"
                     android:layout_height="wrap_content"
-                    android:text="-" />
+                    android:text="-"
+                    android:textSize="40px" />
 
             </LinearLayout>
             <View
@@ -152,7 +207,7 @@
                 android:background="#EAEAEA" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -161,7 +216,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView7"
                     android:src="@drawable/ic_calendar"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginRight="15dp" />
 
                 <TextView
@@ -169,13 +224,15 @@
                     android:layout_weight="4"
                     android:layout_height="wrap_content"
                     android:text="창립일"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="42px" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="7"
                     android:layout_height="wrap_content"
-                    android:text="2015 / 02 / 01" />
+                    android:text="2015 / 02 / 01"
+                    android:textSize="40px" />
 
             </LinearLayout>
             <View
@@ -186,7 +243,7 @@
                 android:background="#EAEAEA" />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
@@ -195,7 +252,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView8"
                     android:src="@drawable/ic_flag"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginRight="15dp" />
 
                 <TextView
@@ -203,13 +260,15 @@
                     android:layout_weight="4"
                     android:layout_height="wrap_content"
                     android:text="현재 기수"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textSize="42px" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="7"
                     android:layout_height="wrap_content"
-                    android:text="3기" />
+                    android:text="3기"
+                    android:textSize="40px" />
 
             </LinearLayout>
         </LinearLayout>
