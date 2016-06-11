@@ -3,6 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    android:textSize="16sp">
+    android:textSize="16sp"
+    android:textColor="@color/card_content_gray"
+    android:drawablePadding="8dp"
+    android:drawableLeft="@drawable/p01_icon_arrow">
 
 </TextView>

@@ -9,7 +9,7 @@
     tools:showIn="@layout/app_bar_home_feed">
 
     <LinearLayout
-        android:background="@color/light_gray"
+        android:background="@color/card_view_background"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -28,8 +28,9 @@
             android:layout_marginRight="15dp"
             android:gravity="left"
             android:text="@string/interesting_club_activities"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/black"/>
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/section_name_gray"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/interesting_club_activity_list"

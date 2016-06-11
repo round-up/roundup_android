@@ -10,6 +10,8 @@
     <color name="light_gray">#F2F2F2</color>
     <color name="button_outer_line">#f0f0f0</color>
     <color name="card_view_background">#f0f0f0</color>
+    <color name="section_name_gray">#6c6c6c</color>
     <color name="card_name_gray">#6c6c6c</color>
+    <color name="card_content_gray">#6c6c6c</color>
     <color name="gray_divider">#ccc</color>
 </resources>
