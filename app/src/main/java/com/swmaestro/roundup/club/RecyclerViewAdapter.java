@@ -63,7 +63,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             FeedViewHolder feedViewHolder = (FeedViewHolder) holder;
             feedViewHolder.textViewFeedTitle.setText(feed.getFeedTitle());
             feedViewHolder.textViewFeedContent.setText(feed.getFeedContent());
-            Picasso.with(context).load(feed.getFeedFileThumbnail()).into(feedViewHolder.imageViewFeedFile);
+//            Picasso.with(context).load(feed.getFeedFileThumbnail()).into(feedViewHolder.imageViewFeedFile);
             feedViewHolder.textViewFeedAuthor.setText(feed.getFeedAuthor());
         }
     }
@@ -100,7 +100,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             textViewFeedContent = (TextView) itemView.findViewById(R.id.tv_feed_content);
             textViewFeedTitle = (TextView) itemView.findViewById(R.id.tv_feed_title);
             textViewFeedAuthor = (TextView) itemView.findViewById(R.id.tv_feed_author);
-            imageViewFeedFile = (ImageView) itemView.findViewById(R.id.iv_feed_file);
+//            imageViewFeedFile = (ImageView) itemView.findViewById(R.id.iv_feed_file);
 
         }
     }

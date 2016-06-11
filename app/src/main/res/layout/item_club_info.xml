@@ -2,57 +2,229 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_club_info_detail"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="자세히 보기" />
+        android:layout_marginBottom="10dp"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView10"
+                android:src="@drawable/ic_flag"
+                android:layout_marginRight="7dp"
+                android:layout_gravity="center_vertical|right" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView16"
+                android:text="3"
+                android:textSize="40px"
+                android:textColor="#888" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기"
+                android:id="@+id/textView17"
+                android:textSize="40px"
+                android:textColor="#888"
+                android:layout_marginRight="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="|"
+                android:id="@+id/textView18"
+                android:textColor="#888"
+                android:textSize="40px"
+                android:layout_marginRight="15dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView11"
+                android:src="@drawable/ic_bigspot"
+                android:layout_marginRight="7dp"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="한국과학창의재단"
+                android:id="@+id/textView19"
+                android:textColor="#888"
+                android:textSize="40px" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_club_info_detail"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center_horizontal"
+            android:text="자세히 보기"
+            android:background="#ffffff"
+            android:textSize="40px"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:background="#ffffff"
+        android:layout_marginBottom="28dp">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView13"
+                android:src="@drawable/ic_clip"
+                android:layout_marginRight="9dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="연합그룹"
+                android:id="@+id/textView21"
+                android:layout_marginRight="10dp"
+                android:textStyle="bold"
+                android:textSize="40px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="|"
+                android:id="@+id/textView22"
+                android:layout_marginRight="10dp"
+                android:textSize="32px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="총"
+                android:id="@+id/textView23"
+                android:textSize="32px"
+                android:layout_marginRight="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"
+                android:id="@+id/textView24"
+                android:textSize="32px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="명"
+                android:id="@+id/textView25"
+                android:textSize="32px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_menu_send" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="사진" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                android:src="@drawable/ic_menu_send"
+                android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_menu_send" />
+                android:src="@drawable/ic_menu_send"
+                android:layout_gravity="top"
+                android:layout_weight="1" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="연합" />
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_menu_send"
+                android:layout_weight="1" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView26"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView27"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView28"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="모든 연합 보기"
+            android:background="#ffffff"
+            android:textStyle="bold"
+            android:textSize="40px"
+            android:layout_marginTop="14dp" />
+
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="게시물"
+        android:id="@+id/textView20"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold" />
+
 </LinearLayout>
