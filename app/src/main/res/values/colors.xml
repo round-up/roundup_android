@@ -13,5 +13,6 @@
     <color name="section_name_gray">#6c6c6c</color>
     <color name="card_name_gray">#6c6c6c</color>
     <color name="card_content_gray">#6c6c6c</color>
+    <color name="card_time_gray">#8f9394</color>
     <color name="gray_divider">#ccc</color>
 </resources>

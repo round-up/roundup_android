@@ -5,39 +5,149 @@
     android:id="@+id/home_feed_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    card_view:cardCornerRadius="@dimen/card_corner_radius"
-    card_view:cardElevation="@dimen/card_elevation">
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    card_view:cardUseCompatPadding="true">
 
-    <ImageView
-        android:id="@+id/home_card_image"
+    <RelativeLayout
+        android:id="@+id/layout_home_feed_header"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop" />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/home_card_main_holder"
-        android:background="?android:selectableItemBackground"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <LinearLayout
-        android:id="@+id/home_card_name_holder"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="45dp">
+        <ImageView
+            android:id="@+id/img_group_icon"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentLeft="true"
+            />
 
         <TextView
-            android:id="@+id/home_card_name"
-            android:layout_gravity="center_vertical"
-            android:gravity="left"
-            android:paddingLeft="10dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:id="@+id/txt_group_name"
+            android:text="동아리명"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/card_name_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_toRightOf="@id/img_group_icon"/>
 
+        <TextView
+            android:id="@+id/txt_author_name"
+            android:text=" | 작성자"
+            android:textSize="10sp"
+            android:textColor="@color/card_content_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/txt_group_name"
+            android:layout_toRightOf="@id/txt_group_name"/>
+
+        <TextView
+            android:id="@+id/txt_time"
+            android:text="작성시간"
+            android:textSize="12sp"
+            android:textColor="@color/card_time_gray"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="28dp"
+            android:layout_marginRight="26dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txt_home_feed_title"
+            android:text="컨텐츠 타이틀"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/card_content_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_group_icon"
+            android:layout_marginTop="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:id="@+id/txt_home_feed_content"
+            android:text="컨텐츠 내용"
+            android:textSize="13sp"
+            android:textColor="@color/card_content_gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginBottom="30dp"
+            android:layout_below="@id/txt_home_feed_title"/>
+
+        <TextView
+            android:id="@+id/txt_home_feed_recommends"
+            android:text="추천 000건"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="22dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_home_feed_content"/>
+
+        <TextView
+            android:id="@+id/txt_home_feed_comments"
+            android:text=" | 댓글00개"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_home_feed_content"
+            android:layout_toRightOf="@id/txt_home_feed_recommends"/>
+
+        <View
+            android:layout_below="@id/txt_home_feed_comments"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray_divider"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"/>
+        
+        <LinearLayout
+            android:layout_below="@id/txt_home_feed_comments"
+            android:layout_marginTop="21dp"
+            android:layout_marginBottom="23dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btn_heart_home_feed"
+                android:src="@drawable/p01_btn_heart"
+                android:background="@null"
+                android:layout_marginRight="112dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/btn_comment_home_feed"
+                android:src="@drawable/p01_btn_comment"
+                android:background="@null"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/btn_share_home_feed"
+                android:src="@drawable/p01_btn_share"
+                android:background="@null"
+                android:layout_marginLeft="112dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </android.support.v7.widget.CardView>
