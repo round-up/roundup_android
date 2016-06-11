@@ -49,7 +49,14 @@ public class ClubSummaryFeedListAdapter
         holder.groupIcon.setImageResource(R.mipmap.ic_launcher);
         holder.groupName.setText(clubSummaryFeed.getGroupName());
         holder.groupSchedule.setText(clubSummaryFeed.getRemainingDays() + "일 남았습니다.");
-        ListView listView = holder.listSessions;
+        LayoutInflater inflater = (LayoutInflater) mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        TextView tv = (TextView) inflater.inflate(R.layout.session_summary_item, null);
+        tv.setText("Hello");
+        holder.groupSessionSummary.addView(tv);
+        tv = (TextView) inflater.inflate(R.layout.session_summary_item, null);
+        tv.setText("Hello");
+        holder.groupSessionSummary.addView(tv);
     }
 
     @Override
@@ -65,7 +72,7 @@ public class ClubSummaryFeedListAdapter
         ImageView groupIcon;
         TextView groupName;
         TextView groupSchedule;
-        ListView listSessions;
+        LinearLayout groupSessionSummary;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -73,7 +80,7 @@ public class ClubSummaryFeedListAdapter
             groupIcon = (ImageView) itemView.findViewById(R.id.img_group_icon);
             groupName = (TextView) itemView.findViewById(R.id.txt_group_name);
             groupSchedule = (TextView) itemView.findViewById(R.id.txt_group_schedule);
-            listSessions = (ListView) itemView.findViewById(R.id.list_sessions);
+            groupSessionSummary = (LinearLayout) itemView.findViewById(R.id.layout_session_summary);
 
             cardView.setOnClickListener(this);
         }
