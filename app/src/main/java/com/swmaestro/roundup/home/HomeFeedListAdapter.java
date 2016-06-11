@@ -1,10 +1,12 @@
 package com.swmaestro.roundup.home;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -40,34 +42,63 @@ public class HomeFeedListAdapter
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        final HomeFeed homeFeed = HomeFeedData.homeFeedList().get(position);
-        holder.cardName.setText(homeFeed.name);
-        Picasso.with(mContext)
-                .load(homeFeed.getImageResourceId(mContext))
-                .into(holder.cardImage);
+        final HomeFeed homeFeed = new HomeFeed();
+        homeFeed.setGroupName("소프트웨어 마에스트로");
+        homeFeed.setAuthorName("차정민");
+        homeFeed.setTime("2016.06.11/16:00");
+        homeFeed.setFeedTitle("재미있는 안드로이드 개발!");
+        homeFeed.setFeedContent("안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다");
+        homeFeed.setNumRecommends(5);
+        homeFeed.setNumComments(2);
+
+        holder.groupName.setText(homeFeed.getGroupName());
+        holder.authorName.setText(homeFeed.getAuthorName());
+        holder.txtTime.setText(homeFeed.getTime());
+        holder.feedTitle.setText(homeFeed.getFeedTitle());
+        holder.feedContent.setText(homeFeed.getFeedContent());
+        holder.txtRecommend.setText("추천 " + homeFeed.getNumRecommends() + " 건");
+        holder.txtRecommend.setText("| 댓글 " + homeFeed.getNumComments() + " 건" );
     }
 
     @Override
     public int getItemCount() {
-        return HomeFeedData.size;
+        return 1;
     }
 
     public class ViewHolder
             extends RecyclerView.ViewHolder
             implements View.OnClickListener {
-        public LinearLayout cardHolder;
-        public LinearLayout cardNameHolder;
-        public TextView cardName;
-        public ImageView cardImage;
+        CardView cardView;
+        ImageView groupIcon;
+        TextView groupName;
+        TextView authorName;
+        TextView txtTime;
+        TextView feedTitle;
+        TextView feedContent;
+        TextView txtRecommend;
+        TextView txtComment;
+        ImageButton btnHeart;
+        ImageButton btnComment;
+        ImageButton btnShare;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            cardHolder = (LinearLayout) itemView.findViewById(R.id.home_card_main_holder);
-            cardNameHolder = (LinearLayout) itemView.findViewById(R.id.home_card_name_holder);
-            cardName = (TextView) itemView.findViewById(R.id.home_card_name);
-            cardImage = (ImageView) itemView.findViewById(R.id.home_card_image);
+            cardView = (CardView) itemView.findViewById(R.id.home_feed_card);
+            groupIcon = (ImageView) itemView.findViewById(R.id.img_group_icon);
+            groupName = (TextView) itemView.findViewById(R.id.txt_group_name);
+            authorName = (TextView) itemView.findViewById(R.id.txt_author_name);
+            txtTime = (TextView) itemView.findViewById(R.id.txt_time);
+            feedTitle = (TextView) itemView.findViewById(R.id.txt_home_feed_title);
+            feedContent = (TextView) itemView.findViewById(R.id.txt_home_feed_content);
+            txtRecommend = (TextView) itemView.findViewById(R.id.txt_home_feed_recommends);
+            txtComment = (TextView) itemView.findViewById(R.id.txt_home_feed_comments);
+            btnHeart = (ImageButton) itemView.findViewById(R.id.btn_heart_home_feed);
+            btnComment = (ImageButton) itemView.findViewById(R.id.btn_comment_home_feed);
+            btnShare = (ImageButton) itemView.findViewById(R.id.btn_share_home_feed);
 
-            cardHolder.setOnClickListener(this);
+            btnHeart.setOnClickListener(this);
+            btnComment.setOnClickListener(this);
+            btnShare.setOnClickListener(this);
         }
 
         @Override
