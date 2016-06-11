@@ -24,7 +24,7 @@ import java.io.UnsupportedEncodingException;
  * Created by CHOI ILJI on 2016-06-01.
  */
 public class ServerConnector extends AsyncTask<String, String, String> {
-    public static int POST = 0, GET = 1;
+    public static int POST_ONLY = 0, POST = 1, GET = 2;
     private int callType;
     private RequestInfo info;
 
@@ -42,12 +42,15 @@ public class ServerConnector extends AsyncTask<String, String, String> {
         if (callType==POST) {
             // For test the server request;
             try {
-                JSONObject obj = postInsert(info);
+                JSONObject obj = postByData(info);
                 return convertJSONtoString(obj);
             }catch(UnsupportedEncodingException ue){
                 ue.printStackTrace();
                 return "";
             }
+        }else if (callType==POST_ONLY){
+            JSONObject obj = postOnly(info);
+            return convertJSONtoString(obj);
         }else if(callType==GET){
             JSONObject obj = getOnly(info);
             return convertJSONtoString(obj);
@@ -57,6 +60,9 @@ public class ServerConnector extends AsyncTask<String, String, String> {
     }
 
     private String convertJSONtoString(JSONObject obj){
+        if (obj==null){
+            return "{}";
+        }
         return obj.toString();
     }
 
@@ -95,7 +101,7 @@ public class ServerConnector extends AsyncTask<String, String, String> {
         return result;
     }
 
-    private JSONObject postInsert(RequestInfo info) throws UnsupportedEncodingException{
+    private JSONObject postByData(RequestInfo info) throws UnsupportedEncodingException{
         String url = info.getUrl();
         String[] header = info.getHeader();
         HttpClient client = new DefaultHttpClient();
@@ -104,12 +110,29 @@ public class ServerConnector extends AsyncTask<String, String, String> {
         HttpPost post = new HttpPost(url);
         post.setHeader(header[0], header[1]);
         post.setEntity(se);
-        Log.i("iasdasdnfo", url + " "+ header[0] + " "+header[1]);
-        Log.i("info2", "123///" + se.toString());
 
         JSONObject result = null;
         try{
             HttpResponse response = client.execute(post);
+            String content = EntityUtils.toString(response.getEntity());
+            result = new JSONObject(content);
+        }catch(Exception e){
+            Log.e("ERror", e.getMessage());
+        }
+        return result;
+    }
+
+    private JSONObject getByData(RequestInfo info) throws UnsupportedEncodingException {
+        String url = info.getUrl();
+        String[] header = info.getHeader();
+        HttpClient client = new DefaultHttpClient();
+        StringEntity se = new StringEntity(info.getData().toString());
+
+        HttpGet get = new HttpGet(url);
+        get.setHeader(header[0], header[1]);
+        JSONObject result = null;
+        try{
+            HttpResponse response = client.execute(get);
             String content = EntityUtils.toString(response.getEntity());
             result = new JSONObject(content);
         }catch(Exception e){

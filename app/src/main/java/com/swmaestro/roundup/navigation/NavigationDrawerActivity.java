@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -24,6 +25,11 @@ import com.swmaestro.roundup.home.HomeFeedActivity;
 import com.swmaestro.roundup.server_connector.RequestConfigurations;
 import com.swmaestro.roundup.server_connector.ServerConnector;
 import com.swmaestro.roundup.setting.SettingActivity;
+import com.swmaestro.roundup.utils.ImageHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +38,7 @@ import java.util.concurrent.ExecutionException;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
+import io.realm.internal.android.JsonUtils;
 
 /**
  * Created by JeongMinCha on 16. 5. 19..
@@ -173,21 +180,46 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 .setIcon(R.drawable.ic_action_settings);
     }
 
-    private List<MyGroupMenuItem> getGroupInformationFromServer(String email){
+
+
+    private ArrayList<MyGroupMenuItem> getGroupInformationFromServer(String email){
+        ArrayList<MyGroupMenuItem> menuItems = new ArrayList<MyGroupMenuItem>();
         RequestConfigurations rcfg = new RequestConfigurations();
         RequestInfo info = rcfg.getGroupList(email);
-        AsyncTask<String, String, String> connector = new ServerConnector(ServerConnector.GET, info).execute("");
+        AsyncTask<String, String, String> connector = new ServerConnector(ServerConnector.POST_ONLY, info).execute("");
         try{
             String result = connector.get();
-            Toast toast = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
-            toast.show();
+            JSONObject obj = new JSONObject(result);
+
+            JSONArray leader_obj = new JSONArray((String)obj.get("leader"));
+            JSONArray member_obj = new JSONArray((String)obj.get("member"));
+
+            for (int i = 0 ; i < leader_obj.length() ;i++){
+                JSONObject item = leader_obj.getJSONObject(i);
+                int id = (Integer)item.get("pk");
+                String title = (String)item.get("group_name");
+                String logoData = (String)item.get("group_logo");
+                menuItems.add(new MyGroupMenuItem((int)id, "*"+title, ImageHandler.getInstance().getImageResByBASE64Data(logoData, R.drawable.ic_action_dock)));
+            }
+
+            for (int i = 0 ; i < member_obj.length() ;i++){
+                JSONObject item = member_obj.getJSONObject(i);
+                int id = (Integer)item.get("pk");
+                String title = (String)item.get("group_name");
+                String logoData = (String)item.get("group_logo");
+                menuItems.add(new MyGroupMenuItem((int)id, title, ImageHandler.getInstance().getImageResByBASE64Data(logoData, R.drawable.ic_action_dock)));
+            }
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ExecutionException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        } catch (JSONException je){
+            Log.e("JSON Error", je.getMessage());
+            je.printStackTrace();
         }
+        return menuItems;
     }
 
     @Override

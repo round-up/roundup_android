@@ -32,16 +32,16 @@ public class RequestConfigurations {
     }
 
     public RequestInfo getGroupList(String email){
-        String appendix = "group/";
+        String appendix = "user/group/"+email+"/";
         String url = BASE_URL + appendix;
-        JSONObject req_data = new JSONObject();
-        try {
-            req_data.put("group_leader_email", email);
-        } catch(JSONException je){
-            Log.e("Server Request", "JSON Parsing Error");
-            je.printStackTrace();
-        }
-        RequestInfo req = new RequestInfo(url, BASE_HEADER, req_data);
+//        JSONObject req_data = new JSONObject();
+//        try {
+//            req_data.put("group_leader_email", email);
+//        } catch(JSONException je){
+//            Log.e("Server Request", "JSON Parsing Error");
+//            je.printStackTrace();
+//        }
+        RequestInfo req = new RequestInfo(url, BASE_HEADER, null);
         return req;
     }
 }
