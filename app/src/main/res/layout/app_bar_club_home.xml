@@ -25,7 +25,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="320dp"
                 android:background="#ffffff"
 
                 android:orientation="vertical">
@@ -39,6 +39,16 @@
                     android:src="@drawable/clubphoto"
                     app:layout_collapseMode="pin" />
 
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/clubphoto"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="116dp" />
+
 
             </RelativeLayout>
 
@@ -48,14 +58,6 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="40dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/clubphoto" />
 
 
         </android.support.design.widget.CollapsingToolbarLayout>

@@ -104,7 +104,7 @@ public class DetailClubActivity extends AppCompatActivity {
             layout.addView(textView);
             layout.addView(linearLayout2);
             layout.setBackgroundColor(Color.parseColor("#ffffff"));
-
+            scrollView2.setVisibility(View.GONE);
             layoutRoot.addView(layout);
             layoutRoot.addView(scrollView2);
             cardView.addView(layoutRoot);

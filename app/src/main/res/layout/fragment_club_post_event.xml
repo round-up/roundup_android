@@ -1,151 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Event"
-        android:id="@+id/textView2"
-        android:layout_gravity="center_horizontal" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorWhite"
         android:orientation="horizontal"
-        android:paddingTop="15sp">
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical">
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="제목 : "
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_weight="5"
+            android:textColor="#000000"
+            android:text="제목"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp" />
+
         <EditText
             android:id="@+id/et_club_post_event_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_weight="13"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="일정 제목을 입력해주세요."
             android:inputType="text"
-            android:hint="Essential"
-            android:textSize="15sp"
-            android:backgroundTint="@color/grayLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorWhite"
         android:orientation="horizontal"
-        android:paddingTop="15sp" >
-        <LinearLayout
-            android:paddingTop="15sp"
-            android:layout_width="wrap_content"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="시간 : "
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="3"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/editText"
-                android:inputType="text"
-                android:hint="Essential"
-                android:textSize="15sp"
-                android:backgroundTint="@color/grayLine"
-                android:layout_width="0dp"
-                android:layout_weight="10"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_weight="2"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="~"/>
-            <EditText
-                android:id="@+id/editText2"
-                android:inputType="text"
-                android:hint="Essential"
-                android:textSize="15sp"
-                android:backgroundTint="@color/grayLine"
-                android:layout_width="0dp"
-                android:layout_weight="10"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="15sp" >
+        android:gravity="center_vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="장소 : "
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_weight="5"
+            android:text="날짜"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp" />
+
+        <Spinner
+            android:id="@+id/dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="13"
+            android:backgroundTint="@color/grayLine"
+            android:inputType="text"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="horizontal"
+            android:paddingTop="13sp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간"
+                android:textSize="13sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_weight="5" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="13"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextClock
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:textColor="#000000"
+                android:backgroundTint="@color/grayLine"
+                android:hint="Essential"
+                android:inputType="text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:text="~" />
+
+            <TextClock
+                android:id="@+id/editText2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:textColor="#000000"
+                android:backgroundTint="@color/grayLine"
+                android:hint="Essential"
+                android:inputType="text"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="장소"
+            android:textSize="13sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical" />
 
         <EditText
             android:id="@+id/editText3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:layout_weight="13"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="일정 장소를 입력해 주세요."
             android:inputType="text"
-            android:hint="Essential"
-            android:textSize="15sp"
-            android:backgroundTint="@color/grayLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:background="@color/colorWhite"
         android:orientation="horizontal"
-        android:paddingTop="15sp" >
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="5dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내용 : "
-            android:textSize="15sp"
-            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editText4"
-            android:inputType="text"
-            android:hint="Essential"
-            android:textSize="15sp"
-            android:backgroundTint="@color/grayLine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textColor="#000000"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="13"
+            android:backgroundTint="@color/colorWhite"
+            android:hint="  | 일정 내용을 입력해 주세요."
+            android:inputType="textMultiLine"
+            android:textSize="13sp"
+            android:layout_gravity="top"
+            android:gravity="top" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="@color/colorWhite"
         android:orientation="horizontal"
-        android:paddingTop="15sp" >
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="오픈 : "
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_weight="5"
+            android:text="오픈"
+            android:textColor="#000000"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp" />
 
-        <Switch
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/switch1" />
+            android:layout_weight="13">
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="13"
+                android:nestedScrollingEnabled="false" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:layout_weight="1"
+            android:layout_gravity="bottom" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/button4"
+            android:layout_weight="1"
+            android:layout_gravity="bottom" />
     </LinearLayout>
 </LinearLayout>
