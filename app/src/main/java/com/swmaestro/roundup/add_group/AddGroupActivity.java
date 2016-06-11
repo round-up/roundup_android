@@ -3,6 +3,7 @@ package com.swmaestro.roundup.add_group;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -11,8 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ToggleButton;
+import android.widget.Toast;
 
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.dto.RequestInfo;
+import com.swmaestro.roundup.server_connector.RequestConfigurations;
+import com.swmaestro.roundup.server_connector.ServerConnector;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by JeongMinCha on 16. 3. 14..
@@ -124,5 +130,40 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
 
     private void sendGroupInfoToServer() {
         // TODO: make the method to send new group information to the server
+        RequestConfigurations rcfg = new RequestConfigurations();
+        RequestInfo info = rcfg.getAddGroupRequestInfo(editTextGroupName.getText().toString(),
+                editTextPlace.getText().toString(),
+                editTextBelongTo.getText().toString(),
+                editTextFoundationDate.getText().toString(),
+                toggleButtonEnrolling.isChecked());
+        AsyncTask<String, String, String> connector = new ServerConnector(ServerConnector.POST, info).execute("");
+        try{
+            String result = connector.get();
+            Toast toast = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
+            toast.show();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        //String groupPlace, String groupBelong, String groupFoundation, boolean groupEnroll
+//        editTextGroupName = (EditText) findViewById(R.id.et_group_name);
+//        editTextPlace = (EditText) findViewById(R.id.et_place);
+//        editTextBelongTo = (EditText) findViewById(R.id.et_belong_to);
+//        editTextFoundationDate = (EditText) findViewById(R.id.et_foundation_date);
+//        editTextCurrentTurn = (EditText) findViewById(R.id.et_current_turn);
+//
+//        toggleButtonEnrolling = (ToggleButton) findViewById(R.id.tb_enrolling);
+//
+//        imageButtonLogo = (ImageButton) findViewById(R.id.ib_add_logo_file);
+//        imageButtonCover = (ImageButton) findViewById(R.id.ib_add_cover_image);
+//        imageButtonLogo.setOnClickListener(this);
+//        imageButtonCover.setOnClickListener(this);
+//
+//        buttonAddGroup = (Button) findViewById(R.id.btn_add_group);
+//        buttonAddGroup.setOnClickListener(this);
     }
 }
