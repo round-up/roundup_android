@@ -24,7 +24,7 @@ import java.io.UnsupportedEncodingException;
  * Created by CHOI ILJI on 2016-06-01.
  */
 public class ServerConnector extends AsyncTask<String, String, String> {
-    public static int POST = 0;
+    public static int POST = 0, GET = 1;
     private int callType;
     private RequestInfo info;
 
@@ -48,6 +48,9 @@ public class ServerConnector extends AsyncTask<String, String, String> {
                 ue.printStackTrace();
                 return "";
             }
+        }else if(callType==GET){
+            JSONObject obj = getOnly(info);
+            return convertJSONtoString(obj);
         }else{
             return "";
         }

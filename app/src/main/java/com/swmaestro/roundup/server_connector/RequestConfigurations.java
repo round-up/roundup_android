@@ -1,5 +1,7 @@
 package com.swmaestro.roundup.server_connector;
 
+import android.util.Log;
+
 import com.swmaestro.roundup.dto.Group;
 import com.swmaestro.roundup.dto.RequestInfo;
 
@@ -26,6 +28,20 @@ public class RequestConfigurations {
         String url = BASE_URL+appendix;
         Group groupInfo= new Group("", groupName, groupPlace, groupBelong, groupFoundation, groupEnroll);
         RequestInfo req = new RequestInfo(url, BASE_HEADER, groupInfo.getJson());
+        return req;
+    }
+
+    public RequestInfo getGroupList(String email){
+        String appendix = "group/";
+        String url = BASE_URL + appendix;
+        JSONObject req_data = new JSONObject();
+        try {
+            req_data.put("group_leader_email", email);
+        } catch(JSONException je){
+            Log.e("Server Request", "JSON Parsing Error");
+            je.printStackTrace();
+        }
+        RequestInfo req = new RequestInfo(url, BASE_HEADER, req_data);
         return req;
     }
 }

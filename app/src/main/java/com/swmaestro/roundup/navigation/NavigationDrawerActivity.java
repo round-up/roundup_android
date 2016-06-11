@@ -1,29 +1,33 @@
 package com.swmaestro.roundup.navigation;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.add_group.AddGroupActivity;
-import com.swmaestro.roundup.chatting.ChattingListActivity;
+import com.swmaestro.roundup.dto.RequestInfo;
 import com.swmaestro.roundup.following.FollowingListActivity;
 import com.swmaestro.roundup.home.HomeFeedActivity;
+import com.swmaestro.roundup.server_connector.RequestConfigurations;
+import com.swmaestro.roundup.server_connector.ServerConnector;
 import com.swmaestro.roundup.setting.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -93,9 +97,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
     private void createFollowingTable() {
         // TODO: Delete this method after making a routine to get data from server and save it to RealmDB.
-        final List<MyGroupMenuItem> groups = new ArrayList<>();
-        groups.add(new MyGroupMenuItem(1, "SubGroup 1", R.drawable.ic_action_dock));
-        groups.add(new MyGroupMenuItem(2, "SubGroup 2", R.drawable.ic_action_dock));
+        final List<MyGroupMenuItem> groups = getGroupInformationFromServer("choiilji@gmail.com");
+        // groups.add(new MyGroupMenuItem(1, "SubGroup 1", R.drawable.ic_action_dock));
+        // groups.add(new MyGroupMenuItem(2, "SubGroup 2", R.drawable.ic_action_dock));
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -119,8 +123,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
     private void createNavigationHeaderTable() {
         // TODO: Delete this method after making a routine to get data from server and save it to RealmDB.
         final NavigationHeader header = new NavigationHeader();
-        header.setName("JeongMinCha");
-        header.setEmailAddr("cjm9236@naver.com");
+        //header.setName("JeongMinCha");
+        //header.setEmailAddr("cjm9236@naver.com");
+        header.setName("IlJi Choi");
+        header.setEmailAddr("choiilji@gmail.com");
         header.setResBackImage(R.drawable.nav_header_background_example);
         header.setResIconImage(R.drawable.ic_action_dock);
         realm.executeTransaction(new Realm.Transaction() {
@@ -165,6 +171,23 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 .setIcon(R.drawable.ic_action_add_group);
         mNavigationMenu.add(R.id.nav_group2, idSettings, Menu.NONE, SETTINGS)
                 .setIcon(R.drawable.ic_action_settings);
+    }
+
+    private List<MyGroupMenuItem> getGroupInformationFromServer(String email){
+        RequestConfigurations rcfg = new RequestConfigurations();
+        RequestInfo info = rcfg.getGroupList(email);
+        AsyncTask<String, String, String> connector = new ServerConnector(ServerConnector.GET, info).execute("");
+        try{
+            String result = connector.get();
+            Toast toast = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
+            toast.show();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
