@@ -2,6 +2,8 @@ package com.swmaestro.roundup.navigation;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -68,15 +70,18 @@ public class NavigationDrawerActivity extends AppCompatActivity
     RealmConfiguration realmConfig;
     Realm realm;
 
-    protected void makeNavigationDrawer() {
-        // Processing Realm DataBase.
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         prepareRealm();
         createFollowingTable();
         accessFollowingTable();
         createNavigationHeaderTable();
         accessNavigationHeaderTable();
+    }
 
-        // Make components by information derived from Realm DB.
+    protected void makeNavigationDrawer() {
         makeToolbar();
         makeDrawer();
         makeNavigationView();
