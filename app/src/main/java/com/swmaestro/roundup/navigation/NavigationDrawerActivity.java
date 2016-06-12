@@ -2,6 +2,8 @@ package com.swmaestro.roundup.navigation;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -15,7 +17,6 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.add_group.AddGroupActivity;
@@ -38,7 +39,6 @@ import java.util.concurrent.ExecutionException;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
-import io.realm.internal.android.JsonUtils;
 
 /**
  * Created by JeongMinCha on 16. 5. 19..
@@ -64,19 +64,25 @@ public class NavigationDrawerActivity extends AppCompatActivity
     private List<Integer> followingGroupIcons;
 
     private NavigationHeader mHeader;
+    private Toolbar mToolbar;
+    private DrawerLayout mDrawer;
 
     RealmConfiguration realmConfig;
     Realm realm;
 
-    protected void makeNavigationDrawer() {
-        // Processing Realm DataBase.
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         prepareRealm();
         createFollowingTable();
         accessFollowingTable();
         createNavigationHeaderTable();
         accessNavigationHeaderTable();
+    }
 
-        // Make components by information derived from Realm DB.
+    protected void makeNavigationDrawer() {
+        makeToolbar();
         makeDrawer();
         makeNavigationView();
         makeNavigationHeader();
@@ -148,14 +154,18 @@ public class NavigationDrawerActivity extends AppCompatActivity
         mHeader = realm.where(NavigationHeader.class).findFirst();
     }
 
-    private void makeDrawer() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    private void makeToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+    }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    private void makeDrawer() {
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
+                this, mDrawer, mToolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+        mDrawer.setDrawerListener(toggle);
         toggle.syncState();
     }
 
@@ -229,8 +239,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         String title = item.getTitle().toString();
 
         // close the navigation drawer.
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        mDrawer.closeDrawer(GravityCompat.START);
 
         // Process the intent.
         Intent intent;
@@ -262,5 +271,15 @@ public class NavigationDrawerActivity extends AppCompatActivity
         }
 
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.navigation.NavigationDrawerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,7 @@ import java.util.List;
 /**
  * Created by lk on 16. 3. 8..
  */
-public class ClubActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AppBarLayout.OnOffsetChangedListener{
-
+public class ClubActivity extends NavigationDrawerActivity implements NavigationView.OnNavigationItemSelectedListener, AppBarLayout.OnOffsetChangedListener{
 
     private RecyclerViewAdapter adapter;
     private CollapsingToolbarLayout collapsingToolbar;
@@ -40,18 +40,7 @@ public class ClubActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_home);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_menu_send, null));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //onBackPressed()
-            }
-        });
-
-        setSupportActionBar(toolbar);
+        super.makeNavigationDrawer();
 
         FloatingActionButton writeButton = (FloatingActionButton) findViewById(R.id.fab);
         writeButton.setOnClickListener(new View.OnClickListener() {
@@ -67,15 +56,8 @@ public class ClubActivity extends AppCompatActivity implements NavigationView.On
 
         collapsingToolbar.setExpandedTitleColor(Color.parseColor("#000000"));
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);

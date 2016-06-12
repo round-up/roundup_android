@@ -72,22 +72,12 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
 
             @Override
             public void onItemClick(View view, int position) {
-//                Intent intent = new Intent(getApplicationContext(), ClubActivity.class);
-//                intent.putExtra("name", HomeFeedData.homeFeedList().get(position).name);
-//                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), ClubActivity.class);
+                intent.putExtra("name", "RoundUp");
+                startActivity(intent);
             }
         };
         mInterestingActivitiesAdapter.setOnItemClickListener(onItemClickListener);
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
     }
 
     @Override
