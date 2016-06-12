@@ -57,7 +57,7 @@ public class HomeFeedListAdapter
         holder.feedTitle.setText(homeFeed.getFeedTitle());
         holder.feedContent.setText(homeFeed.getFeedContent());
         holder.txtRecommend.setText("추천 " + homeFeed.getNumRecommends() + " 건");
-        holder.txtRecommend.setText("| 댓글 " + homeFeed.getNumComments() + " 건" );
+        holder.txtComment.setText("댓글 " + homeFeed.getNumComments() + " 건" );
     }
 
     @Override
