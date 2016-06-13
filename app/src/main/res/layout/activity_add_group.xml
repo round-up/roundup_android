@@ -2,237 +2,202 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
-    <LinearLayout
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
+
+    <RelativeLayout
+        android:id="@+id/layout_add_new_group"
+        android:background="@color/card_view_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/img_background"
+            android:src="@drawable/p02_img_cover"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="270dp" />
+
+        <LinearLayout
+            android:id="@+id/layout_input_group_name"
+            android:layout_below="@id/img_background"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingTop="15sp">
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="152dp"
                 android:layout_height="wrap_content"
-                android:text="Group Name: "
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:text="동아리명(필수)"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/card_name_gray"
+                android:paddingLeft="18dp"
+                android:drawableLeft="@drawable/p03_ic_member"
+                android:drawablePadding="12dp"/>
+
             <EditText
-                android:id="@+id/et_group_name"
-                android:inputType="text"
-                android:hint="Essential"
-                android:textSize="15sp"
-                android:backgroundTint="@color/grayLine"
-                android:layout_width="match_parent"
+                android:hint="동아리 이름을 입력해주세요."
+                android:textColor="@color/card_content_gray"
+                android:textSize="13sp"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="15sp">
-            <TextView
-                android:id="@+id/tv_add_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Logo: "
-                android:layout_alignParentLeft="true"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-            <ImageButton
-                android:id="@+id/ib_add_logo_file"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_action_new"
-                />
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toStartOf="@id/ib_add_logo_file"
-                android:layout_toLeftOf="@id/ib_add_logo_file"
-                android:layout_toEndOf="@id/tv_add_logo"
-                android:layout_toRightOf="@id/tv_add_logo">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textSize="15sp"
-                    android:hint="Logo File Name"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/grayLine"
-                    android:layout_alignParentBottom="true"/>
-            </LinearLayout>
-        </RelativeLayout>
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/layout_input_group_place"
+            android:layout_below="@id/layout_input_group_name"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingTop="15sp">
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="152dp"
                 android:layout_height="wrap_content"
-                android:text="Place: "
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:text="활동 장소"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/card_name_gray"
+                android:paddingLeft="18dp"
+                android:drawableLeft="@drawable/p03_ic_bigspot"
+                android:drawablePadding="12dp"/>
+
             <EditText
-                android:id="@+id/et_place"
-                android:inputType="text"
-                android:hint="Optional"
-                android:textSize="15sp"
-                android:backgroundTint="@color/grayLine"
-                android:layout_width="match_parent"
+                android:hint="주 활동 장소를 입력해주세요."
+                android:textColor="@color/card_content_gray"
+                android:textSize="13sp"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/layout_input_group_belonging"
+            android:layout_below="@id/layout_input_group_place"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingTop="15sp">
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="152dp"
                 android:layout_height="wrap_content"
-                android:text="Belong To: "
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:text="소속"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/card_name_gray"
+                android:paddingLeft="18dp"
+                android:drawableLeft="@drawable/p03_ic_briefcase"
+                android:drawablePadding="12dp"/>
+
             <EditText
-                android:id="@+id/et_belong_to"
-                android:inputType="text"
-                android:hint="Optional"
-                android:textSize="15sp"
-                android:backgroundTint="@color/grayLine"
-                android:layout_width="match_parent"
+                android:hint="동아리의 소속을 입력해주세요."
+                android:textColor="@color/card_content_gray"
+                android:textSize="13sp"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/layout_input_group_foundation_day"
+            android:layout_below="@id/layout_input_group_belonging"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingTop="15sp">
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="152dp"
                 android:layout_height="wrap_content"
-                android:text="Foundation Day: "
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:text="창립일"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/card_name_gray"
+                android:paddingLeft="18dp"
+                android:drawableLeft="@drawable/p03_ic_calendar"
+                android:drawablePadding="12dp"/>
+
             <EditText
-                android:id="@+id/et_foundation_date"
-                android:inputType="date"
-                android:hint="2000/01/01"
-                android:textSize="15sp"
-                android:backgroundTint="@color/grayLine"
-                android:layout_width="match_parent"
+                android:hint="ex) 2016 / 05 / 15"
+                android:textColor="@color/card_content_gray"
+                android:textSize="13sp"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/layout_input_group_counter"
+            android:layout_below="@id/layout_input_group_foundation_day"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingTop="15sp">
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="152dp"
                 android:layout_height="wrap_content"
-                android:text="Current Turn: "
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:text="현재 기수"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/card_name_gray"
+                android:paddingLeft="18dp"
+                android:drawableLeft="@drawable/p03_ic_flag"
+                android:drawablePadding="12dp"/>
+
             <EditText
-                android:id="@+id/et_current_turn"
-                android:inputType="number"
-                android:hint="5"
-                android:textSize="15sp"
-                android:backgroundTint="@color/grayLine"
-                android:layout_width="match_parent"
+                android:hint="운영 중인 기수를 입력해주세요."
+                android:textColor="@color/card_content_gray"
+                android:textSize="13sp"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/layout_input_group_is_recruiting"
+            android:layout_below="@id/layout_input_group_counter"
+            android:background="@color/colorWhite"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingTop="15sp">
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="152dp"
                 android:layout_height="wrap_content"
-                android:text="Enrolling: "
-                android:textSize="15sp"
-                android:textStyle="bold" />
-            <ToggleButton
-                android:id="@+id/tb_enrolling"
+                android:text="창립일"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/card_name_gray"
+                android:paddingLeft="14dp"
+                android:drawableLeft="@drawable/p03_ic_calendar"
+                android:drawablePadding="12dp"/>
+
+            <ImageView
+                android:src="@drawable/p03_btn_recruit_on"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="15sp">
-            <TextView
-                android:id="@+id/tv_add_cover_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cover Image: "
-                android:layout_alignParentLeft="true"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-            <ImageButton
-                android:id="@+id/ib_add_cover_image"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_action_new"
-                />
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toStartOf="@id/ib_add_cover_image"
-                android:layout_toLeftOf="@id/ib_add_cover_image"
-                android:layout_toEndOf="@id/tv_add_cover_image"
-                android:layout_toRightOf="@id/tv_add_cover_image">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textSize="15sp"
-                    android:hint="Cover Image File Name"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/grayLine"
-                    android:layout_alignParentBottom="true"/>
-            </LinearLayout>
-        </RelativeLayout>
+    </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="15sp">
-            <Button
-                android:id="@+id/btn_add_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="15dp"
-                android:text="Make this group"/>
-        </LinearLayout>
-
-    </LinearLayout>
 </ScrollView>
 
