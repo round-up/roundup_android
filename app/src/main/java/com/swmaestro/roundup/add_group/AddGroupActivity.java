@@ -3,7 +3,6 @@ package com.swmaestro.roundup.add_group;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -12,13 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ToggleButton;
-import android.widget.Toast;
 
 import com.swmaestro.roundup.R;
-import com.swmaestro.roundup.dto.RequestInfo;
-import com.swmaestro.roundup.server_connector.RequestConfigurations;
-import com.swmaestro.roundup.server_connector.ServerConnector;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by JeongMinCha on 16. 3. 14..
@@ -31,39 +25,29 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
 
     private String selectedImagePath;
 
+    private ImageButton imgButtonBackground;
     private EditText editTextGroupName;
     private EditText editTextPlace;
-    private EditText editTextBelongTo;
-    private EditText editTextFoundationDate;
-    private EditText editTextCurrentTurn;
-
-    private ToggleButton toggleButtonEnrolling;
-
-    private ImageButton imageButtonLogo;
-    private ImageButton imageButtonCover;
-
-    private Button buttonAddGroup;
+    private EditText editTextBelonging;
+    private EditText editTextFoundationDay;
+    private EditText editTextGroupCounter;
+    private ToggleButton toggleButtonRecruiting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
 
+        imgButtonBackground = (ImageButton) findViewById(R.id.ib_background);
         editTextGroupName = (EditText) findViewById(R.id.et_group_name);
-        editTextPlace = (EditText) findViewById(R.id.et_place);
-        editTextBelongTo = (EditText) findViewById(R.id.et_belong_to);
-        editTextFoundationDate = (EditText) findViewById(R.id.et_foundation_date);
-        editTextCurrentTurn = (EditText) findViewById(R.id.et_current_turn);
+        editTextPlace = (EditText) findViewById(R.id.et_group_place);
+        editTextBelonging = (EditText) findViewById(R.id.et_group_belonging);
+        editTextFoundationDay = (EditText) findViewById(R.id.et_group_foundation_day);
+        editTextGroupCounter = (EditText) findViewById(R.id.et_group_counter);
+        toggleButtonRecruiting = (ToggleButton) findViewById(R.id.tb_recruiting);
 
-        toggleButtonEnrolling = (ToggleButton) findViewById(R.id.tb_enrolling);
-
-        imageButtonLogo = (ImageButton) findViewById(R.id.ib_add_logo_file);
-        imageButtonCover = (ImageButton) findViewById(R.id.ib_add_cover_image);
-        imageButtonLogo.setOnClickListener(this);
-        imageButtonCover.setOnClickListener(this);
-
-        buttonAddGroup = (Button) findViewById(R.id.btn_add_group);
-        buttonAddGroup.setOnClickListener(this);
+        // Dim image button for background image
+        imgButtonBackground.setColorFilter(0x88000000);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -101,53 +85,53 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()) {
-            case R.id.btn_add_group:
-                this.sendGroupInfoToServer();
-                finish();
-                break;
-
-            case R.id.ib_add_logo_file: {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
-            }
-                break;
-
-            case R.id.ib_add_cover_image: {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
-            }
-                break;
-
-            default:
-                break;
-        }
+//        switch (v.getId()) {
+//            case R.id.btn_add_group:
+//                this.sendGroupInfoToServer();
+//                finish();
+//                break;
+//
+//            case R.id.ib_add_logo_file: {
+//                Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+//            }
+//                break;
+//
+//            case R.id.ib_add_cover_image: {
+//                Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+//            }
+//                break;
+//
+//            default:
+//                break;
+//        }
     }
 
     private void sendGroupInfoToServer() {
         // TODO: make the method to send new group information to the server
-        RequestConfigurations rcfg = new RequestConfigurations();
-        RequestInfo info = rcfg.getAddGroupRequestInfo(editTextGroupName.getText().toString(),
-                editTextPlace.getText().toString(),
-                editTextBelongTo.getText().toString(),
-                editTextFoundationDate.getText().toString(),
-                toggleButtonEnrolling.isChecked());
-        AsyncTask<String, String, String> connector = new ServerConnector(ServerConnector.POST, info).execute("");
-        try{
-            String result = connector.get();
-            Toast toast = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
-            toast.show();
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        RequestConfigurations rcfg = new RequestConfigurations();
+//        RequestInfo info = rcfg.getAddGroupRequestInfo(editTextGroupName.getText().toString(),
+//                editTextPlace.getText().toString(),
+//                editTextBelongTo.getText().toString(),
+//                editTextFoundationDate.getText().toString(),
+//                toggleButtonEnrolling.isChecked());
+//        AsyncTask<String, String, String> connector = new ServerConnector(ServerConnector.POST, info).execute("");
+//        try{
+//            String result = connector.get();
+//            Toast toast = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
+//            toast.show();
+//        } catch (InterruptedException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        } catch (ExecutionException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
 
         //String groupPlace, String groupBelong, String groupFoundation, boolean groupEnroll
 //        editTextGroupName = (EditText) findViewById(R.id.et_group_name);
