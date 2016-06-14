@@ -5,10 +5,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +20,11 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.dto.RequestInfo;
+import com.swmaestro.roundup.server_connector.RequestConfigurations;
+import com.swmaestro.roundup.server_connector.ServerConnector;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by JeongMinCha on 16. 3. 14..
@@ -60,6 +68,24 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
         imgButtonBackground.setOnClickListener(this);
 
         imgButtonProfile.setOnClickListener(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_add_group, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_add_group_complete:
+                sendGroupInfoToServer();
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -133,40 +159,23 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
 
     private void sendGroupInfoToServer() {
         // TODO: make the method to send new group information to the server
-//        RequestConfigurations rcfg = new RequestConfigurations();
-//        RequestInfo info = rcfg.getAddGroupRequestInfo(editTextGroupName.getText().toString(),
-//                editTextPlace.getText().toString(),
-//                editTextBelongTo.getText().toString(),
-//                editTextFoundationDate.getText().toString(),
-//                toggleButtonEnrolling.isChecked());
-//        AsyncTask<String, String, String> connector = new ServerConnector(ServerConnector.POST, info).execute("");
-//        try{
-//            String result = connector.get();
-//            Toast toast = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
-//            toast.show();
-//        } catch (InterruptedException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-
-        //String groupPlace, String groupBelong, String groupFoundation, boolean groupEnroll
-//        editTextGroupName = (EditText) findViewById(R.id.et_group_name);
-//        editTextPlace = (EditText) findViewById(R.id.et_place);
-//        editTextBelongTo = (EditText) findViewById(R.id.et_belong_to);
-//        editTextFoundationDate = (EditText) findViewById(R.id.et_foundation_date);
-//        editTextCurrentTurn = (EditText) findViewById(R.id.et_current_turn);
-//
-//        toggleButtonEnrolling = (ToggleButton) findViewById(R.id.tb_enrolling);
-//
-//        imageButtonLogo = (ImageButton) findViewById(R.id.ib_add_logo_file);
-//        imageButtonCover = (ImageButton) findViewById(R.id.ib_add_cover_image);
-//        imageButtonLogo.setOnClickListener(this);
-//        imageButtonCover.setOnClickListener(this);
-//
-//        buttonAddGroup = (Button) findViewById(R.id.btn_add_group);
-//        buttonAddGroup.setOnClickListener(this);
+        RequestConfigurations rcfg = new RequestConfigurations();
+        RequestInfo info = rcfg.getAddGroupRequestInfo(editTextGroupName.getText().toString(),
+                editTextPlace.getText().toString(),
+                editTextBelonging.getText().toString(),
+                editTextFoundationDay.getText().toString(),
+                toggleButtonRecruiting.isChecked());
+        AsyncTask<String, String, String> connector = new ServerConnector(ServerConnector.POST, info).execute("");
+        try{
+            String result = connector.get();
+            Toast toast = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
+            toast.show();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
