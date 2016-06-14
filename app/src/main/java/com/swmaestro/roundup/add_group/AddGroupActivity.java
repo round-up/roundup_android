@@ -3,7 +3,6 @@ package com.swmaestro.roundup.add_group;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -12,13 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ToggleButton;
-import android.widget.Toast;
 
 import com.swmaestro.roundup.R;
-import com.swmaestro.roundup.dto.RequestInfo;
-import com.swmaestro.roundup.server_connector.RequestConfigurations;
-import com.swmaestro.roundup.server_connector.ServerConnector;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by JeongMinCha on 16. 3. 14..
@@ -31,6 +25,7 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
 
     private String selectedImagePath;
 
+    private ImageButton imgButtonBackground;
     private EditText editTextGroupName;
     private EditText editTextPlace;
     private EditText editTextBelonging;
@@ -43,12 +38,16 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
 
+        imgButtonBackground = (ImageButton) findViewById(R.id.ib_background);
         editTextGroupName = (EditText) findViewById(R.id.et_group_name);
         editTextPlace = (EditText) findViewById(R.id.et_group_place);
         editTextBelonging = (EditText) findViewById(R.id.et_group_belonging);
         editTextFoundationDay = (EditText) findViewById(R.id.et_group_foundation_day);
         editTextGroupCounter = (EditText) findViewById(R.id.et_group_counter);
         toggleButtonRecruiting = (ToggleButton) findViewById(R.id.tb_recruiting);
+
+        // Dim image button for background image
+        imgButtonBackground.setColorFilter(0x88000000);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

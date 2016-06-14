@@ -9,15 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/img_background"
+        <ImageButton
+            android:id="@+id/ib_background"
+            android:layout_marginTop="-60dp"
             android:src="@drawable/p02_img_cover"
             android:layout_width="match_parent"
             android:layout_height="270dp" />
 
         <LinearLayout
             android:id="@+id/layout_input_group_name"
-            android:layout_below="@id/img_background"
+            android:layout_marginTop="180dp"
             android:background="@color/colorWhite"
             android:gravity="center_vertical"
             android:orientation="horizontal"
