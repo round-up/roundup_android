@@ -47,6 +47,15 @@
 
         </LinearLayout>
 
+        <ImageButton
+            android:id="@+id/ib_profile_img"
+            android:src="@drawable/p03_ic_plus"
+            android:background="@drawable/round_button_style"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp"
+            android:layout_width="87dp"
+            android:layout_height="87dp" />
+
         <LinearLayout
             android:id="@+id/layout_input_group_place"
             android:layout_below="@id/layout_input_group_name"
@@ -182,6 +191,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:layout_marginTop="2dp"
+            android:layout_marginBottom="100dp"
             android:layout_width="match_parent"
             android:layout_height="60dp">
 
