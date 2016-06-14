@@ -2,14 +2,18 @@ package com.swmaestro.roundup.add_group;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.swmaestro.roundup.R;
@@ -19,6 +23,10 @@ import com.swmaestro.roundup.R;
  */
 public class AddGroupActivity extends AppCompatActivity implements Button.OnClickListener {
 
+    private static final int BACKGROUND_IMG = 1;
+    private static final int PROFILE_IMG = 2;
+    private int currentImageToUpload = 0;
+
     // this is the action code we use in our intent,
     // this way we know we're looking at the response from our own action
     private static final int SELECT_PICTURE = 1;
@@ -26,6 +34,7 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
     private String selectedImagePath;
 
     private ImageButton imgButtonBackground;
+    private ImageButton imgButtonProfile;
     private EditText editTextGroupName;
     private EditText editTextPlace;
     private EditText editTextBelonging;
@@ -39,6 +48,7 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
         setContentView(R.layout.activity_add_group);
 
         imgButtonBackground = (ImageButton) findViewById(R.id.ib_background);
+        imgButtonProfile = (ImageButton) findViewById(R.id.ib_profile_img);
         editTextGroupName = (EditText) findViewById(R.id.et_group_name);
         editTextPlace = (EditText) findViewById(R.id.et_group_place);
         editTextBelonging = (EditText) findViewById(R.id.et_group_belonging);
@@ -46,15 +56,53 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
         editTextGroupCounter = (EditText) findViewById(R.id.et_group_counter);
         toggleButtonRecruiting = (ToggleButton) findViewById(R.id.tb_recruiting);
 
-        // Dim image button for background image
-        imgButtonBackground.setColorFilter(0x88000000);
+        imgButtonBackground.setColorFilter(0x88000000); // Dim image button for background image
+        imgButtonBackground.setOnClickListener(this);
+
+        imgButtonProfile.setOnClickListener(this);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_PICTURE) {
-                Uri selectedImageUri = data.getData();
-                selectedImagePath = getPath(selectedImageUri);
+    @Override
+    public void onClick(View v) {
+
+        Intent intent = null;
+
+        switch (v.getId()) {
+            case R.id.ib_background:
+                intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                currentImageToUpload = BACKGROUND_IMG;
+                startActivityForResult(Intent.createChooser(intent, "Select Background Image"), SELECT_PICTURE);
+                break;
+            case R.id.ib_profile_img:
+                intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                currentImageToUpload = PROFILE_IMG;
+                startActivityForResult(Intent.createChooser(intent, "Select Profile Image"), SELECT_PICTURE);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
+            Uri selectedImageUri = data.getData();
+            selectedImagePath = getPath(selectedImageUri);
+
+            Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath);
+            switch(currentImageToUpload) {
+                case BACKGROUND_IMG:
+                    imgButtonBackground.setImageBitmap(bitmap);
+                    break;
+                case PROFILE_IMG:
+                    imgButtonProfile.setImageBitmap(bitmap);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -82,35 +130,6 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
         return uri.getPath();
     }
 
-    @Override
-    public void onClick(View v) {
-
-//        switch (v.getId()) {
-//            case R.id.btn_add_group:
-//                this.sendGroupInfoToServer();
-//                finish();
-//                break;
-//
-//            case R.id.ib_add_logo_file: {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
-//            }
-//                break;
-//
-//            case R.id.ib_add_cover_image: {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
-//            }
-//                break;
-//
-//            default:
-//                break;
-//        }
-    }
 
     private void sendGroupInfoToServer() {
         // TODO: make the method to send new group information to the server
