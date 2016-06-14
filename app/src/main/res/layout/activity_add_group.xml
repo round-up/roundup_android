@@ -36,6 +36,7 @@
                 android:drawablePadding="12dp"/>
 
             <EditText
+                android:id="@+id/et_group_name"
                 android:hint="동아리 이름을 입력해주세요."
                 android:textColor="@color/card_content_gray"
                 android:textSize="13sp"
@@ -67,6 +68,7 @@
                 android:drawablePadding="12dp"/>
 
             <EditText
+                android:id="@+id/et_group_place"
                 android:hint="주 활동 장소를 입력해주세요."
                 android:textColor="@color/card_content_gray"
                 android:textSize="13sp"
@@ -98,6 +100,7 @@
                 android:drawablePadding="12dp"/>
 
             <EditText
+                android:id="@+id/et_group_belonging"
                 android:hint="동아리의 소속을 입력해주세요."
                 android:textColor="@color/card_content_gray"
                 android:textSize="13sp"
@@ -129,6 +132,7 @@
                 android:drawablePadding="12dp"/>
 
             <EditText
+                android:id="@+id/et_group_foundation_day"
                 android:hint="ex) 2016 / 05 / 15"
                 android:textColor="@color/card_content_gray"
                 android:textSize="13sp"
@@ -160,6 +164,7 @@
                 android:drawablePadding="12dp"/>
 
             <EditText
+                android:id="@+id/et_group_counter"
                 android:hint="운영 중인 기수를 입력해주세요."
                 android:textColor="@color/card_content_gray"
                 android:textSize="13sp"
@@ -190,8 +195,13 @@
                 android:drawableLeft="@drawable/p03_ic_calendar"
                 android:drawablePadding="12dp"/>
 
-            <ImageView
-                android:src="@drawable/p03_btn_recruit_on"
+            <ToggleButton
+                android:id="@+id/tb_recruiting"
+                android:textOff=""
+                android:textOn=""
+                android:background="@null"
+                android:drawableLeft="@null"
+                android:drawableStart="@drawable/toggle_recruiting_selector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
