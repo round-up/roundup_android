@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.swmaestro.roundup.dto.RequestInfo;
 import com.swmaestro.roundup.server_connector.RequestConfigurations;
 import com.swmaestro.roundup.server_connector.ServerConfig;
 import com.swmaestro.roundup.server_connector.ServerConnector;
+import com.swmaestro.roundup.utils.ImageHandler;
 
 import org.json.JSONObject;
 
@@ -164,11 +166,19 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
         return uri.getPath();
     }
 
-
     private void sendGroupInfoToServer() {
         // TODO: make the method to send new group information to the server
         String url = ServerConfig.BASE_URL + "group/";
         Group group = new Group("", "", "", "RoundUp", "Seoul", "Soma", "2016.06.24", true);
+
+        ImageHandler imageHandler = ImageHandler.getInstance();
+        group.setGroupBackgroundImage(imageHandler.encodeImageViewBase64(imgButtonBackground));
+        group.setGroupProfileImage(imageHandler.encodeImageViewBase64(imgButtonProfile));
+        group.setGroupName(editTextGroupName.getText().toString());
+        group.setGroupPlace(editTextPlace.getText().toString());
+        group.setGroupBelong(editTextBelonging.getText().toString());
+        group.setGroupFoundation(editTextFoundationDay.getText().toString());
+        group.setGroupIsRecruiting(toggleButtonRecruiting.isChecked());
         JSONObject object = group.getJsonObject();
 
         JsonObjectRequest request
