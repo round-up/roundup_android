@@ -110,9 +110,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
     private void createFollowingTable() {
         // TODO: Delete this method after making a routine to get data from server and save it to RealmDB.
-        final List<MyGroupMenuItem> groups = getGroupInformationFromServer("choiilji@gmail.com");
-        // groups.add(new MyGroupMenuItem(1, "SubGroup 1", R.drawable.ic_action_dock));
-        // groups.add(new MyGroupMenuItem(2, "SubGroup 2", R.drawable.ic_action_dock));
+//        final List<MyGroupMenuItem> groups = getGroupInformationFromServer("choiilji@gmail.com");
+        final List<MyGroupMenuItem> groups = new ArrayList<>();
+        groups.add(new MyGroupMenuItem(1, "SubGroup 1", R.drawable.ic_action_dock));
+        groups.add(new MyGroupMenuItem(2, "SubGroup 2", R.drawable.ic_action_dock));
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {

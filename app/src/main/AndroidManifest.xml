@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.swmaestro.roundup">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
@@ -24,10 +26,6 @@
             android:label="@string/add_group_activity_label"
             android:name=".add_group.AddGroupActivity">
         </activity>
-        <activity
-            android:label="@string/chatting_activity_label"
-            android:name=".chatting.ChattingListActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:label="@string/following_list_ativity_label"
             android:name=".following.FollowingListActivity"

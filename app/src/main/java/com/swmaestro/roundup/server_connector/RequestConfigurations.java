@@ -1,7 +1,5 @@
 package com.swmaestro.roundup.server_connector;
 
-import android.util.Log;
-
 import com.swmaestro.roundup.dto.Group;
 import com.swmaestro.roundup.dto.RequestInfo;
 
@@ -22,13 +20,6 @@ public class RequestConfigurations {
         result.put("base_header", "Content-type application/json");
 
         return result;
-    }
-    public RequestInfo getAddGroupRequestInfo(String groupName, String groupPlace, String groupBelong, String groupFoundation, boolean groupEnroll){
-        String appendix = "group/";
-        String url = BASE_URL+appendix;
-        Group groupInfo= new Group("", groupName, groupPlace, groupBelong, groupFoundation, groupEnroll);
-        RequestInfo req = new RequestInfo(url, BASE_HEADER, groupInfo.getJson());
-        return req;
     }
 
     public RequestInfo getGroupList(String email){

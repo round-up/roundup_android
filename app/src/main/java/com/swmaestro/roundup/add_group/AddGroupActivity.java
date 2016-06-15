@@ -1,23 +1,59 @@
 package com.swmaestro.roundup.add_group;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.dto.Group;
+import com.swmaestro.roundup.dto.RequestInfo;
+import com.swmaestro.roundup.server_connector.RequestConfigurations;
+import com.swmaestro.roundup.server_connector.ServerConfig;
+import com.swmaestro.roundup.server_connector.ServerConnector;
+import com.swmaestro.roundup.utils.ImageHandler;
+
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by JeongMinCha on 16. 3. 14..
  */
 public class AddGroupActivity extends AppCompatActivity implements Button.OnClickListener {
+
+    private static final int BACKGROUND_IMG = 1;
+    private static final int PROFILE_IMG = 2;
+    private int currentImageToUpload = 0;
 
     // this is the action code we use in our intent,
     // this way we know we're looking at the response from our own action
@@ -26,6 +62,7 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
     private String selectedImagePath;
 
     private ImageButton imgButtonBackground;
+    private ImageButton imgButtonProfile;
     private EditText editTextGroupName;
     private EditText editTextPlace;
     private EditText editTextBelonging;
@@ -39,6 +76,7 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
         setContentView(R.layout.activity_add_group);
 
         imgButtonBackground = (ImageButton) findViewById(R.id.ib_background);
+        imgButtonProfile = (ImageButton) findViewById(R.id.ib_profile_img);
         editTextGroupName = (EditText) findViewById(R.id.et_group_name);
         editTextPlace = (EditText) findViewById(R.id.et_group_place);
         editTextBelonging = (EditText) findViewById(R.id.et_group_belonging);
@@ -46,15 +84,75 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
         editTextGroupCounter = (EditText) findViewById(R.id.et_group_counter);
         toggleButtonRecruiting = (ToggleButton) findViewById(R.id.tb_recruiting);
 
-        // Dim image button for background image
-        imgButtonBackground.setColorFilter(0x88000000);
+        imgButtonBackground.setColorFilter(0x88000000); // Dim image button for background image
+        imgButtonBackground.setOnClickListener(this);
+
+        imgButtonProfile.setOnClickListener(this);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_PICTURE) {
-                Uri selectedImageUri = data.getData();
-                selectedImagePath = getPath(selectedImageUri);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_add_group, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_add_group_complete:
+                sendGroupInfoToServer();
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        Intent intent = null;
+
+        switch (v.getId()) {
+            case R.id.ib_background:
+                intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                currentImageToUpload = BACKGROUND_IMG;
+                startActivityForResult(Intent.createChooser(intent, "Select Background Image"), SELECT_PICTURE);
+                break;
+            case R.id.ib_profile_img:
+                intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                currentImageToUpload = PROFILE_IMG;
+                startActivityForResult(Intent.createChooser(intent, "Select Profile Image"), SELECT_PICTURE);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
+            Uri selectedImageUri = data.getData();
+            selectedImagePath = getPath(selectedImageUri);
+            Log.i("path", selectedImagePath);
+
+            BitmapFactory.Options options = null;
+            Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath, options);
+
+            switch(currentImageToUpload) {
+                case BACKGROUND_IMG:
+                    imgButtonBackground.setImageBitmap(bitmap);
+                    break;
+                case PROFILE_IMG:
+                    imgButtonProfile.setImageBitmap(bitmap);
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -82,72 +180,36 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
         return uri.getPath();
     }
 
-    @Override
-    public void onClick(View v) {
-
-//        switch (v.getId()) {
-//            case R.id.btn_add_group:
-//                this.sendGroupInfoToServer();
-//                finish();
-//                break;
-//
-//            case R.id.ib_add_logo_file: {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
-//            }
-//                break;
-//
-//            case R.id.ib_add_cover_image: {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
-//            }
-//                break;
-//
-//            default:
-//                break;
-//        }
-    }
-
     private void sendGroupInfoToServer() {
         // TODO: make the method to send new group information to the server
-//        RequestConfigurations rcfg = new RequestConfigurations();
-//        RequestInfo info = rcfg.getAddGroupRequestInfo(editTextGroupName.getText().toString(),
-//                editTextPlace.getText().toString(),
-//                editTextBelongTo.getText().toString(),
-//                editTextFoundationDate.getText().toString(),
-//                toggleButtonEnrolling.isChecked());
-//        AsyncTask<String, String, String> connector = new ServerConnector(ServerConnector.POST, info).execute("");
-//        try{
-//            String result = connector.get();
-//            Toast toast = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
-//            toast.show();
-//        } catch (InterruptedException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
+        String url = ServerConfig.BASE_URL + "group/";
+        Group group = new Group("", "", "", "RoundUp", "Seoul", "Soma", "2016.06.24", true);
 
-        //String groupPlace, String groupBelong, String groupFoundation, boolean groupEnroll
-//        editTextGroupName = (EditText) findViewById(R.id.et_group_name);
-//        editTextPlace = (EditText) findViewById(R.id.et_place);
-//        editTextBelongTo = (EditText) findViewById(R.id.et_belong_to);
-//        editTextFoundationDate = (EditText) findViewById(R.id.et_foundation_date);
-//        editTextCurrentTurn = (EditText) findViewById(R.id.et_current_turn);
-//
-//        toggleButtonEnrolling = (ToggleButton) findViewById(R.id.tb_enrolling);
-//
-//        imageButtonLogo = (ImageButton) findViewById(R.id.ib_add_logo_file);
-//        imageButtonCover = (ImageButton) findViewById(R.id.ib_add_cover_image);
-//        imageButtonLogo.setOnClickListener(this);
-//        imageButtonCover.setOnClickListener(this);
-//
-//        buttonAddGroup = (Button) findViewById(R.id.btn_add_group);
-//        buttonAddGroup.setOnClickListener(this);
+        ImageHandler imageHandler = ImageHandler.getInstance();
+        group.setGroupBackgroundImage(imageHandler.encodeImageViewBase64(imgButtonBackground));
+        group.setGroupProfileImage(imageHandler.encodeImageViewBase64(imgButtonProfile));
+        group.setGroupName(editTextGroupName.getText().toString());
+        group.setGroupPlace(editTextPlace.getText().toString());
+        group.setGroupBelong(editTextBelonging.getText().toString());
+        group.setGroupFoundation(editTextFoundationDay.getText().toString());
+        group.setGroupIsRecruiting(toggleButtonRecruiting.isChecked());
+        JSONObject object = group.getJsonObject();
+
+        JsonObjectRequest request
+                = new JsonObjectRequest(url, object,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("all", response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+        Volley.newRequestQueue(this).add(request);
     }
 }
