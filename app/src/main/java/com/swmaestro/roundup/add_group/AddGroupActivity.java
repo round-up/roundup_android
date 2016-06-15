@@ -1,14 +1,23 @@
 package com.swmaestro.roundup.add_group;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -34,6 +43,7 @@ import com.swmaestro.roundup.utils.ImageHandler;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -125,11 +135,15 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
             Uri selectedImageUri = data.getData();
             selectedImagePath = getPath(selectedImageUri);
+            Log.i("path", selectedImagePath);
 
-            Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath);
+            BitmapFactory.Options options = null;
+            Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath, options);
+
             switch(currentImageToUpload) {
                 case BACKGROUND_IMG:
                     imgButtonBackground.setImageBitmap(bitmap);
