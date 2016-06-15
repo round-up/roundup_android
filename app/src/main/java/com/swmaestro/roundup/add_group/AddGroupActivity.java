@@ -19,10 +19,18 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.dto.Group;
 import com.swmaestro.roundup.dto.RequestInfo;
 import com.swmaestro.roundup.server_connector.RequestConfigurations;
+import com.swmaestro.roundup.server_connector.ServerConfig;
 import com.swmaestro.roundup.server_connector.ServerConnector;
+
+import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
@@ -159,23 +167,25 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
 
     private void sendGroupInfoToServer() {
         // TODO: make the method to send new group information to the server
-        RequestConfigurations rcfg = new RequestConfigurations();
-        RequestInfo info = rcfg.getAddGroupRequestInfo(editTextGroupName.getText().toString(),
-                editTextPlace.getText().toString(),
-                editTextBelonging.getText().toString(),
-                editTextFoundationDay.getText().toString(),
-                toggleButtonRecruiting.isChecked());
-        AsyncTask<String, String, String> connector = new ServerConnector(ServerConnector.POST, info).execute("");
-        try{
-            String result = connector.get();
-            Toast toast = Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG);
-            toast.show();
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        String url = ServerConfig.BASE_URL + "group/";
+        Group group = new Group("", "", "", "RoundUp", "Seoul", "Soma", "2016.06.24", true);
+        JSONObject object = group.getJsonObject();
+
+        JsonObjectRequest request
+                = new JsonObjectRequest(url, object,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("all", response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+        Volley.newRequestQueue(this).add(request);
     }
 }
