@@ -12,6 +12,8 @@ import android.view.MenuItem;
 
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.club.ClubActivity;
+import com.swmaestro.roundup.login.LoginActivity;
+import com.swmaestro.roundup.login.SaveSharedPreference;
 import com.swmaestro.roundup.navigation.NavigationDrawerActivity;
 
 
@@ -90,8 +92,11 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_logout) {
+            SaveSharedPreference.clearUserName(HomeFeedActivity.this);
+            Intent intent = new Intent(HomeFeedActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

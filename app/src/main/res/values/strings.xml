@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RoundUp</string>
 
+    <string name="signup_activity_label">Sign Up</string>
     <string name="home_feed_activity_label">Home</string>
     <string name="following_list_ativity_label">Following</string>
     <string name="chatting_activity_label">Chatting</string>
@@ -15,4 +16,5 @@
     <string name="club_summary_feeds">다가오는 동아리 활동 요약</string>
     <string name="interesting_club_activities">Hot Content</string>
     <string name="add_group_complete">완료</string>
+    <string name="logout">로그아웃</string>
 </resources>
