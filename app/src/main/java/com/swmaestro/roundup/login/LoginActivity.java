@@ -1,6 +1,7 @@
 package com.swmaestro.roundup.login;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,8 +13,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.home.HomeFeedActivity;
+import com.swmaestro.roundup.server_connector.ServerConfig;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -25,10 +34,21 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
+    private boolean valid = false;
+    private ProgressDialog progressDialog;
+
     @InjectView(R.id.input_email) EditText mEmailText;
     @InjectView(R.id.input_password) EditText mPasswordText;
     @InjectView(R.id.btn_login) Button mLoginButton;
     @InjectView(R.id.link_signup) TextView mSignupLink;
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,32 +78,13 @@ public class LoginActivity extends AppCompatActivity {
     public void login() {
         Log.d(TAG, "Login");
 
-        if (!validate()) {
-            onLoginFailed();
-            return;
-        }
-
-        mLoginButton.setEnabled(false);
-
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = mEmailText.getText().toString();
-        String password = mPasswordText.getText().toString();
-
-        // TODO: Implement your own authentication logic here.
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+        validate();
+        mLoginButton.setEnabled(false);
     }
 
 
@@ -91,9 +92,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
                 this.finish();
             }
         }
@@ -115,12 +113,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         mLoginButton.setEnabled(true);
     }
 
-    public boolean validate() {
-        boolean valid = true;
+    public void validate() {
 
         String email = mEmailText.getText().toString();
         String password = mPasswordText.getText().toString();
@@ -128,6 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             mEmailText.setError("enter a valid email address");
             valid = false;
+            return;
         } else {
             mEmailText.setError(null);
         }
@@ -135,10 +132,45 @@ public class LoginActivity extends AppCompatActivity {
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
             mPasswordText.setError("between 4 and 10 alphanumeric characters");
             valid = false;
+            return;
         } else {
             mPasswordText.setError(null);
         }
 
-        return valid;
+
+        String url = ServerConfig.BASE_URL + "user/check/";
+        JSONObject object = new JSONObject();
+        try {
+            object.put("email", email);
+            object.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(url, object, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.getString("result").equals("true")) {
+                        setValid(true);
+                        onLoginSuccess();
+                        progressDialog.dismiss();
+                    } else {
+                        setValid(false);
+                        return;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                setValid(false);
+                return;
+            }
+        });
+        Volley.newRequestQueue(this).add(request);
     }
 }
