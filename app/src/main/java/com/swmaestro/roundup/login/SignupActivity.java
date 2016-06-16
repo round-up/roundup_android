@@ -16,8 +16,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.home.HomeFeedActivity;
+import com.swmaestro.roundup.server_connector.ServerConfig;
+
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -94,13 +101,43 @@ public class SignupActivity extends AppCompatActivity {
                 }, 3000);
     }
 
-
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
         Intent intent = new Intent(SignupActivity.this, HomeFeedActivity.class);
         startActivity(intent);
+        createUserIntoServer();
         finish();
+    }
+
+    private void createUserIntoServer() {
+        String url = ServerConfig.BASE_URL + "user/";
+        User user = new User();
+        user.setEmail(_emailText.getText().toString());
+        user.setName(_nameText.getText().toString());
+        user.setPassword(_passwordText.getText().toString());
+        user.setBirthDate(_birthText.getText().toString());
+        user.setPhoneNumber(_phoneNumberText.getText().toString());
+        user.setGender(_genderButton.isChecked());
+        JSONObject object = user.getJsonObject();
+
+        Log.i("all", object.toString());
+        JsonObjectRequest request
+                = new JsonObjectRequest(url, object,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("all", response.toString());
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+        Volley.newRequestQueue(this).add(request);
     }
 
     public void onSignupFailed() {
@@ -154,8 +191,6 @@ public class SignupActivity extends AppCompatActivity {
             if (!birthDate.equals(sdf.format(date))) {
                 _birthText.setError("Birth date format is wrong. You should input it like yyyy-MM-dd");
                 valid = false;
-            } else {
-                Log.i("wow!", "Match Success!");
             }
         } catch (ParseException e) {
             _birthText.setError("Parse Exception");
