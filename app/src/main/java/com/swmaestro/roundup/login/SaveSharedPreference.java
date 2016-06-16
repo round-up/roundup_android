@@ -23,4 +23,10 @@ public class SaveSharedPreference {
     public static String getUserName(Context ctxt) {
         return getSharedPreferences(ctxt).getString(PREF_USER_NAME, "");
     }
+
+    public static void clearUserName(Context ctxt) {
+        SharedPreferences.Editor editor = getSharedPreferences(ctxt).edit();
+        editor.clear();
+        editor.commit();
+    }
 }
