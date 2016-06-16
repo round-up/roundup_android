@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".home.HomeFeedActivity"
+            android:name=".login.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -40,6 +40,10 @@
         </activity>
         <activity android:name=".club.AddPostActivity"/>
         <activity android:name=".club.DetailClubActivity"/>
+        <activity
+            android:name=".home.HomeFeedActivity"
+            android:label="@string/home_feed_activity_label"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
