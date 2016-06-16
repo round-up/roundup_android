@@ -44,6 +44,10 @@
             android:name=".home.HomeFeedActivity"
             android:label="@string/home_feed_activity_label"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".login.SignupActivity"
+            android:label="@string/signup_activity_label"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

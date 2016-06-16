@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RoundUp</string>
 
+    <string name="signup_activity_label">Sign Up</string>
     <string name="home_feed_activity_label">Home</string>
     <string name="following_list_ativity_label">Following</string>
     <string name="chatting_activity_label">Chatting</string>
