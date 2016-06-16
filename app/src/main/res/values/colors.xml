@@ -15,4 +15,8 @@
     <color name="card_content_gray">#6c6c6c</color>
     <color name="card_time_gray">#8f9394</color>
     <color name="gray_divider">#ccc</color>
+    <color name="join_input">#e5e5e7</color>
+    <color name="login_btn_color">#00b7d6</color>
+    <color name="facebook_btn_bg">#4f50c2</color>
+    <color name="twitter_btn_bg">#007ecd</color>
 </resources>
