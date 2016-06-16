@@ -42,7 +42,7 @@ public class SignupActivity extends AppCompatActivity {
     @InjectView(R.id.input_password_check) EditText _passwordCheckText;
     @InjectView(R.id.input_birth) EditText _birthText;
     @InjectView(R.id.input_phone_number) EditText _phoneNumberText;
-    @InjectView(R.id.input_gender) ToggleButton _genderButton;
+    @InjectView(R.id.input_gender) EditText _genderButton;
     @InjectView(R.id.btn_signup) Button _signupButton;
     @InjectView(R.id.link_login) TextView _loginLink;
 
@@ -118,7 +118,11 @@ public class SignupActivity extends AppCompatActivity {
         user.setPassword(_passwordText.getText().toString());
         user.setBirthDate(_birthText.getText().toString());
         user.setPhoneNumber(_phoneNumberText.getText().toString());
-        user.setGender(_genderButton.isChecked());
+        if (_genderButton.getText().toString().equals('M')) {
+            user.setGender(true);
+        } else {
+            user.setGender(false);
+        }
         JSONObject object = user.getJsonObject();
 
         Log.i("all", object.toString());
@@ -155,7 +159,12 @@ public class SignupActivity extends AppCompatActivity {
         String passwordCheck = _passwordCheckText.getText().toString();
         String birthDate = _birthText.getText().toString();
         String phoneNumber = _phoneNumberText.getText().toString();
-        Boolean gender = _genderButton.isChecked();
+        Boolean gender = false;
+        if (_genderButton.getText().toString().equals('M')) {
+            gender = true;
+        } else {
+            gender = false;
+        }
 
         if (name.isEmpty() || name.length() < 3) {
             _nameText.setError("at least 3 characters");

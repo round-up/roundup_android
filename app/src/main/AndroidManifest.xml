@@ -51,7 +51,7 @@
         <activity
             android:name=".login.SignupActivity"
             android:label="@string/signup_activity_label"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
     </application>
 
 </manifest>
