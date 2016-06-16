@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.home.HomeFeedActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -106,6 +107,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         mLoginButton.setEnabled(true);
+        Intent intent = new Intent(LoginActivity.this, HomeFeedActivity.class);
+        startActivity(intent);
         finish();
     }
 

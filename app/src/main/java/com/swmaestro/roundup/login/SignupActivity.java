@@ -4,6 +4,7 @@ package com.swmaestro.roundup.login;
  * Created by JeongMinCha on 16. 6. 16..
  */
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.home.HomeFeedActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -86,6 +88,8 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
+        Intent intent = new Intent(SignupActivity.this, HomeFeedActivity.class);
+        startActivity(intent);
         finish();
     }
 
