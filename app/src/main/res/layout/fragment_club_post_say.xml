@@ -12,21 +12,49 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/linearLayout">
 
-        <Button
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button5"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:layout_gravity="bottom" />
+            android:gravity="center"
+            android:background="#d7d7d7" >
 
-        <Button
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView18"
+                android:src="@drawable/ic_cancle"
+                android:layout_marginRight="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="취소"
+                android:id="@+id/textView34" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button6"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:layout_gravity="bottom" />
+            android:gravity="center"
+            android:background="#ffffff" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/imageView19"
+                android:src="@drawable/ic_check"
+                android:layout_marginRight="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="완료"
+                android:id="@+id/textView35" />
+        </LinearLayout>
     </LinearLayout>
 
     <EditText

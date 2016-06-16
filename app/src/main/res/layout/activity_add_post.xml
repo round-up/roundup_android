@@ -12,32 +12,40 @@
 
         <Button
             android:id="@+id/btn_add_club_post_session"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="세션" />
+            android:background="#15a2c7"
+            android:text="세션"
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
 
 
         <Button
             android:id="@+id/btn_add_club_post_notice"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="공지" />
+            android:background="#15a2c7"
+            android:text="공지"
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
 
         <Button
             android:id="@+id/btn_add_club_post_event"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="일정" />
+            android:background="#15a2c7"
+            android:text="일정"
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
 
         <Button
             android:id="@+id/btn_add_club_post_say"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="잡담" />
+            android:background="#15a2c7"
+            android:text="잡담"
+            android:layout_weight="1"
+            android:textColor="#ffffff" />
 
     </LinearLayout>
 
