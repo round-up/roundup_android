@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton.setEnabled(true);
         Intent intent = new Intent(LoginActivity.this, HomeFeedActivity.class);
         startActivity(intent);
+        SaveSharedPreference.setUserName(LoginActivity.this, mEmailText.getText().toString());
         finish();
     }
 

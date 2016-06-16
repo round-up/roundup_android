@@ -21,6 +21,13 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 overridePendingTransition(0,android.R.anim.fade_in);
+                if (SaveSharedPreference.getUserName(SplashActivity.this).length() == 0) {
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(SplashActivity.this, HomeFeedActivity.class);
+                    startActivity(intent);
+                }
                 finish();
             }
         },SPLASH_TIME);
