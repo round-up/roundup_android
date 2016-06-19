@@ -1,6 +1,7 @@
 package com.swmaestro.roundup.club;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -20,20 +21,32 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.navigation.NavigationDrawerActivity;
+import com.swmaestro.roundup.server_connector.ServerConfig;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by lk on 16. 3. 8..
  */
-public class ClubActivity extends NavigationDrawerActivity implements NavigationView.OnNavigationItemSelectedListener, AppBarLayout.OnOffsetChangedListener{
+public class ClubActivity extends NavigationDrawerActivity implements NavigationView.OnNavigationItemSelectedListener, AppBarLayout.OnOffsetChangedListener {
 
     private RecyclerViewAdapter adapter;
     private CollapsingToolbarLayout collapsingToolbar;
     private int mutedColor = R.attr.colorPrimary;
+    private Group group;
+    private ImageView iv_club_logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +80,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
 
         adapter = new RecyclerViewAdapter(getApplicationContext());
         recyclerView.setAdapter(adapter);
-
+        iv_club_logo = (ImageView) findViewById(R.id.iv_club_logo);
         loadData();
     }
 
@@ -81,24 +94,65 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
         return true;
     }
 
-    private void loadData(){
-        Feed feed = new Feed("제목", "작성자", R.mipmap.ic_launcher, "내용내용내용내용");
-        List<Feed> feedList = new ArrayList<>();
-
-        for (int i = 0 ; i < 20 ; i++) {
-            feed = new Feed("제목 " + i, "작성자", R.mipmap.ic_launcher, "내용내용내용내용");
-            feedList.add(feed);
-        }
-
-        adapter.setFeedList(feedList);
-    }
+//    private void loadData(){
+//        Feed feed = new Feed("제목", "작성자", R.mipmap.ic_launcher, "내용내용내용내용");
+//        List<Feed> feedList = new ArrayList<>();
+//
+//        for (int i = 0 ; i < 20 ; i++) {
+//            feed = new Feed("제목 " + i, "작성자", R.mipmap.ic_launcher, "내용내용내용내용");
+//            feedList.add(feed);
+//        }
+//
+//        adapter.setFeedList(feedList);
+//    }
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
         int maxScroll = appBarLayout.getTotalScrollRange();
         float percentage = (float) Math.abs(offset) / (float) maxScroll;
 
-        Log.i("",maxScroll + "  / " + percentage);
+        Log.i("", maxScroll + "  / " + percentage);
+    }
+
+    private void loadData() {
+        HashMap<String, String> request = new HashMap<>();
+        request.put("model", Request.Method.GET + "");
+        int groupPk = 1;
+        request.put("url", ServerConfig.BASE_URL + "group/" + groupPk);
+
+        Log.i("url", request.get("url"));
+
+        JsonObjectRequest groupRequest = new JsonObjectRequest(request, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    group = new Group(response.getInt("id"), response.getString("group_belong"), response.getString("group_category"), response.getString("group_name"),
+                            response.getString("group_description"), response.getString("group_start_date"), response.getString("group_place"), response.getBoolean("group_recruit_state"),
+                            response.getString("group_leader_email"), response.getString("group_logo"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                iv_club_logo.setImageBitmap(group.getGroup_logo());
+
+
+            }
+            //mAdapter.notifyDataSetChanged();
+            //hideprograssDialog();                                                      // Hide PrograssDialog at the end of the recipe loaded
+        }
+
+                , new Response.ErrorListener()
+
+        {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("volley", error.toString());
+                //hideprograssDialog();
+            }
+        }
+
+        );
+        Volley.newRequestQueue(this).add(groupRequest);
     }
 
 }
