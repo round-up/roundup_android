@@ -63,8 +63,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
     private Menu mNavigationMenu;
 
-    private List<String> followingGroupTitles;
-    private List<Integer> followingGroupIcons;
+    private List<String> myGroupTitles;
 
     private NavigationHeader mHeader;
     private Toolbar mToolbar;
@@ -127,14 +126,12 @@ public class NavigationDrawerActivity extends AppCompatActivity
     }
 
     private void accessFollowingTable() {
-        followingGroupTitles = new ArrayList<>();
-        followingGroupIcons = new ArrayList<>();
+        myGroupTitles = new ArrayList<>();
 
         RealmResults<MyGroupMenuItem> realmResults
                 = realm.where(MyGroupMenuItem.class).findAll();
         for (int idx = 0; idx < realmResults.size(); idx ++) {
-            followingGroupTitles.add(realmResults.get(idx).getTitle());
-            followingGroupIcons.add(realmResults.get(idx).getIconRes());
+            myGroupTitles.add(realmResults.get(idx).getTitle());
         }
     }
 
@@ -186,8 +183,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 .setIcon(homeIcon);
         SubMenu subMenu = mNavigationMenu
                 .addSubMenu(R.id.nav_group1, idMyGroups, Menu.NONE, MY_GROUPS);
-        for (int i = 0; i < followingGroupIcons.size(); i++) {
-            subMenu.add("\t\t\t" + followingGroupTitles.get(i));
+        for (int i = 0; i < myGroupTitles.size(); i++) {
+            subMenu.add("\t\t\t\t\t\t\t\t" + myGroupTitles.get(i));
         }
 
         mNavigationMenu.add(R.id.nav_group2, idFollowingGroups, Menu.NONE, FOLLOWING_GROUPS)
