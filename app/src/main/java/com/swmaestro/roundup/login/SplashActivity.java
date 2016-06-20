@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Window;
 
 import com.swmaestro.roundup.R;
@@ -28,6 +29,7 @@ public class SplashActivity extends Activity {
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(SplashActivity.this, HomeFeedActivity.class);
+                    intent.putExtra("user_name", SaveSharedPreference.getUserName(SplashActivity.this));
                     startActivity(intent);
                 }
                 finish();
