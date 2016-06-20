@@ -105,6 +105,7 @@ public class SignupActivity extends AppCompatActivity {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
         Intent intent = new Intent(SignupActivity.this, HomeFeedActivity.class);
+        intent.putExtra("user_name", _emailText.getText().toString());
         startActivity(intent);
         createUserIntoServer();
         finish();

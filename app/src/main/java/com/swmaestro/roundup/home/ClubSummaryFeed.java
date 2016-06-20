@@ -8,12 +8,21 @@ import java.util.List;
  */
 public class ClubSummaryFeed {
 
+    private int groupId;
     private String groupName;
     private int remainingDays;
     private List<String> sessionSummaries;
 
     public ClubSummaryFeed() {
         sessionSummaries = new ArrayList<String>();
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public String getGroupName() {

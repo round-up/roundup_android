@@ -1,6 +1,8 @@
 package com.swmaestro.roundup.home;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.utils.ImageHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by JeongMinCha on 16. 4. 28..
@@ -20,16 +30,34 @@ import com.swmaestro.roundup.R;
 public class HomeFeedListAdapter
         extends RecyclerView.Adapter<HomeFeedListAdapter.ViewHolder> {
 
+    List<Integer> groupIds;
+    JSONObject data;
     Context mContext;
     OnItemClickListener mItemClickListener;
 
     public HomeFeedListAdapter(Context context) {
-
+        groupIds = new ArrayList<>();
         this.mContext = context;
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
+    }
+
+    public JSONObject getData() {
+        return data;
+    }
+
+    public void setData(JSONObject data) {
+        this.data = data;
+    }
+
+    public List<Integer> getGroupIds() {
+        return groupIds;
+    }
+
+    public void setGroupIds(List<Integer> groupIds) {
+        this.groupIds = groupIds;
     }
 
     @Override
@@ -43,14 +71,25 @@ public class HomeFeedListAdapter
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         final HomeFeed homeFeed = new HomeFeed();
-        homeFeed.setGroupName("소프트웨어 마에스트로");
-        homeFeed.setAuthorName("차정민");
-        homeFeed.setTime("2016.06.11/16:00");
-        homeFeed.setFeedTitle("재미있는 안드로이드 개발!");
-        homeFeed.setFeedContent("안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다");
-        homeFeed.setNumRecommends(5);
-        homeFeed.setNumComments(2);
+        try {
+            JSONArray feedArray = data.getJSONArray("normal");
+            JSONObject feed = feedArray.getJSONObject(position);
 
+            homeFeed.setGroupId(feed.getInt("group_id"));
+            homeFeed.setGroupName("소프트웨어 마에스트로");
+            homeFeed.setAuthorName(feed.getString("email"));
+//            homeFeed.setTime(feed.getString("feed_date"));
+            homeFeed.setTime("2016.06.03 12:32");
+            homeFeed.setFeedTitle(feed.getString("feed_title"));
+            homeFeed.setFeedContent(feed.getString("feed_content"));
+            homeFeed.setNumRecommends(feed.getJSONArray("like_list").length());
+            homeFeed.setNumComments(feed.getJSONArray("comment_list").length());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Bitmap bm = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p01_img_profile2);
+        holder.groupIcon.setImageBitmap(ImageHandler.getInstance().getRoundedShape(bm));
         holder.groupName.setText(homeFeed.getGroupName());
         holder.authorName.setText(homeFeed.getAuthorName());
         holder.txtTime.setText(homeFeed.getTime());
@@ -58,11 +97,17 @@ public class HomeFeedListAdapter
         holder.feedContent.setText(homeFeed.getFeedContent());
         holder.txtRecommend.setText("추천 " + homeFeed.getNumRecommends() + " 건");
         holder.txtComment.setText("댓글 " + homeFeed.getNumComments() + " 건" );
+
+        groupIds.add(position, homeFeed.getGroupId());
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        try {
+            return data.getJSONArray("normal").length();
+        } catch (JSONException e) {
+            return 1;
+        }
     }
 
     public class ViewHolder
@@ -96,9 +141,7 @@ public class HomeFeedListAdapter
             btnComment = (ImageButton) itemView.findViewById(R.id.btn_comment_home_feed);
             btnShare = (ImageButton) itemView.findViewById(R.id.btn_share_home_feed);
 
-            btnHeart.setOnClickListener(this);
-            btnComment.setOnClickListener(this);
-            btnShare.setOnClickListener(this);
+            cardView.setOnClickListener(this);
         }
 
         @Override
