@@ -11,14 +11,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.club.ClubActivity;
 import com.swmaestro.roundup.login.LoginActivity;
 import com.swmaestro.roundup.login.SaveSharedPreference;
 import com.swmaestro.roundup.navigation.NavigationDrawerActivity;
+import com.swmaestro.roundup.server_connector.ServerConfig;
+import com.swmaestro.roundup.utils.HomeFeedData;
+
+import org.json.JSONObject;
 
 
 public class HomeFeedActivity extends NavigationDrawerActivity {
+
+    private JSONObject data;
 
     private RecyclerView mClubSummaryRecyclerView;
     private StaggeredGridLayoutManager mClubSummaryLayoutManager;
@@ -34,14 +44,30 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_feed);
 
-        Log.i("intent var", getIntent().getStringExtra("user_name"));
-
         super.makeNavigationDrawer();
-        this.makeClubSummarySection();
-        this.makeInterestingActivitiesSection();
+        this.loadHomeFeedData(getIntent().getStringExtra("user_name"));
     }
 
-    private void makeClubSummarySection() {
+    private void loadHomeFeedData(String userEmail) {
+        String url = ServerConfig.BASE_URL + "home_feed/" + userEmail;
+
+        JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                data = response;
+                makeClubSummarySection(data);
+                makeInterestingActivitiesSection(data);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        Volley.newRequestQueue(this).add(request);
+    }
+
+    private void makeClubSummarySection(JSONObject object) {
         // RecyclerView and StaggeredGridLayoutManager for Club Summary Feed Section.
         mClubSummaryRecyclerView = (RecyclerView) findViewById(R.id.club_summary_feed_list);
         mClubSummaryLayoutManager = new StaggeredGridLayoutManager(1,
@@ -49,6 +75,7 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
         mClubSummaryRecyclerView.setLayoutManager(mClubSummaryLayoutManager);
 
         mClubSummaryFeedListAdapter = new ClubSummaryFeedListAdapter(this);
+        mClubSummaryFeedListAdapter.setData(object);
         mClubSummaryRecyclerView.setAdapter(mClubSummaryFeedListAdapter);
 
         ClubSummaryFeedListAdapter.OnItemClickListener onItemClickListener
@@ -62,7 +89,7 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
         mClubSummaryFeedListAdapter.setOnItemClickListener(onItemClickListener);
     }
 
-    private void makeInterestingActivitiesSection() {
+    private void makeInterestingActivitiesSection(JSONObject object) {
         // RecyclerView and StaggeredGridLayoutManager for Interesting Activities Section.
         mInterestingActivitiesRecyclerView = (RecyclerView) findViewById(R.id.interesting_club_activity_list);
         mInterestingActivitiesLayoutManager = new StaggeredGridLayoutManager(1,
@@ -70,6 +97,7 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
         mInterestingActivitiesRecyclerView.setLayoutManager(mInterestingActivitiesLayoutManager);
 
         mInterestingActivitiesAdapter = new HomeFeedListAdapter(this);
+        mInterestingActivitiesAdapter.setData(object);
         mInterestingActivitiesRecyclerView.setAdapter(mInterestingActivitiesAdapter);
 
         HomeFeedListAdapter.OnItemClickListener onItemClickListener

@@ -14,12 +14,15 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.swmaestro.roundup.R;
 
+import org.json.JSONObject;
+
 /**
  * Created by JeongMinCha on 16. 4. 28..
  */
 public class HomeFeedListAdapter
         extends RecyclerView.Adapter<HomeFeedListAdapter.ViewHolder> {
 
+    JSONObject data;
     Context mContext;
     OnItemClickListener mItemClickListener;
 
@@ -30,6 +33,14 @@ public class HomeFeedListAdapter
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
+    }
+
+    public JSONObject getData() {
+        return data;
+    }
+
+    public void setData(JSONObject data) {
+        this.data = data;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.swmaestro.roundup.home;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,20 @@ import android.widget.TextView;
 
 import com.swmaestro.roundup.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by JeongMinCha on 16. 5. 6..
  */
 public class ClubSummaryFeedListAdapter
         extends RecyclerView.Adapter<ClubSummaryFeedListAdapter.ViewHolder> {
 
+    JSONObject data;
     Context mContext;
     OnItemClickListener mItemClickListener;
 
@@ -28,6 +37,14 @@ public class ClubSummaryFeedListAdapter
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
+    }
+
+    public JSONObject getData() {
+        return data;
+    }
+
+    public void setData(JSONObject data) {
+        this.data = data;
     }
 
     @Override
@@ -45,18 +62,29 @@ public class ClubSummaryFeedListAdapter
         clubSummaryFeed.setGroupName("RoundUp");
         clubSummaryFeed.setRemainingDays(5);
 
+        List<String> sessionTitles = new ArrayList<>();
+        try {
+            JSONArray sessionArray = data.getJSONArray("session");
+            for (int idx = 0; idx < sessionArray.length(); idx++) {
+                sessionTitles.add(sessionArray.getJSONObject(idx).getString("feed_title"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         // set texts to the visual components.
         holder.groupIcon.setImageResource(R.mipmap.ic_launcher);
         holder.groupName.setText(clubSummaryFeed.getGroupName());
         holder.groupSchedule.setText(clubSummaryFeed.getRemainingDays() + "일 남았습니다.");
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        TextView tv = (TextView) inflater.inflate(R.layout.session_summary_item, null);
-        tv.setText("Hello");
-        holder.groupSessionSummary.addView(tv);
-        tv = (TextView) inflater.inflate(R.layout.session_summary_item, null);
-        tv.setText("Hello");
-        holder.groupSessionSummary.addView(tv);
+        TextView tv = null;
+
+        for (int idx = 0; idx < sessionTitles.size(); idx++) {
+            tv = (TextView) inflater.inflate(R.layout.session_summary_item, null);
+            tv.setText(sessionTitles.get(idx));
+            holder.groupSessionSummary.addView(tv);
+        }
     }
 
     @Override
