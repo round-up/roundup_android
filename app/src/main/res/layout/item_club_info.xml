@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView16"
+                android:id="@+id/tv_club_info_gisu"
                 android:text="3"
                 android:textSize="40px"
                 android:textColor="#888" />
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="한국과학창의재단"
-                android:id="@+id/textView19"
+                android:id="@+id/tv_club_info_place"
                 android:textColor="#888"
                 android:textSize="40px" />
 
@@ -153,25 +153,25 @@
             android:layout_marginRight="10dp">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/iv_club_info_other1"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_menu_send"
+                android:src="#ffffff"
                 android:layout_weight="1" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/iv_club_info_other2"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_menu_send"
+                android:src="#ffffff"
                 android:layout_gravity="top"
                 android:layout_weight="1" />
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/iv_club_info_other3"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:src="@drawable/ic_menu_send"
+                android:src="#ffffff"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -187,22 +187,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView26"
+                android:id="@+id/tv_club_info_other1"
                 android:layout_weight="1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView27"
+                android:id="@+id/tv_club_info_other2"
                 android:layout_weight="1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView28"
+                android:id="@+id/tv_club_info_other3"
                 android:layout_weight="1" />
         </LinearLayout>
 

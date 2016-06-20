@@ -1,6 +1,7 @@
 package com.swmaestro.roundup.club;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -20,20 +21,34 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.navigation.NavigationDrawerActivity;
+import com.swmaestro.roundup.server_connector.ServerConfig;
+import com.swmaestro.roundup.utils.ImageHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by lk on 16. 3. 8..
  */
-public class ClubActivity extends NavigationDrawerActivity implements NavigationView.OnNavigationItemSelectedListener, AppBarLayout.OnOffsetChangedListener{
+public class ClubActivity extends NavigationDrawerActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerViewAdapter adapter;
     private CollapsingToolbarLayout collapsingToolbar;
     private int mutedColor = R.attr.colorPrimary;
+    private Group group;
+    private ImageView iv_club_logo;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +66,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
         });
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+
         //collapsingToolbar.setCollapsedTitleTextColor(R.color.colorWhite);
         ImageView header = (ImageView) findViewById(R.id.iv_club_cover);
 
@@ -60,14 +76,15 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
         navigationView.setNavigationItemSelectedListener(this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        adapter = new RecyclerViewAdapter(getApplicationContext());
+        group = Group.setGroup(0,"","","","","","",true,"","",0);
+        adapter = new RecyclerViewAdapter(getApplicationContext(), group);
         recyclerView.setAdapter(adapter);
-
+        iv_club_logo = (ImageView) findViewById(R.id.iv_club_logo);
         loadData();
     }
 
@@ -81,24 +98,121 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
         return true;
     }
 
-    private void loadData(){
-        Feed feed = new Feed("제목", "작성자", R.mipmap.ic_launcher, "내용내용내용내용");
-        List<Feed> feedList = new ArrayList<>();
+//    private void loadData(){
+//        Feed feed = new Feed("제목", "작성자", R.mipmap.ic_launcher, "내용내용내용내용");
+//        List<Feed> feedList = new ArrayList<>();
+//
+//        for (int i = 0 ; i < 20 ; i++) {
+//            feed = new Feed("제목 " + i, "작성자", R.mipmap.ic_launcher, "내용내용내용내용");
+//            feedList.add(feed);
+//        }
+//
+//        adapter.setFeedList(feedList);
+//    }
 
-        for (int i = 0 ; i < 20 ; i++) {
-            feed = new Feed("제목 " + i, "작성자", R.mipmap.ic_launcher, "내용내용내용내용");
-            feedList.add(feed);
-        }
 
-        adapter.setFeedList(feedList);
+    private void loadData() {
+        //LoadGroupInfo();
+        LoadFeed();
     }
 
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
-        int maxScroll = appBarLayout.getTotalScrollRange();
-        float percentage = (float) Math.abs(offset) / (float) maxScroll;
+    private void LoadGroupInfo() {
+        HashMap<String, String> request = new HashMap<>();
+        request.put("model", Request.Method.GET + "");
+        int groupPk = 1;
+        request.put("url", ServerConfig.BASE_URL + "group/" + groupPk);
 
-        Log.i("",maxScroll + "  / " + percentage);
+        Log.i("url", request.get("url"));
+
+        JsonObjectRequest groupRequest = new JsonObjectRequest(request, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    group = Group.setGroup(response.getInt("id"), response.getString("group_belong"), response.getString("group_category"), response.getString("group_name"),
+                            response.getString("group_description"), response.getString("group_start_date"), response.getString("group_place"), response.getBoolean("group_recruit_state"),
+                            response.getString("group_leader_email"), response.getString("group_logo"), response.getInt("group_gisoo"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    JSONObject o = response.getJSONObject("united_group");
+                    JSONArray a = o.getJSONArray("group_list");
+                    for (int i = 0; i < a.length(); i++) {
+                        JSONObject oo = a.getJSONObject(i);
+                        group.setOther_logo(oo.getString("group_logo"));
+                        group.setOther_name(oo.getString("group_name"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    JSONArray a = response.getJSONArray("users");
+                    for (int i = 0; i < a.length(); i++) {
+                        JSONObject o = a.getJSONObject(i);
+                        User user = new User(o.getString("user_profile_image"), o.getString("user_phone_number"), o.getString("user_birth"), o.getBoolean("user_gender"), o.getString("user_name"), o.getString("email"));
+                        group.addUser(user);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                iv_club_logo.setImageBitmap(group.getGroup_logo());
+                collapsingToolbar.setTitle(group.getGroup_name());
+
+                adapter = new RecyclerViewAdapter(getApplicationContext(), group);
+                recyclerView.setAdapter(adapter);
+
+            }
+            //mAdapter.notifyDataSetChanged();
+            //hideprogㅈrassDialog();                                                      // Hide PrograssDialog at the end of the recipe loaded
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("volley", error.toString());
+                //hideprograssDialog();
+            }
+        });
+        Volley.newRequestQueue(this).add(groupRequest);
+    }
+
+    private void LoadFeed() {
+        HashMap<String, String> request = new HashMap<>();
+        request.put("model", Request.Method.GET + "");
+        int groupPk = 1;
+        int count = 10;
+        request.put("url", ServerConfig.BASE_URL + "group_feed/group/" + groupPk + "/" + count);
+        Volley.newRequestQueue(this).add(JsonArrayRequest.createJsonRequestToken(request, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                List<Feed> feedList = new ArrayList<>();
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject o = response.getJSONObject(i);
+                        ArrayList<Bitmap> imageList = new ArrayList<Bitmap>();
+                        for(int j=0; j<o.getJSONArray("image_list").length(); j++){
+                            JSONObject o2 = o.getJSONArray("image_list").getJSONObject(j);
+                            imageList.add(ImageHandler.getInstance().decodeBase64ToImage(o2.getString("feed_image")));
+                        }
+                        ArrayList<Comment> commentList = new ArrayList<Comment>();
+                        Feed feed = new Feed(o.getInt("feed_access_modifier"), o.getString("feed_tags"), o.getJSONArray("like_list").length(), imageList, o.getString("feed_title"), o.getString("feed_date"), o.getString("email"),
+                                o.getString("feed_type"), o.getString("feed_content"), commentList);
+                        feedList.add(feed);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                adapter.setFeedList(feedList);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("volley", error.toString());
+            }
+        }));
     }
 
 }

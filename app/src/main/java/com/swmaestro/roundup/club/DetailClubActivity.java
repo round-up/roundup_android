@@ -20,27 +20,47 @@ import android.widget.TextView;
 
 import com.swmaestro.roundup.R;
 
+import org.w3c.dom.Text;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by lk on 16. 6. 2..
  */
 public class DetailClubActivity extends AppCompatActivity {
 
+    TextView place;
+    TextView place2;
+    TextView gisu;
+    TextView gisu2;
+    TextView name;
+    TextView description;
+    TextView belong;
+    TextView start_date;
+    LinearLayout linearLayoutMain;
+    Group group;
+    CircleImageView profile;
+
+
     public void onCreate(Bundle saveInstanced) {
         super.onCreate(saveInstanced);
         setContentView(R.layout.activity_detail_club);
 
-        LinearLayout linearLayoutMain = (LinearLayout) findViewById(R.id.ll_main);
+        initStaticView();
+        userProfile();
 
-        int n = 5;
+    }
+
+    private void userProfile() {
+        int n = group.getGroup_gisoo();
         // todo 시작
         for (int i = n; i > 0; i--) {
-            CardView cardView = new CardView(getApplicationContext());
             LinearLayout.LayoutParams p =  new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            p.setMargins(0,20,0,20);
-            cardView.setLayoutParams(p);
+            p.setMargins(0,10,0,10);
 
             LinearLayout layoutRoot = new LinearLayout(getApplicationContext());
             layoutRoot.setOrientation(LinearLayout.VERTICAL);
+            layoutRoot.setLayoutParams(p);
 
             final HorizontalScrollView scrollView2 = new HorizontalScrollView(getApplicationContext());
             ImageView imageView = new ImageView(getApplicationContext());
@@ -59,7 +79,8 @@ public class DetailClubActivity extends AppCompatActivity {
             textView.setLayoutParams(params3);
 
             ImageButton imageView2 = new ImageButton(getApplicationContext());
-            imageView2.setImageResource(R.drawable.ic_member);
+            imageView2.setImageResource(R.drawable.btn_down);
+            imageView2.setBackgroundColor(Color.parseColor("#ffffff"));
             imageView2.setScaleType(ImageView.ScaleType.CENTER);
             LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(100, 100);
             layoutParams2.setMargins(30, 30, 30, 30);
@@ -83,16 +104,19 @@ public class DetailClubActivity extends AppCompatActivity {
             linearLayout2.addView(imageView2);
 
 
-            HorizontalScrollView.LayoutParams params2 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300);
+            HorizontalScrollView.LayoutParams params2 = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 200);
             scrollView2.setLayoutParams(params2);
+            scrollView2.setBackgroundColor(Color.parseColor("#ffffff"));
             LinearLayout ll4 = new LinearLayout(getApplicationContext());
             ll4.setLayoutParams(params2);
             ll4.setBackgroundColor(Color.parseColor("#ffffff"));
             scrollView2.addView(ll4);
-            for (int k = 0; k < 10; k++) {
-                Drawable temp1 = getDrawable(R.mipmap.ic_launcher);
-                ImageView iv = new ImageView(getApplicationContext());
-                iv.setBackground(temp1);
+            LinearLayout.LayoutParams image_params = new LinearLayout.LayoutParams(150, 150);
+            image_params.setMargins(25,0,25,0);
+            for (int k = 0; k < group.getUser_list().size(); k++) {
+                CircleImageView iv = new CircleImageView(getApplicationContext());
+                iv.setImageBitmap(group.getUser_list().get(k).getUser_profile_image());
+                iv.setLayoutParams(image_params);
                 ll4.addView(iv);
             }
 
@@ -107,10 +131,33 @@ public class DetailClubActivity extends AppCompatActivity {
             scrollView2.setVisibility(View.GONE);
             layoutRoot.addView(layout);
             layoutRoot.addView(scrollView2);
-            cardView.addView(layoutRoot);
 
-            linearLayoutMain.addView(cardView);
+            linearLayoutMain.addView(layoutRoot);
         }
+    }
 
+    private void initStaticView() {
+        linearLayoutMain = (LinearLayout) findViewById(R.id.ll_main);
+        place = (TextView) findViewById(R.id.tv_detail_place);
+        belong = (TextView) findViewById(R.id.tv_detail_belong);
+        start_date = (TextView) findViewById(R.id.tv_detail_group_start_date);
+        place2 = (TextView) findViewById(R.id.tv_detail_place2);
+        gisu = (TextView) findViewById(R.id.tv_detail_gisu);
+        gisu2 = (TextView) findViewById(R.id.tv_detail_gisu2);
+        name = (TextView) findViewById(R.id.tv_detail_name);
+        description = (TextView) findViewById(R.id.tv_detail_description);
+        profile = (CircleImageView) findViewById(R.id.iv_detail_profile);
+
+        group = Group.instance;
+
+        place.setText(group.getGroup_place());
+        belong.setText(group.getGroup_belong());
+        start_date.setText(group.getGroup_start_date());
+        place2.setText(group.getGroup_place());
+        gisu.setText(group.getGroup_gisoo()+"");
+        gisu2.setText(group.getGroup_gisoo()+"");
+        name.setText(group.getGroup_name());
+        description.setText(group.getGroup_description());
+        profile.setImageBitmap(group.getGroup_logo());
     }
 }

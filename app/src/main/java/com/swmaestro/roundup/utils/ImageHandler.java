@@ -2,14 +2,18 @@ package com.swmaestro.roundup.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.ImageView;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * Created by iljichoi on 16. 6. 11..
@@ -84,5 +88,18 @@ public class ImageHandler {
                 new Rect(0, 0, targetWidth,
                         targetHeight), null);
         return targetBitmap;
+    }
+
+
+    public Bitmap decodeBase64ToImage(String image){
+        try{
+            InputStream stream = new ByteArrayInputStream(Base64.decode(image.getBytes(), Base64.DEFAULT));
+            Bitmap bitmap = BitmapFactory.decodeStream(stream);
+            Log.v("Ben", "Image Converted");
+            return bitmap;
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 }
