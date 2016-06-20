@@ -1,11 +1,14 @@
 package com.swmaestro.roundup.following;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.navigation.NavigationDrawerActivity;
+import com.swmaestro.roundup.utils.ImageHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +60,17 @@ public class FollowingListActivity extends NavigationDrawerActivity {
 
     private void createFollowingTable() {
         // TODO: Delete this method after making a routine to get data from server and save it to RealmDB.
+        ImageHandler imageHandler = ImageHandler.getInstance();
+
         final List<FollowingGroup> groups = new ArrayList<>();
-        groups.add(new FollowingGroup(1, "레알", true, "IT 실전 창업 동아리", R.drawable.ic_action_dock));
-        groups.add(new FollowingGroup(2, "넥스터즈", false, "IT 실전 창업 동아리 2", R.drawable.ic_action_dock));
+        Bitmap icon1 = BitmapFactory.decodeResource(getResources(), R.drawable.p01_img_ex1);
+        Bitmap icon2 = BitmapFactory.decodeResource(getResources(), R.drawable.p01_img_ex2);
+        Bitmap icon3 = BitmapFactory.decodeResource(getResources(), R.drawable.p01_img_ex3);
+
+        groups.add(new FollowingGroup(1, "레알", true, "IT 실전 창업 동아리", imageHandler.encodeBase64(icon1)));
+        groups.add(new FollowingGroup(2, "넥스터즈", false, "IT 실전 창업 동아리", imageHandler.encodeBase64(icon2)));
+        groups.add(new FollowingGroup(3, "넥스터즈00", true, "IT 실전 창업 동아리 2", imageHandler.encodeBase64(icon3)));
+
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {

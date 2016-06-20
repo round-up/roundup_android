@@ -1,23 +1,12 @@
 package com.swmaestro.roundup.add_group;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -26,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.android.volley.Response;
@@ -35,16 +23,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.dto.Group;
-import com.swmaestro.roundup.dto.RequestInfo;
-import com.swmaestro.roundup.server_connector.RequestConfigurations;
 import com.swmaestro.roundup.server_connector.ServerConfig;
-import com.swmaestro.roundup.server_connector.ServerConnector;
 import com.swmaestro.roundup.utils.ImageHandler;
 
 import org.json.JSONObject;
-
-import java.io.File;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by JeongMinCha on 16. 3. 14..
@@ -186,8 +168,8 @@ public class AddGroupActivity extends AppCompatActivity implements Button.OnClic
         Group group = new Group("", "", "", "RoundUp", "Seoul", "Soma", "2016.06.24", true);
 
         ImageHandler imageHandler = ImageHandler.getInstance();
-        group.setGroupBackgroundImage(imageHandler.encodeImageViewBase64(imgButtonBackground));
-        group.setGroupProfileImage(imageHandler.encodeImageViewBase64(imgButtonProfile));
+        group.setGroupBackgroundImage(imageHandler.encodeBase64(imgButtonBackground));
+        group.setGroupProfileImage(imageHandler.encodeBase64(imgButtonProfile));
         group.setGroupName(editTextGroupName.getText().toString());
         group.setGroupPlace(editTextPlace.getText().toString());
         group.setGroupBelong(editTextBelonging.getText().toString());

@@ -1,6 +1,7 @@
 package com.swmaestro.roundup.utils;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
@@ -28,14 +29,9 @@ public class ImageHandler {
         return default_res;
     }
 
-    public String encodeImageViewBase64(ImageView view) {
-
-        if (view == null) {
-            return "";
-        }
+    public String encodeBase64(Bitmap bitmap) {
 
         String imageCode = null;
-        Bitmap bitmap = ((BitmapDrawable) view.getDrawable()).getBitmap();;
 
         if (bitmap != null) {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -45,9 +41,25 @@ public class ImageHandler {
 
             return imageCode;
         } else {
-            return "";
+            return null;
         }
+    }
 
+    public String encodeBase64(ImageView view) {
+
+        try {
+            Bitmap bitmap = ((BitmapDrawable) view.getDrawable()).getBitmap();;
+            return encodeBase64(bitmap);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Bitmap decodeBase64(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedByte;
     }
 
     public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
