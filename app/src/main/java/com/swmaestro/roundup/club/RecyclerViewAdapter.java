@@ -4,12 +4,14 @@ package com.swmaestro.roundup.club;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -67,10 +69,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             position = position - 1;
             Feed feed = feedList.get(position);
             FeedViewHolder feedViewHolder = (FeedViewHolder) holder;
-            feedViewHolder.textViewFeedTitle.setText(feed.getFeedTitle());
-            feedViewHolder.textViewFeedContent.setText(feed.getFeedContent());
+            feedViewHolder.textViewFeedTitle.setText(feed.getFeed_title());
+            feedViewHolder.textViewFeedContent.setText(feed.getFeed_content());
+            feedViewHolder.textViewLike.setText(feed.getLike() + "");
+            feedViewHolder.textViewComment.setText(feed.getComment_list().size() + "");
+            if(feed.getImage_list().size() >= 3){
+                if(feed.getImage_list().size() == 2){
+                    feedViewHolder.iv2.setVisibility(View.VISIBLE);
+                    feedViewHolder.iv2_1.setImageBitmap(feed.getImage_list().get(0));
+                    feedViewHolder.iv2_2.setImageBitmap(feed.getImage_list().get(1));
+                }else{
+                    feedViewHolder.iv3.setVisibility(View.VISIBLE);
+                    feedViewHolder.iv3_1.setImageBitmap(feed.getImage_list().get(0));
+                    feedViewHolder.iv3_2.setImageBitmap(feed.getImage_list().get(1));
+                    feedViewHolder.iv3_3.setImageBitmap(feed.getImage_list().get(2));
+                }
+            }
 //            Picasso.with(context).load(feed.getFeedFileThumbnail()).into(feedViewHolder.imageViewFeedFile);
-            feedViewHolder.textViewFeedAuthor.setText(feed.getFeedAuthor());
+            feedViewHolder.textViewFeedAuthor.setText(feed.getEmail());
         }else{
             ClubViewHolder clubViewHolder = (ClubViewHolder) holder;
             clubViewHolder.place.setText(group.getGroup_place());
@@ -134,15 +150,33 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView textViewFeedTitle;
         TextView textViewFeedContent;
         TextView textViewFeedAuthor;
-        ImageView imageViewFeedFile;
+        TextView textViewComment;
+        TextView textViewLike;
+        LinearLayout iv2;
+        LinearLayout iv3;
+        ImageView iv3_1;
+        ImageView iv3_2;
+        ImageView iv3_3;
+
+        ImageView iv2_1;
+        ImageView iv2_2;
 
         public FeedViewHolder(View itemView) {
             super(itemView);
             textViewFeedContent = (TextView) itemView.findViewById(R.id.tv_feed_content);
             textViewFeedTitle = (TextView) itemView.findViewById(R.id.tv_feed_title);
-            textViewFeedAuthor = (TextView) itemView.findViewById(R.id.tv_feed_author);
-//            imageViewFeedFile = (ImageView) itemView.findViewById(R.id.iv_feed_file);
+            textViewFeedAuthor = (TextView) itemView.findViewById(R.id.tv_author);
+            textViewComment = (TextView) itemView.findViewById(R.id.tv_feed_comment);
+            textViewLike = (TextView) itemView.findViewById(R.id.tv_feed_like);
+            iv3 = (LinearLayout) itemView.findViewById(R.id.three_layout);
+            iv2 = (LinearLayout) itemView.findViewById(R.id.two_layout);
 
+            iv3_1 = (ImageView) itemView.findViewById(R.id.three_1);
+            iv3_2 = (ImageView) itemView.findViewById(R.id.three_2);
+            iv3_3 = (ImageView) itemView.findViewById(R.id.three_3);
+
+            iv2_1 = (ImageView) itemView.findViewById(R.id.two_1);
+            iv2_2 = (ImageView) itemView.findViewById(R.id.two_2);
         }
     }
 

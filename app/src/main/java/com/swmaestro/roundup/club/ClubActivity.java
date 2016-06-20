@@ -28,6 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.swmaestro.roundup.R;
 import com.swmaestro.roundup.navigation.NavigationDrawerActivity;
 import com.swmaestro.roundup.server_connector.ServerConfig;
+import com.swmaestro.roundup.utils.ImageHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,7 +41,7 @@ import java.util.List;
 /**
  * Created by lk on 16. 3. 8..
  */
-public class ClubActivity extends NavigationDrawerActivity implements NavigationView.OnNavigationItemSelectedListener, AppBarLayout.OnOffsetChangedListener {
+public class ClubActivity extends NavigationDrawerActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerViewAdapter adapter;
     private CollapsingToolbarLayout collapsingToolbar;
@@ -80,7 +81,9 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-
+        group = Group.setGroup(0,"","","","","","",true,"","",0);
+        adapter = new RecyclerViewAdapter(getApplicationContext(), group);
+        recyclerView.setAdapter(adapter);
         iv_club_logo = (ImageView) findViewById(R.id.iv_club_logo);
         loadData();
     }
@@ -107,15 +110,13 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
 //        adapter.setFeedList(feedList);
 //    }
 
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
-        int maxScroll = appBarLayout.getTotalScrollRange();
-        float percentage = (float) Math.abs(offset) / (float) maxScroll;
-
-        Log.i("", maxScroll + "  / " + percentage);
-    }
 
     private void loadData() {
+        //LoadGroupInfo();
+        LoadFeed();
+    }
+
+    private void LoadGroupInfo() {
         HashMap<String, String> request = new HashMap<>();
         request.put("model", Request.Method.GET + "");
         int groupPk = 1;
@@ -138,7 +139,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
                 try {
                     JSONObject o = response.getJSONObject("united_group");
                     JSONArray a = o.getJSONArray("group_list");
-                    for(int i=0; i<a.length(); i++){
+                    for (int i = 0; i < a.length(); i++) {
                         JSONObject oo = a.getJSONObject(i);
                         group.setOther_logo(oo.getString("group_logo"));
                         group.setOther_name(oo.getString("group_name"));
@@ -149,7 +150,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
 
                 try {
                     JSONArray a = response.getJSONArray("users");
-                    for(int i=0; i<a.length(); i++){
+                    for (int i = 0; i < a.length(); i++) {
                         JSONObject o = a.getJSONObject(i);
                         User user = new User(o.getString("user_profile_image"), o.getString("user_phone_number"), o.getString("user_birth"), o.getBoolean("user_gender"), o.getString("user_name"), o.getString("email"));
                         group.addUser(user);
@@ -167,20 +168,51 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
             }
             //mAdapter.notifyDataSetChanged();
             //hideprogㅈrassDialog();                                                      // Hide PrograssDialog at the end of the recipe loaded
-        }
-
-                , new Response.ErrorListener()
-
-        {
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("volley", error.toString());
                 //hideprograssDialog();
             }
-        }
-
-        );
+        });
         Volley.newRequestQueue(this).add(groupRequest);
+    }
+
+    private void LoadFeed() {
+        HashMap<String, String> request = new HashMap<>();
+        request.put("model", Request.Method.GET + "");
+        int groupPk = 1;
+        int count = 10;
+        request.put("url", ServerConfig.BASE_URL + "group_feed/group/" + groupPk + "/" + count);
+        Volley.newRequestQueue(this).add(JsonArrayRequest.createJsonRequestToken(request, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                List<Feed> feedList = new ArrayList<>();
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject o = response.getJSONObject(i);
+                        ArrayList<Bitmap> imageList = new ArrayList<Bitmap>();
+                        for(int j=0; j<o.getJSONArray("image_list").length(); j++){
+                            JSONObject o2 = o.getJSONArray("image_list").getJSONObject(j);
+                            imageList.add(ImageHandler.getInstance().decodeBase64ToImage(o2.getString("feed_image")));
+                        }
+                        ArrayList<Comment> commentList = new ArrayList<Comment>();
+                        Feed feed = new Feed(o.getInt("feed_access_modifier"), o.getString("feed_tags"), o.getJSONArray("like_list").length(), imageList, o.getString("feed_title"), o.getString("feed_date"), o.getString("email"),
+                                o.getString("feed_type"), o.getString("feed_content"), commentList);
+                        feedList.add(feed);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                adapter.setFeedList(feedList);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("volley", error.toString());
+            }
+        }));
     }
 
 }
