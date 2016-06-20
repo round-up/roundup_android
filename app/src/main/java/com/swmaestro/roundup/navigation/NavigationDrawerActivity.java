@@ -1,6 +1,8 @@
 package com.swmaestro.roundup.navigation;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -98,8 +100,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
         if (mHeader != null) {
             tvName.setText(mHeader.getName());
             tvEmail.setText(mHeader.getEmailAddr());
-            ivIcon.setImageResource(mHeader.getResIconImage());
-            headerView.setBackgroundResource(mHeader.getResBackImage());
+            Bitmap icon = BitmapFactory.decodeResource(this.getResources(),
+                    R.drawable.p00_img_profile_default);
+            ivIcon.setImageBitmap(ImageHandler.getInstance().getRoundedShape(icon));
         }
     }
 
@@ -137,11 +140,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
     private void createNavigationHeaderTable() {
         // TODO: Delete this method after making a routine to get data from server and save it to RealmDB.
         final NavigationHeader header = new NavigationHeader();
-        //header.setName("JeongMinCha");
-        //header.setEmailAddr("cjm9236@naver.com");
         header.setName("IlJi Choi");
         header.setEmailAddr("choiilji@gmail.com");
-        header.setResBackImage(R.drawable.nav_header_background_example);
         header.setResIconImage(R.drawable.ic_action_dock);
         realm.executeTransaction(new Realm.Transaction() {
             @Override
