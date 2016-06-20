@@ -2,6 +2,7 @@ package com.swmaestro.roundup.following;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,10 @@ public class FollowingGroupsAdapter extends ArrayAdapter<FollowingGroup> {
 
         holder = (ViewHolder) rowView.getTag();
         FollowingGroup group = followingGroups.get(position);
-        holder.imgIcon.setImageBitmap(ImageHandler.getInstance().decodeBase64(group.getIcon()));
+        Bitmap bm = ImageHandler.getInstance().decodeBase64(group.getIcon());
+        bm = ImageHandler.getInstance().getRoundedShape(bm);
+
+        holder.imgIcon.setImageBitmap(bm);
         holder.txtName.setText(group.getTitle());
         if (group.isAlliance() == true) {
             holder.txtAlliance.setText(" | 연합 관계");
