@@ -1,6 +1,8 @@
 package com.swmaestro.roundup.home;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.utils.ImageHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,7 +85,8 @@ public class ClubSummaryFeedListAdapter
         }
 
         // set texts to the visual components.
-        holder.groupIcon.setImageResource(R.mipmap.ic_launcher);
+        Bitmap bm = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p01_img_profile1);
+        holder.groupIcon.setImageBitmap(ImageHandler.getInstance().getRoundedShape(bm));
         holder.groupName.setText(clubSummaryFeed.getGroupName());
         holder.groupSchedule.setText(clubSummaryFeed.getRemainingDays() + "일 남았습니다.");
         LayoutInflater inflater = (LayoutInflater) mContext

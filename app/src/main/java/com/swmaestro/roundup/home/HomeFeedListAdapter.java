@@ -1,6 +1,8 @@
 package com.swmaestro.roundup.home;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.utils.ImageHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,7 +65,8 @@ public class HomeFeedListAdapter
 
             homeFeed.setGroupName("소프트웨어 마에스트로");
             homeFeed.setAuthorName(feed.getString("email"));
-            homeFeed.setTime(feed.getString("feed_date"));
+//            homeFeed.setTime(feed.getString("feed_date"));
+            homeFeed.setTime("2016.06.03 12:32");
             homeFeed.setFeedTitle(feed.getString("feed_title"));
             homeFeed.setFeedContent(feed.getString("feed_content"));
             homeFeed.setNumRecommends(feed.getJSONArray("like_list").length());
@@ -71,6 +75,8 @@ public class HomeFeedListAdapter
             e.printStackTrace();
         }
 
+        Bitmap bm = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p01_img_profile2);
+        holder.groupIcon.setImageBitmap(ImageHandler.getInstance().getRoundedShape(bm));
         holder.groupName.setText(homeFeed.getGroupName());
         holder.authorName.setText(homeFeed.getAuthorName());
         holder.txtTime.setText(homeFeed.getTime());
