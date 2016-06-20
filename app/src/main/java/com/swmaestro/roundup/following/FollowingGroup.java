@@ -1,6 +1,5 @@
 package com.swmaestro.roundup.following;
 
-import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -13,25 +12,25 @@ public class FollowingGroup extends RealmObject {
     private String title;
     private boolean isAlliance;
     private String introText;
-    private int iconRes;
+    private String icon;
 
     public FollowingGroup() {
     }
 
-    public FollowingGroup(long groupId, String title, boolean isAlliance, String introText, int iconRes) {
+    public FollowingGroup(long groupId, String title, boolean isAlliance, String introText, String icon) {
         this.groupId = groupId;
         this.title = title;
         this.isAlliance = isAlliance;
         this.introText = introText;
-        this.iconRes = iconRes;
+        this.icon = icon;
     }
 
-    public int getIconRes() {
-        return iconRes;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setIconRes(int iconRes) {
-        this.iconRes = iconRes;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public String getIntroText() {

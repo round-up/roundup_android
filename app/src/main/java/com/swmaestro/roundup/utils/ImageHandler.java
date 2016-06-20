@@ -2,6 +2,10 @@ package com.swmaestro.roundup.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import android.graphics.Canvas;
+import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Base64;
 import android.util.Log;
@@ -29,14 +33,9 @@ public class ImageHandler {
         return default_res;
     }
 
-    public String encodeImageViewBase64(ImageView view) {
-
-        if (view == null) {
-            return "";
-        }
+    public String encodeBase64(Bitmap bitmap) {
 
         String imageCode = null;
-        Bitmap bitmap = ((BitmapDrawable) view.getDrawable()).getBitmap();;
 
         if (bitmap != null) {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -46,9 +45,49 @@ public class ImageHandler {
 
             return imageCode;
         } else {
-            return "";
+            return null;
         }
+    }
 
+    public String encodeBase64(ImageView view) {
+
+        try {
+            Bitmap bitmap = ((BitmapDrawable) view.getDrawable()).getBitmap();;
+            return encodeBase64(bitmap);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Bitmap decodeBase64(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedByte;
+    }
+
+    public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
+        int targetWidth = (int) (scaleBitmapImage.getWidth() * 0.8);
+        int targetHeight = (int) (scaleBitmapImage.getHeight() * 0.8);
+        Bitmap targetBitmap = Bitmap.createBitmap(targetWidth,
+                targetHeight,Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(targetBitmap);
+        Path path = new Path();
+        path.addCircle(((float) targetWidth - 1) / 2,
+                ((float) targetHeight - 1) / 2,
+                (Math.min(((float) targetWidth),
+                        ((float) targetHeight)) / 2),
+                Path.Direction.CCW);
+
+        canvas.clipPath(path);
+        Bitmap sourceBitmap = scaleBitmapImage;
+        canvas.drawBitmap(sourceBitmap,
+                new Rect(0, 0, sourceBitmap.getWidth(),
+                        sourceBitmap.getHeight()),
+                new Rect(0, 0, targetWidth,
+                        targetHeight), null);
+        return targetBitmap;
     }
 
 
