@@ -30,17 +30,27 @@ import java.util.List;
 public class ClubSummaryFeedListAdapter
         extends RecyclerView.Adapter<ClubSummaryFeedListAdapter.ViewHolder> {
 
+    List<Integer> groupIds;
     JSONObject data;
     JSONArray groupData;
     Context mContext;
     OnItemClickListener mItemClickListener;
 
     public ClubSummaryFeedListAdapter(Context context) {
+        groupIds = new ArrayList<>();
         this.mContext = context;
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
+    }
+
+    public List<Integer> getGroupIds() {
+        return groupIds;
+    }
+
+    public void setGroupIds(List<Integer> groupIds) {
+        this.groupIds = groupIds;
     }
 
     public JSONObject getData() {
@@ -71,6 +81,7 @@ public class ClubSummaryFeedListAdapter
 
         // example ClubSummaryFeed
         final ClubSummaryFeed clubSummaryFeed = new ClubSummaryFeed();
+        clubSummaryFeed.setGroupId(3);
         clubSummaryFeed.setGroupName("RoundUp");
         clubSummaryFeed.setRemainingDays(5);
 
@@ -98,6 +109,8 @@ public class ClubSummaryFeedListAdapter
             tv.setText(sessionTitles.get(idx));
             holder.groupSessionSummary.addView(tv);
         }
+
+        groupIds.add(position, clubSummaryFeed.getGroupId());
     }
 
     @Override

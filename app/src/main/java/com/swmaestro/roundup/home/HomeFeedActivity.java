@@ -92,7 +92,9 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
 
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = new Intent(getApplicationContext(), ClubActivity.class);
+                intent.putExtra("group_id", mClubSummaryFeedListAdapter.getGroupIds().get(position));
+                startActivity(intent);
             }
         };
         mClubSummaryFeedListAdapter.setOnItemClickListener(onItemClickListener);
@@ -112,7 +114,7 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getApplicationContext(), ClubActivity.class);
-                intent.putExtra("name", "RoundUp");
+                intent.putExtra("group_id", mInterestingActivitiesAdapter.getGroupIds().get(position));
                 startActivity(intent);
             }
         };

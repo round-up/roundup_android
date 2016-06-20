@@ -21,18 +21,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by JeongMinCha on 16. 4. 28..
  */
 public class HomeFeedListAdapter
         extends RecyclerView.Adapter<HomeFeedListAdapter.ViewHolder> {
 
+    List<Integer> groupIds;
     JSONObject data;
     Context mContext;
     OnItemClickListener mItemClickListener;
 
     public HomeFeedListAdapter(Context context) {
-
+        groupIds = new ArrayList<>();
         this.mContext = context;
     }
 
@@ -46,6 +50,14 @@ public class HomeFeedListAdapter
 
     public void setData(JSONObject data) {
         this.data = data;
+    }
+
+    public List<Integer> getGroupIds() {
+        return groupIds;
+    }
+
+    public void setGroupIds(List<Integer> groupIds) {
+        this.groupIds = groupIds;
     }
 
     @Override
@@ -63,6 +75,7 @@ public class HomeFeedListAdapter
             JSONArray feedArray = data.getJSONArray("normal");
             JSONObject feed = feedArray.getJSONObject(position);
 
+            homeFeed.setGroupId(feed.getInt("group_id"));
             homeFeed.setGroupName("소프트웨어 마에스트로");
             homeFeed.setAuthorName(feed.getString("email"));
 //            homeFeed.setTime(feed.getString("feed_date"));
@@ -84,6 +97,8 @@ public class HomeFeedListAdapter
         holder.feedContent.setText(homeFeed.getFeedContent());
         holder.txtRecommend.setText("추천 " + homeFeed.getNumRecommends() + " 건");
         holder.txtComment.setText("댓글 " + homeFeed.getNumComments() + " 건" );
+
+        groupIds.add(position, homeFeed.getGroupId());
     }
 
     @Override
@@ -126,9 +141,7 @@ public class HomeFeedListAdapter
             btnComment = (ImageButton) itemView.findViewById(R.id.btn_comment_home_feed);
             btnShare = (ImageButton) itemView.findViewById(R.id.btn_share_home_feed);
 
-            btnHeart.setOnClickListener(this);
-            btnComment.setOnClickListener(this);
-            btnShare.setOnClickListener(this);
+            cardView.setOnClickListener(this);
         }
 
         @Override
