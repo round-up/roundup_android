@@ -1,6 +1,7 @@
 package com.swmaestro.roundup.utils;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Rect;
@@ -53,6 +54,12 @@ public class ImageHandler {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public Bitmap decodeBase64(String encodedImage) {
+        byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedByte;
     }
 
     public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {

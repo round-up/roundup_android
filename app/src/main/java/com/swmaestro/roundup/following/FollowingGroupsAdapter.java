@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.swmaestro.roundup.R;
+import com.swmaestro.roundup.utils.ImageHandler;
 
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class FollowingGroupsAdapter extends ArrayAdapter<FollowingGroup> {
 
         holder = (ViewHolder) rowView.getTag();
         FollowingGroup group = followingGroups.get(position);
-        holder.imgIcon.setImageResource(group.getIconRes());
+        holder.imgIcon.setImageBitmap(ImageHandler.getInstance().decodeBase64(group.getIcon()));
         holder.txtName.setText(group.getTitle());
         if (group.isAlliance() == true) {
             holder.txtAlliance.setText(" | 연합 관계");
