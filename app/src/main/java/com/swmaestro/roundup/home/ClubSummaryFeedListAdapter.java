@@ -28,6 +28,7 @@ public class ClubSummaryFeedListAdapter
         extends RecyclerView.Adapter<ClubSummaryFeedListAdapter.ViewHolder> {
 
     JSONObject data;
+    JSONArray groupData;
     Context mContext;
     OnItemClickListener mItemClickListener;
 
@@ -45,6 +46,14 @@ public class ClubSummaryFeedListAdapter
 
     public void setData(JSONObject data) {
         this.data = data;
+    }
+
+    public JSONArray getGroupData() {
+        return groupData;
+    }
+
+    public void setGroupData(JSONArray groupData) {
+        this.groupData = groupData;
     }
 
     @Override

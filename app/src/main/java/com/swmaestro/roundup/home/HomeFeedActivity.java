@@ -45,7 +45,15 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
         setContentView(R.layout.activity_home_feed);
 
         super.makeNavigationDrawer();
+
+        mClubSummaryFeedListAdapter = new ClubSummaryFeedListAdapter(this);
+        mInterestingActivitiesAdapter = new HomeFeedListAdapter(this);
         this.loadHomeFeedData(getIntent().getStringExtra("user_name"));
+        this.loadGroupData();
+    }
+
+    private void loadGroupData() {
+        // TODO: Volley GET method to retrieve group info
     }
 
     private void loadHomeFeedData(String userEmail) {
@@ -55,8 +63,12 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
             @Override
             public void onResponse(JSONObject response) {
                 data = response;
-                makeClubSummarySection(data);
-                makeInterestingActivitiesSection(data);
+                mClubSummaryFeedListAdapter.setData(data);
+                mInterestingActivitiesAdapter.setData(data);
+
+                // TODO: move this two statements to response listener in method 'loadGroupData' after the method is implemented
+                makeClubSummarySection();
+                makeInterestingActivitiesSection();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -67,15 +79,12 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
         Volley.newRequestQueue(this).add(request);
     }
 
-    private void makeClubSummarySection(JSONObject object) {
+    private void makeClubSummarySection() {
         // RecyclerView and StaggeredGridLayoutManager for Club Summary Feed Section.
         mClubSummaryRecyclerView = (RecyclerView) findViewById(R.id.club_summary_feed_list);
         mClubSummaryLayoutManager = new StaggeredGridLayoutManager(1,
                 StaggeredGridLayoutManager.HORIZONTAL);
         mClubSummaryRecyclerView.setLayoutManager(mClubSummaryLayoutManager);
-
-        mClubSummaryFeedListAdapter = new ClubSummaryFeedListAdapter(this);
-        mClubSummaryFeedListAdapter.setData(object);
         mClubSummaryRecyclerView.setAdapter(mClubSummaryFeedListAdapter);
 
         ClubSummaryFeedListAdapter.OnItemClickListener onItemClickListener
@@ -89,15 +98,12 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
         mClubSummaryFeedListAdapter.setOnItemClickListener(onItemClickListener);
     }
 
-    private void makeInterestingActivitiesSection(JSONObject object) {
+    private void makeInterestingActivitiesSection() {
         // RecyclerView and StaggeredGridLayoutManager for Interesting Activities Section.
         mInterestingActivitiesRecyclerView = (RecyclerView) findViewById(R.id.interesting_club_activity_list);
         mInterestingActivitiesLayoutManager = new StaggeredGridLayoutManager(1,
                 StaggeredGridLayoutManager.VERTICAL);
         mInterestingActivitiesRecyclerView.setLayoutManager(mInterestingActivitiesLayoutManager);
-
-        mInterestingActivitiesAdapter = new HomeFeedListAdapter(this);
-        mInterestingActivitiesAdapter.setData(object);
         mInterestingActivitiesRecyclerView.setAdapter(mInterestingActivitiesAdapter);
 
         HomeFeedListAdapter.OnItemClickListener onItemClickListener
