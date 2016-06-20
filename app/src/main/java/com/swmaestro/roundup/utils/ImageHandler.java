@@ -28,14 +28,9 @@ public class ImageHandler {
         return default_res;
     }
 
-    public String encodeImageViewBase64(ImageView view) {
-
-        if (view == null) {
-            return "";
-        }
+    public String encodeBase64(Bitmap bitmap) {
 
         String imageCode = null;
-        Bitmap bitmap = ((BitmapDrawable) view.getDrawable()).getBitmap();;
 
         if (bitmap != null) {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -45,9 +40,19 @@ public class ImageHandler {
 
             return imageCode;
         } else {
-            return "";
+            return null;
         }
+    }
 
+    public String encodeBase64(ImageView view) {
+
+        try {
+            Bitmap bitmap = ((BitmapDrawable) view.getDrawable()).getBitmap();;
+            return encodeBase64(bitmap);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Bitmap getRoundedShape(Bitmap scaleBitmapImage) {
