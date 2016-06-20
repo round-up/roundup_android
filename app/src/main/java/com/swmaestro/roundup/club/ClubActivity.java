@@ -47,6 +47,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
     private int mutedColor = R.attr.colorPrimary;
     private Group group;
     private ImageView iv_club_logo;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
         });
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+
         //collapsingToolbar.setCollapsedTitleTextColor(R.color.colorWhite);
         ImageView header = (ImageView) findViewById(R.id.iv_club_cover);
 
@@ -73,13 +75,12 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
         navigationView.setNavigationItemSelectedListener(this);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        adapter = new RecyclerViewAdapter(getApplicationContext());
-        recyclerView.setAdapter(adapter);
+
         iv_club_logo = (ImageView) findViewById(R.id.iv_club_logo);
         loadData();
     }
@@ -127,18 +128,45 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    group = new Group(response.getInt("id"), response.getString("group_belong"), response.getString("group_category"), response.getString("group_name"),
+                    group = Group.setGroup(response.getInt("id"), response.getString("group_belong"), response.getString("group_category"), response.getString("group_name"),
                             response.getString("group_description"), response.getString("group_start_date"), response.getString("group_place"), response.getBoolean("group_recruit_state"),
-                            response.getString("group_leader_email"), response.getString("group_logo"));
+                            response.getString("group_leader_email"), response.getString("group_logo"), response.getInt("group_gisoo"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                iv_club_logo.setImageBitmap(group.getGroup_logo());
 
+                try {
+                    JSONObject o = response.getJSONObject("united_group");
+                    JSONArray a = o.getJSONArray("group_list");
+                    for(int i=0; i<a.length(); i++){
+                        JSONObject oo = a.getJSONObject(i);
+                        group.setOther_logo(oo.getString("group_logo"));
+                        group.setOther_name(oo.getString("group_name"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    JSONArray a = response.getJSONArray("users");
+                    for(int i=0; i<a.length(); i++){
+                        JSONObject o = a.getJSONObject(i);
+                        User user = new User(o.getString("user_profile_image"), o.getString("user_phone_number"), o.getString("user_birth"), o.getBoolean("user_gender"), o.getString("user_name"), o.getString("email"));
+                        group.addUser(user);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                iv_club_logo.setImageBitmap(group.getGroup_logo());
+                collapsingToolbar.setTitle(group.getGroup_name());
+
+                adapter = new RecyclerViewAdapter(getApplicationContext(), group);
+                recyclerView.setAdapter(adapter);
 
             }
             //mAdapter.notifyDataSetChanged();
-            //hideprograssDialog();                                                      // Hide PrograssDialog at the end of the recipe loaded
+            //hideprogㅈrassDialog();                                                      // Hide PrograssDialog at the end of the recipe loaded
         }
 
                 , new Response.ErrorListener()

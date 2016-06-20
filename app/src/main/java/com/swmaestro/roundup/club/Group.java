@@ -4,11 +4,15 @@ import android.graphics.Bitmap;
 
 import com.swmaestro.roundup.utils.ImageHandler;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by lk on 16. 6. 18..
  */
 public class Group {
 
+    public static Group instance;
 
     private int id;
     private String group_belong;
@@ -20,9 +24,16 @@ public class Group {
     private boolean group_recruit_state;
     private String group_leader_email;
     private Bitmap group_logo;
+    private int group_gisoo;
+    private ArrayList<Bitmap> other_logo;
+    private ArrayList<String> other_name;
+    private ArrayList<User> user_list;
 
 
-    public Group(int id, String group_belong, String group_category, String group_name, String group_description, String group_start_date, String group_place, boolean group_recruit_state, String group_leader_email, String group_logo) {
+
+
+
+    private Group(int id, String group_belong, String group_category, String group_name, String group_description, String group_start_date, String group_place, boolean group_recruit_state, String group_leader_email, String group_logo, int gisu) {
         this.id = id;
         this.group_belong = group_belong;
         this.group_category = group_category;
@@ -33,7 +44,17 @@ public class Group {
         this.group_recruit_state = group_recruit_state;
         this.group_leader_email = group_leader_email;
         this.group_logo = ImageHandler.getInstance().decodeBase64ToImage(group_logo);
+        this.group_gisoo = gisu;
+        other_logo = new ArrayList<>();
+        other_name = new ArrayList<>();
+        user_list = new ArrayList<>();
     }
+
+    public static Group setGroup(int id, String group_belong, String group_category, String group_name, String group_description, String group_start_date, String group_place, boolean group_recruit_state, String group_leader_email, String group_logo, int gisu) {
+        instance = new Group(id, group_belong, group_category, group_name, group_description, group_start_date, group_place, group_recruit_state, group_leader_email, group_logo, gisu);
+        return instance;
+    }
+
 
 
     public int getId() {
@@ -70,6 +91,34 @@ public class Group {
 
     public String getGroup_leader_email() {
         return group_leader_email;
+    }
+
+    public int getGroup_gisoo() {
+        return group_gisoo;
+    }
+
+    public void setOther_logo(String image){
+        other_logo.add(ImageHandler.getInstance().decodeBase64ToImage(image));
+    }
+
+    public ArrayList<String> getOther_name() {
+        return other_name;
+    }
+
+    public ArrayList<Bitmap> getOther_logo() {
+        return other_logo;
+    }
+
+    public void setOther_name(String name){
+        other_name.add(name);
+    }
+
+    public void addUser(User user){
+        user_list.add(user);
+    }
+
+    public ArrayList<User> getUser_list(){
+        return user_list;
     }
 
     public Bitmap getGroup_logo() {
