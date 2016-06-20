@@ -187,7 +187,6 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
         Volley.newRequestQueue(this).add(JsonArrayRequest.createJsonRequestToken(request, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                List<Feed> feedList = new ArrayList<>();
                 try {
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject o = response.getJSONObject(i);
@@ -197,15 +196,19 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
                             imageList.add(ImageHandler.getInstance().decodeBase64ToImage(o2.getString("feed_image")));
                         }
                         ArrayList<Comment> commentList = new ArrayList<Comment>();
+                        for(int j=0; j<o.getJSONArray("comment_list").length(); j++){
+                            JSONObject o2 = o.getJSONArray("comment_list").getJSONObject(j);
+                            commentList.add(new Comment(o2.getString("email"), o2.getString("comment_date"), o2.getString("comment_content"), o2.getString("comment_title")));
+                        }
                         Feed feed = new Feed(o.getInt("feed_access_modifier"), o.getString("feed_tags"), o.getJSONArray("like_list").length(), imageList, o.getString("feed_title"), o.getString("feed_date"), o.getString("email"),
                                 o.getString("feed_type"), o.getString("feed_content"), commentList);
-                        feedList.add(feed);
+                        Feed.list.add(feed);
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                adapter.setFeedList(feedList);
+                adapter.setFeedList(Feed.list);
             }
         }, new Response.ErrorListener() {
             @Override

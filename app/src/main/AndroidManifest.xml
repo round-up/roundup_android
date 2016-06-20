@@ -52,6 +52,7 @@
             android:name=".login.SignupActivity"
             android:label="@string/signup_activity_label"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity android:name=".club.ReviewActivity"/>
     </application>
 
 </manifest>

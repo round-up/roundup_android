@@ -250,7 +250,7 @@
                 android:layout_height="50dp"
                 android:background="#ffffff"
                 android:src="@drawable/btn_comment"
-                android:id="@+id/button9" />
+                android:id="@+id/bt_comment" />
 
             <ImageButton
                 android:layout_width="0dp"

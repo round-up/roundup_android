@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -67,7 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position > 0) {
             position = position - 1;
-            Feed feed = feedList.get(position);
+            Feed feed = Feed.list.get(position);
             FeedViewHolder feedViewHolder = (FeedViewHolder) holder;
             feedViewHolder.textViewFeedTitle.setText(feed.getFeed_title());
             feedViewHolder.textViewFeedContent.setText(feed.getFeed_content());
@@ -87,6 +88,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
 //            Picasso.with(context).load(feed.getFeedFileThumbnail()).into(feedViewHolder.imageViewFeedFile);
             feedViewHolder.textViewFeedAuthor.setText(feed.getEmail());
+            final int finalPosition = position;
+            feedViewHolder.comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ReviewActivity.class);
+                    intent.putExtra("position", finalPosition);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }else{
             ClubViewHolder clubViewHolder = (ClubViewHolder) holder;
             clubViewHolder.place.setText(group.getGroup_place());
@@ -161,6 +172,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView iv2_1;
         ImageView iv2_2;
 
+        ImageButton comment;
+
         public FeedViewHolder(View itemView) {
             super(itemView);
             textViewFeedContent = (TextView) itemView.findViewById(R.id.tv_feed_content);
@@ -177,6 +190,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             iv2_1 = (ImageView) itemView.findViewById(R.id.two_1);
             iv2_2 = (ImageView) itemView.findViewById(R.id.two_2);
+
+            comment = (ImageButton) itemView.findViewById(R.id.bt_comment);
         }
     }
 
