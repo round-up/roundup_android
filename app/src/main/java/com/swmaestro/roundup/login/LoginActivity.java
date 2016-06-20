@@ -105,6 +105,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginSuccess() {
+        progressDialog.dismiss();
+
         mLoginButton.setEnabled(true);
         Intent intent = new Intent(LoginActivity.this, HomeFeedActivity.class);
         intent.putExtra("user_name", mEmailText.getText().toString());
@@ -114,6 +116,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
+        progressDialog.dismiss();
+
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
         mLoginButton.setEnabled(true);
     }
@@ -125,7 +129,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             mEmailText.setError("enter a valid email address");
-            valid = false;
+            setValid(false);
+            onLoginFailed();
             return;
         } else {
             mEmailText.setError(null);
@@ -133,7 +138,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
             mPasswordText.setError("between 4 and 10 alphanumeric characters");
-            valid = false;
+            setValid(false);
+            onLoginFailed();
             return;
         } else {
             mPasswordText.setError(null);
@@ -156,9 +162,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.getString("result").equals("true")) {
                         setValid(true);
                         onLoginSuccess();
-                        progressDialog.dismiss();
                     } else {
                         setValid(false);
+                        onLoginFailed();
                         return;
                     }
                 } catch (JSONException e) {
@@ -170,6 +176,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 setValid(false);
+                onLoginFailed();
                 return;
             }
         });
