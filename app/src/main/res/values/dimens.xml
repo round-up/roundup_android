@@ -15,4 +15,6 @@
 
     <dimen name="card_elevation">1dp</dimen>
     <dimen name="card_corner_radius">0dp</dimen>
+
+    <dimen name="design_navigation_icon_size">16dp</dimen>
 </resources>

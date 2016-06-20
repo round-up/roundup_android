@@ -3,6 +3,7 @@ package com.swmaestro.roundup.navigation;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -173,22 +174,28 @@ public class NavigationDrawerActivity extends AppCompatActivity
     private void makeNavigationView() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
+
+        Drawable homeIcon = getResources().getDrawable(R.drawable.p00_ic_home);
+        Drawable sendIcon = getResources().getDrawable(R.drawable.p00_ic_send);
+        Drawable newIcon = getResources().getDrawable(R.drawable.p00_ic_new);
+        Drawable settingIcon = getResources().getDrawable(R.drawable.p00_ic_settings);
 
         mNavigationMenu = navigationView.getMenu();
         mNavigationMenu.add(R.id.nav_group1, idHomeFeed, Menu.NONE, HOME_FEED)
-                .setIcon(R.drawable.ic_action_dock);
+                .setIcon(homeIcon);
         SubMenu subMenu = mNavigationMenu
                 .addSubMenu(R.id.nav_group1, idMyGroups, Menu.NONE, MY_GROUPS);
         for (int i = 0; i < followingGroupIcons.size(); i++) {
-            subMenu.add(followingGroupTitles.get(i)).setIcon(followingGroupIcons.get(i));
+            subMenu.add("\t\t\t" + followingGroupTitles.get(i));
         }
 
         mNavigationMenu.add(R.id.nav_group2, idFollowingGroups, Menu.NONE, FOLLOWING_GROUPS)
-                .setIcon(R.drawable.ic_action_forward);
+                .setIcon(sendIcon);
         mNavigationMenu.add(R.id.nav_group2, idAddGroup, Menu.NONE, ADD_GROUP)
-                .setIcon(R.drawable.ic_action_add_group);
+                .setIcon(newIcon);
         mNavigationMenu.add(R.id.nav_group2, idSettings, Menu.NONE, SETTINGS)
-                .setIcon(R.drawable.ic_action_settings);
+                .setIcon(settingIcon);
     }
 
 
