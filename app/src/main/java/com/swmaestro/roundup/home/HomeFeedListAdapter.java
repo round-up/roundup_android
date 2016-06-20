@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.swmaestro.roundup.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -54,13 +56,20 @@ public class HomeFeedListAdapter
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         final HomeFeed homeFeed = new HomeFeed();
-        homeFeed.setGroupName("소프트웨어 마에스트로");
-        homeFeed.setAuthorName("차정민");
-        homeFeed.setTime("2016.06.11/16:00");
-        homeFeed.setFeedTitle("재미있는 안드로이드 개발!");
-        homeFeed.setFeedContent("안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다안드로이드 개발은 재밌다");
-        homeFeed.setNumRecommends(5);
-        homeFeed.setNumComments(2);
+        try {
+            JSONArray feedArray = data.getJSONArray("normal");
+            JSONObject feed = feedArray.getJSONObject(position);
+
+            homeFeed.setGroupName("소프트웨어 마에스트로");
+            homeFeed.setAuthorName(feed.getString("email"));
+            homeFeed.setTime(feed.getString("feed_date"));
+            homeFeed.setFeedTitle(feed.getString("feed_title"));
+            homeFeed.setFeedContent(feed.getString("feed_content"));
+            homeFeed.setNumRecommends(feed.getJSONArray("like_list").length());
+            homeFeed.setNumComments(feed.getJSONArray("comment_list").length());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         holder.groupName.setText(homeFeed.getGroupName());
         holder.authorName.setText(homeFeed.getAuthorName());
@@ -73,7 +82,11 @@ public class HomeFeedListAdapter
 
     @Override
     public int getItemCount() {
-        return 1;
+        try {
+            return data.getJSONArray("normal").length();
+        } catch (JSONException e) {
+            return 1;
+        }
     }
 
     public class ViewHolder
