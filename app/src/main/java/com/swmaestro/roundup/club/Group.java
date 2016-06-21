@@ -1,6 +1,8 @@
 package com.swmaestro.roundup.club;
 
 import android.graphics.Bitmap;
+import android.media.Image;
+import android.provider.ContactsContract;
 
 import com.swmaestro.roundup.utils.ImageHandler;
 
@@ -28,12 +30,9 @@ public class Group {
     private ArrayList<Bitmap> other_logo;
     private ArrayList<String> other_name;
     private ArrayList<User> user_list;
+    private Bitmap group_cover;
 
-
-
-
-
-    private Group(int id, String group_belong, String group_category, String group_name, String group_description, String group_start_date, String group_place, boolean group_recruit_state, String group_leader_email, String group_logo, int gisu) {
+    private Group(int id, String group_belong, String group_category, String group_name, String group_description, String group_start_date, String group_place, boolean group_recruit_state, String group_leader_email, String group_logo, int gisu, String group_cover) {
         this.id = id;
         this.group_belong = group_belong;
         this.group_category = group_category;
@@ -48,10 +47,15 @@ public class Group {
         other_logo = new ArrayList<>();
         other_name = new ArrayList<>();
         user_list = new ArrayList<>();
+        this.group_cover = ImageHandler.getInstance().decodeBase64ToImage(group_cover);
     }
 
-    public static Group setGroup(int id, String group_belong, String group_category, String group_name, String group_description, String group_start_date, String group_place, boolean group_recruit_state, String group_leader_email, String group_logo, int gisu) {
-        instance = new Group(id, group_belong, group_category, group_name, group_description, group_start_date, group_place, group_recruit_state, group_leader_email, group_logo, gisu);
+    public Bitmap getGroup_cover() {
+        return group_cover;
+    }
+
+    public static Group setGroup(int id, String group_belong, String group_category, String group_name, String group_description, String group_start_date, String group_place, boolean group_recruit_state, String group_leader_email, String group_logo, int gisu, String group_cover) {
+        instance = new Group(id, group_belong, group_category, group_name, group_description, group_start_date, group_place, group_recruit_state, group_leader_email, group_logo, gisu, group_cover);
         return instance;
     }
 

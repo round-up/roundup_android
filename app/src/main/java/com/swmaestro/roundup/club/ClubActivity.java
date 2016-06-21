@@ -49,11 +49,16 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
     private Group group;
     private ImageView iv_club_logo;
     RecyclerView recyclerView;
+    private ImageView iv_club_cover;
+    int groupPk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_home);
+
+        Intent intent = getIntent();
+        groupPk = intent.getIntExtra("group_id", 1);
 
         super.makeNavigationDrawer();
 
@@ -80,8 +85,10 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        iv_club_cover = (ImageView) findViewById(R.id.iv_club_cover);
 
-        group = Group.setGroup(0,"","","","","","",true,"","",0);
+        group = Group.setGroup(0,"","","","","","",true,"","",0, "");
+
         adapter = new RecyclerViewAdapter(getApplicationContext(), group);
         recyclerView.setAdapter(adapter);
         iv_club_logo = (ImageView) findViewById(R.id.iv_club_logo);
@@ -119,7 +126,6 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
     private void LoadGroupInfo() {
         HashMap<String, String> request = new HashMap<>();
         request.put("model", Request.Method.GET + "");
-        int groupPk = 1;
         request.put("url", ServerConfig.BASE_URL + "group/" + groupPk);
 
         Log.i("url", request.get("url"));
@@ -131,7 +137,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
                 try {
                     group = Group.setGroup(response.getInt("id"), response.getString("group_belong"), response.getString("group_category"), response.getString("group_name"),
                             response.getString("group_description"), response.getString("group_start_date"), response.getString("group_place"), response.getBoolean("group_recruit_state"),
-                            response.getString("group_leader_email"), response.getString("group_logo"), response.getInt("group_gisoo"));
+                            response.getString("group_leader_email"), response.getString("group_logo"), response.getInt("group_gisoo"), response.getString("group_cover"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -161,6 +167,8 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
 
                 iv_club_logo.setImageBitmap(group.getGroup_logo());
                 collapsingToolbar.setTitle(group.getGroup_name());
+                iv_club_cover.setImageBitmap(group.getGroup_cover());
+
 
                 adapter = new RecyclerViewAdapter(getApplicationContext(), group);
                 recyclerView.setAdapter(adapter);
@@ -181,7 +189,6 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
     private void LoadFeed() {
         HashMap<String, String> request = new HashMap<>();
         request.put("model", Request.Method.GET + "");
-        int groupPk = 1;
         int count = 10;
         request.put("url", ServerConfig.BASE_URL + "group_feed/group/" + groupPk + "/" + count);
         Volley.newRequestQueue(this).add(JsonArrayRequest.createJsonRequestToken(request, new Response.Listener<JSONArray>() {
@@ -204,12 +211,16 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
                         Feed feed = new Feed(o.getInt("feed_access_modifier"), o.getString("feed_tags"), o.getJSONArray("like_list").length(), imageList, o.getString("feed_title"), o.getString("feed_date"), o.getString("email"),
                                 o.getString("feed_type"), o.getString("feed_content"), commentList);
                         Feed.list.add(feed);
+                        System.out.println(feed.getEmail());
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 adapter.setFeedList(Feed.list);
+                for(int i=0; i<Feed.list.size(); i++){
+                    System.out.println(Feed.list.get(i).getEmail());
+                }
                 adapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
