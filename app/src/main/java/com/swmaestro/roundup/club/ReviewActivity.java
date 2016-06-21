@@ -47,7 +47,7 @@ public class ReviewActivity extends ActionBarActivity {
         mRegisterBT = (Button) findViewById(R.id.activity_review_registerBt);
 
         ListView listView = (ListView) findViewById(R.id.activity_review_lv);
-        reviewListData = Feed.list.get(commentId).getComment_list();
+        reviewListData = Group.list.get(commentId).getComment_list();
         reviewListAdapter = new ReviewListAdapter(this, R.layout.item_comment,reviewListData);
         listView.setAdapter(reviewListAdapter);
         reviewListAdapter.notifyDataSetChanged();

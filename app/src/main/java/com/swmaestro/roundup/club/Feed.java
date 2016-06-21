@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class Feed {
 
-    public static ArrayList<Feed> list;
-
     private int feed_access_modifier;
     private String feed_tags;
     private int like;
@@ -71,6 +69,5 @@ public class Feed {
         this.feed_type = feed_type;
         this.feed_content = feed_content;
         this.comment_list = comment_list;
-        list = new ArrayList<>();
     }
 }

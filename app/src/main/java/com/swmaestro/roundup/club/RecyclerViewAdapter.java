@@ -68,7 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position > 0) {
             position = position - 1;
-            Feed feed = Feed.list.get(position);
+            Feed feed = Group.list.get(position);
             FeedViewHolder feedViewHolder = (FeedViewHolder) holder;
             feedViewHolder.textViewFeedTitle.setText(feed.getFeed_title());
             feedViewHolder.textViewFeedContent.setText(feed.getFeed_content());

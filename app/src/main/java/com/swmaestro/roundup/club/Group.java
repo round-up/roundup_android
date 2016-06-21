@@ -31,6 +31,7 @@ public class Group {
     private ArrayList<String> other_name;
     private ArrayList<User> user_list;
     private Bitmap group_cover;
+    public static ArrayList<Feed> list;
 
     private Group(int id, String group_belong, String group_category, String group_name, String group_description, String group_start_date, String group_place, boolean group_recruit_state, String group_leader_email, String group_logo, int gisu, String group_cover) {
         this.id = id;
@@ -48,6 +49,7 @@ public class Group {
         other_name = new ArrayList<>();
         user_list = new ArrayList<>();
         this.group_cover = ImageHandler.getInstance().decodeBase64ToImage(group_cover);
+        list = new ArrayList<>();
     }
 
     public Bitmap getGroup_cover() {

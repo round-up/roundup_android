@@ -195,7 +195,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    Feed.list = new ArrayList<Feed>();
+                    Group.list = new ArrayList<Feed>();
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject o = response.getJSONObject(i);
                         ArrayList<Bitmap> imageList = new ArrayList<Bitmap>();
@@ -210,16 +210,16 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
                         }
                         Feed feed = new Feed(o.getInt("feed_access_modifier"), o.getString("feed_tags"), o.getJSONArray("like_list").length(), imageList, o.getString("feed_title"), o.getString("feed_date"), o.getString("email"),
                                 o.getString("feed_type"), o.getString("feed_content"), commentList);
-                        Feed.list.add(feed);
+                        Group.list.add(feed);
                         System.out.println(feed.getEmail());
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                adapter.setFeedList(Feed.list);
-                for(int i=0; i<Feed.list.size(); i++){
-                    System.out.println(Feed.list.get(i).getEmail());
+                adapter.setFeedList(Group.list);
+                for(int i=0; i<Group.list.size(); i++){
+                    System.out.println(Group.list.get(i).getEmail());
                 }
                 adapter.notifyDataSetChanged();
             }
