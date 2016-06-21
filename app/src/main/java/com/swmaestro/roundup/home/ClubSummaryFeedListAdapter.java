@@ -85,6 +85,7 @@ public class ClubSummaryFeedListAdapter
         clubSummaryFeed.setGroupName("RoundUp");
         clubSummaryFeed.setRemainingDays(5);
 
+        Log.i("data", data.toString());
         List<String> sessionTitles = new ArrayList<>();
         try {
             JSONArray sessionArray = data.getJSONArray("session");

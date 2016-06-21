@@ -58,6 +58,7 @@ public class HomeFeedActivity extends NavigationDrawerActivity {
 
     private void loadHomeFeedData(String userEmail) {
         String url = ServerConfig.BASE_URL + "home_feed/" + userEmail;
+        Log.i("userEmail", userEmail);
 
         JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
             @Override
