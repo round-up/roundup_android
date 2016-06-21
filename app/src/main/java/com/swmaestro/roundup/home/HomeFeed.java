@@ -7,6 +7,7 @@ import android.content.Context;
  */
 public class HomeFeed {
 
+    private int groupId;
     private String iconPath;
     private String groupName;
     private String authorName;
@@ -18,6 +19,14 @@ public class HomeFeed {
 
     public int getImageResourceId(Context context) {
         return context.getResources().getIdentifier(this.iconPath, "drawable", context.getPackageName());
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public String getIconPath() {
