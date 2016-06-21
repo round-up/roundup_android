@@ -112,7 +112,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
 
 
     private void loadData() {
-        //LoadGroupInfo();
+        LoadGroupInfo();
         LoadFeed();
     }
 
@@ -188,6 +188,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
             @Override
             public void onResponse(JSONArray response) {
                 try {
+                    Feed.list = new ArrayList<Feed>();
                     for (int i = 0; i < response.length(); i++) {
                         JSONObject o = response.getJSONObject(i);
                         ArrayList<Bitmap> imageList = new ArrayList<Bitmap>();
@@ -209,6 +210,7 @@ public class ClubActivity extends NavigationDrawerActivity implements Navigation
                     e.printStackTrace();
                 }
                 adapter.setFeedList(Feed.list);
+                adapter.notifyDataSetChanged();
             }
         }, new Response.ErrorListener() {
             @Override

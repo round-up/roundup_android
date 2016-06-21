@@ -157,7 +157,8 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:src="#ffffff"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scaleType="centerCrop" />
 
             <ImageView
                 android:id="@+id/iv_club_info_other2"
@@ -165,14 +166,16 @@
                 android:layout_height="100dp"
                 android:src="#ffffff"
                 android:layout_gravity="top"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scaleType="centerCrop" />
 
             <ImageView
                 android:id="@+id/iv_club_info_other3"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:src="#ffffff"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:scaleType="centerCrop" />
         </LinearLayout>
 
         <LinearLayout
